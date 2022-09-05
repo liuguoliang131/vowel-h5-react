@@ -1,18 +1,10 @@
-import { createStore } from 'redux'
-const initState = {
-  type: '',
-  value: 0
-}
-const reducer = (state = initState, action) => {
-  switch (action.type) {
-    case 'token':
-      return Object.assign(state, action)
-    case 'userInfo':
-      return Object.assign(state, action)
-    default:
-      return state
-  }
-}
+import { combineReducers, createStore } from 'redux'
+import login from './modules/login'
+import index from './modules/index'
+const reducer = combineReducers({
+  login,
+  index
+})
 const store = createStore(reducer)
-
+console.log('getState', store.getState())
 export default store

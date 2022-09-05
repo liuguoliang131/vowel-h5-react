@@ -8,8 +8,12 @@ const Login = (props) => {
     console.log('this', props)
     // eslint-disable-next-line react/prop-types
     props.setToken({
-      type: 'token',
+      type: 'login/token',
       token: 'xxxx'
+    })
+    props.setCount({
+      type: 'index/count',
+      count: '1'
     })
     navigate('/layout/home', { state: { token: 'xxxxx' }, replace: false })
   }
@@ -26,6 +30,9 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(action)
     },
     setUserInfo (action) {
+      dispatch(action)
+    },
+    setCount (action) {
       dispatch(action)
     }
   }

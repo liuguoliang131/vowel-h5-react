@@ -17,3 +17,5 @@ module.exports = {
     }
   }
 }
+
+<!-- 在/config/webpack/webpack.config.js中修改"postcss-px-to-viewport" -->

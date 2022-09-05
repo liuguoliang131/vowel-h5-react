@@ -23,7 +23,8 @@ const Home = (props) => {
 }
 const mapStateToProps = (state) => {
   return {
-    token: state.token
+    token: state.login.token,
+    count: state.index.count
   }
 }
 export default connect(mapStateToProps, null)(Home)
