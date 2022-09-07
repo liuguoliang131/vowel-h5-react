@@ -2,7 +2,7 @@ import React from 'react'
 import './index.scss'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux/es/exports'
-const backIMG = require('../../assets/back.png')
+import Crumbs1 from '../../components/crumbs1/index.jsx'
 const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()
@@ -21,10 +21,8 @@ const Login = (props) => {
   }
   return (
     <div className='login'>
-      <div className="crumbs">
-        <img src={backIMG} alt="" className="back" />
-        <span>登录</span>
-      </div>
+      <Crumbs1 text="登录"></Crumbs1>
+      <div className="pt30"></div>
       <div className="phone">
         <label htmlFor="phone">手机号</label>
         <input type="phone" name='phone' />
