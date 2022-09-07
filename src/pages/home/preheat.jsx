@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 // import { getTest } from '../../axios/api'
 import { connect } from 'react-redux'
 // import { useLocation } from 'react-router-dom'
-import './index.scss'
+import './preheat.scss'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
 import CountDown from './components/countDown/index.jsx'
@@ -22,7 +22,7 @@ const Home = (props) => {
     setVisible(false)
   }
   return (
-    <div className='home'>
+    <div className='preheat'>
       <Crumbs></Crumbs>
       <TopWord></TopWord>
       <div className="mb14"></div>

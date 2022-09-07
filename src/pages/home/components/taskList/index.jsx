@@ -1,9 +1,12 @@
 import React from 'react'
 import './index.scss'
+import { useLocation } from 'react-router-dom'
 const row1IMG = require('../../../../assets/Frame 1000006094@2x.png')
 const row2IMG = require('../../../../assets/Frame 1000006078-1.png')
 const row3IMG = require('../../../../assets/Rectangle 40961.png')
 function TaskList () {
+  const location = useLocation()
+  console.log('location', location)
   return (
     <div className="TaskList">
       <div className="TaskList-content">
@@ -34,7 +37,7 @@ function TaskList () {
           <div className="col3">
             <div className="col3-1">
               <img src={row3IMG} alt="" />
-              <div>立即购买</div>
+              <div>{location.pathname === '/layout/home' ? '立即购买' : '立即预购'}</div>
             </div>
             <div className="col3-2">已获得<span style={{ color: 'rgba(252, 23, 188, 1)' }}>1</span>次抽奖机会</div>
           </div>

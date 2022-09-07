@@ -2,6 +2,7 @@
 import React, { Suspense } from 'react'
 import { Navigate, BrowserRouter, useRoutes } from 'react-router-dom'
 import Home from '../pages/home/index.jsx'
+import Preheat from '../pages/home/preheat.jsx'
 import Login from '../pages/login/index.jsx'
 import Layout from '../components/layout/index.jsx'
 const routes = [
@@ -16,6 +17,10 @@ const routes = [
       {
         path: '/layout/home',
         element: <Home />
+      },
+      {
+        path: '/layout/preheat',
+        element: <Preheat />
       },
       {
         path: '/layout',
