@@ -1,0 +1,36 @@
+.audioPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  z-index: 99;
+  width: 100%;
+  height: 60px;
+  background-color: #fff;
+  .cover {
+    width: 60px;
+    height: 46px;
+    margin-left: 16px;
+    margin-right: 3px;
+  }
+  .title {
+    flex: 1;
+    font-family: PingFang SC;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0em;
+    text-align: left;
+
+  }
+  .playbtn {
+    width: 36px;
+    height: 36px;
+    margin-right: 28px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

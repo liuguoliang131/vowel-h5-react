@@ -1,0 +1,90 @@
+.TaskList {
+  text-align: center;
+  .TaskList-content {
+    box-sizing: border-box;
+    margin: auto;
+    width: 355px;
+    height: 166px;
+    padding-top: 50px;
+    text-align: center;
+    background: url('../../../../../static/Frame\ 1000006053.png') no-repeat center center;
+    background-size: cover;
+    .row {
+      width: 336px;
+      height: 60px;
+      display: flex;
+      // align-items: center;
+      font-size: 12px;
+      .col1 {
+        width: 32px;
+        height: 32px;
+        margin-left: 13px;
+        margin-right: 7px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+      .col2 {
+        flex: 1;
+        .col2-1 {
+          font-family: 'PingFang SC';
+          font-style: normal;
+          font-weight: 600;
+          font-size: 14px;
+          line-height: 20px;
+          color: #333333;
+          text-align: left;
+        }
+        .col2-2 {
+          font-family: 'PingFang SC';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 17px;
+          color: #666666;
+          text-align: left;
+          .col2-2-n {
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 20px;
+            color: #FC17BC;
+            margin-left: 5px;
+          }
+        }
+      }
+      .col3 {
+        position: relative;
+        text-align: right;
+        width: 120px;
+        .col3-1 {
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 88px;
+          height: 36px;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+          div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 88px;
+            height: 36px;
+            line-height: 36px;
+            text-align: center;
+            color: #ffff;
+          }
+        }
+        .col3-2 {
+          position: absolute;
+          top: 36px;
+          right: -10px;
+          transform: scale(0.8);
+        }
+      }
+    }
+  }
+}

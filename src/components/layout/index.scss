@@ -2,9 +2,8 @@
   height: 100vh;
   font-size: 22px;
   overflow-y: scroll;
+  .layout-view {
+    height: 100%;
+  }
 }
 
-.view {
-  height: 100%;
-  background-color: pink;
-}

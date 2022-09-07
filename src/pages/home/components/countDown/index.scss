@@ -1,0 +1,27 @@
+.CountDown {
+  text-align: center;
+  .round-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 211px;
+    height: 26px;
+    margin: auto;
+    background: rgba(252, 20, 186, 0.45);
+    border-radius: 13px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    color: #ffff;
+    .round-box-text1 {
+      margin-right: 11px;
+    }
+    .round-box-text2 {
+      display: flex;
+      align-items: center;
+      .text2-colon {
+        margin: 0 5px;
+      }
+    }
+  }
+}

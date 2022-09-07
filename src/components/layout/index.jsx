@@ -5,8 +5,7 @@ import { Outlet } from 'react-router-dom'
 function Layout () {
   return (
     <div className='layout'>
-      layout
-      <div className='view'>
+      <div className='layout-view'>
         <Outlet></Outlet>
       </div>
     </div>

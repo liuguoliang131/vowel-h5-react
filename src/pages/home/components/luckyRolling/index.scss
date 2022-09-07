@@ -1,0 +1,85 @@
+$one:80.5px;
+.LuckyRolling {
+  text-align: center;
+  .bg-box {
+    margin: auto;
+    width: 332px;
+    height: 332px;
+  }
+  .LuckyRolling-box {
+    position: relative;
+    margin: 5px 0 0 5px;
+    width: 322px;
+    height: 322px;
+    background-color: rgba(255,255,255,0.4);
+    .start-btn {
+      position: absolute;
+      top: $one;
+      left: $one;
+      background-color: yellow;
+      width: 2*$one;
+      height: 2*$one;
+    }
+    // 奖项
+    .prize {
+      position: absolute;
+      width: $one;
+      height: $one;
+      box-sizing: border-box;
+      // border: 1px solid blue;
+      .bgPicture {
+        width: calc( 100% - 10px );
+        height: calc( 100% - 10px );
+        margin: 5px 0 0 5px;
+      }
+      .prizePicture {
+        position: absolute;
+        top: 0.25*$one;
+        left: 0.25*$one;
+        width: 0.5*$one;
+        height: 0.5*$one;
+      }
+      
+    }
+    .active-prize {
+      .bgPicture {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
+      .prizePicture {
+        position: absolute;
+        top: 0.25 * $one - 2.5px;
+        left: 0.25 * $one - 2.5px;
+        width: 0.5 * $one + 5px;
+        height: 0.5 * $one + 5px;
+      }
+    }
+    // 坐标系
+    .x1 {
+      left: 0;
+    }
+    .x2 {
+      left: $one;
+    }
+    .x3 {
+      left: 2*$one;
+    }
+    .x4 {
+      left: 3*$one;
+    }
+    .y1 {
+      top: 0;
+    }
+    .y2 {
+      top: $one;
+    }
+    .y3 {
+      top: 2*$one;
+    }
+    .y4 {
+      top: 3*$one;
+    }
+
+  }
+}

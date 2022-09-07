@@ -1,0 +1,55 @@
+.crumbs {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 99;
+  width: 100%;
+  height: 44px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  .crumbs-l {
+    width: 28px;
+    height: 28px;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  .crumbs-r {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    .crumbs-r-btn1 {
+      width: 56px;
+      height: 20px;
+      border: 0.5px solid #FFFFFF;
+      backdrop-filter: blur(25px);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Roboto';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      /* identical to box height */
+      margin-right: 20.5px;
+      color: #FFFFFF;
+    }
+    .crumbs-r-btn2 {
+      width: 14px;
+      height: 14px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}
+.crumbs-slot {
+  height: 44px;
+}
