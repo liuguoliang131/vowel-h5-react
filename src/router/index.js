@@ -7,6 +7,7 @@ import Login from '../pages/login/index.jsx'
 import Layout from '../components/layout/index.jsx'
 const MyEvent = lazy(() => import('../pages/myEvent/index.jsx'))
 const MyPrize = lazy(() => import('../pages/myPrize/index.jsx'))
+const MyCourse = lazy(() => import('../pages/myCourse/index.jsx'))
 const routes = [
   {
     path: '/login',
@@ -31,6 +32,10 @@ const routes = [
       {
         path: '/layout/myPrize',
         element: <MyPrize />
+      },
+      {
+        path: '/layout/myCourse',
+        element: <MyCourse />
       },
       {
         path: '/layout',

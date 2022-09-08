@@ -17,7 +17,7 @@ const Login = (props) => {
       type: 'index/count',
       count: '1'
     })
-    navigate('/layout/home', { state: { token: 'xxxxx' }, replace: false })
+    navigate('/layout/myEvent', { state: { token: 'xxxxx' }, replace: false })
   }
   return (
     <div className='login'>

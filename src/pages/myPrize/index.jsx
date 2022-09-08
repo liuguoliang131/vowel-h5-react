@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { useLocation } from 'react-router'
+import { useLocation, useNavigate } from 'react-router'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 function MyPrize () {
   const location = useLocation()
+  const navigate = useNavigate()
   console.log('location', location)
   const [list] = useState([
     { type: '1', id: 1 },
@@ -12,6 +13,11 @@ function MyPrize () {
     { type: '4', id: 4 },
     { type: '5', id: 5 }
   ])
+  const handleGo = (item) => {
+    if (item.type === '5') {
+      navigate('/layout/myCourse', { state: { ...item }, replace: false })
+    }
+  }
   return (
     <div className="myPrize">
       <Crumbs1 text="我的奖品"></Crumbs1>
@@ -103,7 +109,12 @@ function MyPrize () {
                   点击下方按钮观看课程
                   </div>
                   <div className="type5-row3">
-                    <span>立即查看</span>
+                    <span onClick={() => handleGo({ type: '5' })}>
+                      <i>
+                        <img src={require('../../assets/play-icon.png')} alt="" />
+                      </i>
+                      立即观看课程
+                    </span>
                   </div>
                   <div className="type5-row4">
                   有效期为：获得奖品日起180天内随意观看！
@@ -114,6 +125,12 @@ function MyPrize () {
           })
 
         }
+        <div className="footer">
+          <img src="qweqw" alt="" className='qrcode' />
+          <div className="footer-tip">
+            微信扫码添加客服
+          </div>
+        </div>
       </div>
     </div>
   )
