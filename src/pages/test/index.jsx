@@ -1,33 +1,44 @@
 import React, { useState } from 'react'
-import { PullToRefresh, List } from 'antd-mobile'
-import { sleep } from 'antd-mobile/es/utils/sleep'
-// import { lorem } from 'demos'
 
-function getNextData () {
-  const ret = []
-  for (let i = 0; i < 18; i++) {
-    ret.unshift(i + i)
-    // ret.unshift(lorem.generateWords(1))
-  }
-  return ret
-}
+import { Vertify } from '@alex_xu/react-slider-vertify'
 
 function Test () {
-  const [data, setData] = useState(() => getNextData())
+  const [visible, setVisible] = useState(false)
+  const show = () => {
+    setVisible(true)
+  }
+  const hide = () => {
+    setVisible(false)
+  }
+  const style = {
+    display: 'inline-block',
+    marginRight: '20px',
+    marginBottom: '20px',
+    width: '100px',
+    padding: '5px 20px',
+    color: '#fff',
+    textAlign: 'center',
+    cursor: 'pointer',
+    background: '#1991FA'
+  }
   return (
-    <PullToRefresh
-      style={{ overflow: 'auto', height: '100vh' }}
-      onRefresh={async () => {
-        await sleep(1000)
-        setData([...getNextData(), ...data])
-      }}
-    >
-      <List style={{ minHeight: '100vh' }}>
-        {data.map((item, index) => (
-          <List.Item key={index}>{item}</List.Item>
-        ))}
-      </List>
-    </PullToRefresh>
+    <>
+      <div onClick={show} style={style}>
+        显示
+      </div>
+      <div onClick={hide} style={style}>
+        隐藏
+      </div>
+      <Vertify
+        width={320}
+        height={160}
+        imgUrl={require('../../assets/分享-分享图.png')}
+        visible={visible}
+        onSuccess={() => alert('success')}
+        onFail={() => alert('fail')}
+        onRefresh={() => alert('refresh')}
+      />
+    </>
   )
 }
 export default Test

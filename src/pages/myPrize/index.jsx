@@ -1,12 +1,15 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
+import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { sleep } from 'antd-mobile/es/utils/sleep'
+import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 function MyPrize () {
   const location = useLocation()
   const navigate = useNavigate()
   console.log('location', location)
-  const [list] = useState([
+  const [data, setData] = useState([
     { type: '1', id: 1 },
     { type: '2', id: 2 },
     { type: '3', id: 3 },
@@ -18,12 +21,29 @@ function MyPrize () {
       navigate('/layout/myCourse', { state: { ...item }, replace: false })
     }
   }
+
+  const [hasMore, setHasMore] = useState(true)
+  async function loadMore () {
+    const append = await mockRequest([
+      { type: '11', id: 24 },
+      { type: '51', id: 25 }
+    ])
+    setData(val => [...val, ...append])
+    setHasMore(append.length > 0)
+  }
+
   return (
     <div className="myPrize">
       <Crumbs1 text="我的奖品"></Crumbs1>
+      <PullToRefresh
+        onRefresh={async () => {
+          await sleep(1000)
+          setData([...data, ...data])
+        }}
+      >
       <div className="list">
         {
-          list.map((item, index) => {
+          data.map((item, index) => {
             if (item.type === '1') {
               // 实物
               return (
@@ -125,6 +145,7 @@ function MyPrize () {
           })
 
         }
+        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
         <div className="footer">
           <img src="qweqw" alt="" className='qrcode' />
           <div className="footer-tip">
@@ -132,6 +153,7 @@ function MyPrize () {
           </div>
         </div>
       </div>
+      </PullToRefresh>
     </div>
   )
 }
