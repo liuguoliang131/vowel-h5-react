@@ -2,6 +2,7 @@
   height: 44px;
 }
 .crumbs1 {
+  z-index: 100;
   position: fixed;
   top: 0;
   left: 0;
@@ -12,10 +13,10 @@
   height: 44px;
   line-height: 44px;
   text-align: center;
-  color: #14181F;
+  color: #FFFFFF;
   font-weight: 500;
   font-size: 16px;
-  background-color: #fff;
+  // background-color: #fff;
   .back {
     position: absolute;
     width: 28px;
