@@ -9,6 +9,7 @@ const MyEvent = lazy(() => import('../pages/myEvent/index.jsx'))
 const MyPrize = lazy(() => import('../pages/myPrize/index.jsx'))
 const MyCourse = lazy(() => import('../pages/myCourse/index.jsx'))
 const Test = lazy(() => import('../pages/test/index.jsx'))
+const Poster = lazy(() => import('../pages/poster/index.jsx'))
 const routes = [
   {
     path: '/login',
@@ -41,6 +42,10 @@ const routes = [
       {
         path: '/layout/test',
         element: <Test />
+      },
+      {
+        path: '/layout/poster',
+        element: <Poster />
       },
       {
         path: '/layout',
