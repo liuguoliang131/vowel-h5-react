@@ -1,0 +1,45 @@
+.model {
+  .mask {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.1);
+    transition: all 0.5s;
+    .content-box {
+      position: relative;
+      box-sizing: border-box;
+      width: 315px;
+      min-height: 200px;
+      background: linear-gradient(179.68deg, #F6CBF9 0.28%, #FEFCFF 114.55%);
+      box-shadow: inset 0px 2px 2px #FFFFFF;
+      border-radius: 8px;
+      padding: 10px;
+      .close {
+        position: absolute;
+        right: 0px;
+        top: -45px;
+        width: 30px;
+        height: 30px;
+      }
+      .text {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: PingFang SC;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 24px;
+        letter-spacing: 0px;
+        text-align: center;
+
+      }
+    }
+  }
+}

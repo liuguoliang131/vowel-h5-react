@@ -1,4 +1,5 @@
 /* eslint-disable no-undef */
+import { USER_INFO } from './uniField'
 const utils = {
   goLogin: () => {
     App.postMessage(JSON.stringify({
@@ -32,6 +33,17 @@ const utils = {
       type: 'openMiniProgram',
       params: { username, path }
     }))
+  },
+  // 获取用户登陆后的信息
+  getUserInfo: () => {
+    const info = localStorage.getItem(USER_INFO)
+    return info ? JSON.parse(info) : null
+  },
+  setUserInfo: (obj) => {
+    localStorage.setItem(USER_INFO, JSON.stringify(obj))
+  },
+  delUserInfo: () => {
+    localStorage.removeItem(USER_INFO)
   }
 }
 export default utils
