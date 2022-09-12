@@ -18,6 +18,7 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': 0,
-    'no-unused-vars': 'off'
+    'no-unused-vars': 'off',
+    'no-debugger': 'off'
   }
 }

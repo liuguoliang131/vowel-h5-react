@@ -1,4 +1,4 @@
-import React, { useState, createRef } from 'react'
+import React, { useState, createRef, useEffect } from 'react'
 import './index.scss'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux/es/exports'
@@ -7,6 +7,8 @@ import Crumbs1 from '../../components/crumbs1/index.jsx'
 import Model from '../../components/model'
 import { Vertify } from '@alex_xu/react-slider-vertify'
 import { Toast } from 'antd-mobile'
+import { captcha, login } from '../../axios/api'
+
 const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()
@@ -14,21 +16,10 @@ const Login = (props) => {
     phone: '',
     captcha: ''
   })
-  const [captchaBtnText, setCaptchaBtnText] = useState(null) // 获取验证码按钮的文字
   const [visible, setVisible] = useState(false) // 弹窗开关
-  const handLogin = () => {
-    console.log('this', props)
+  const timer = null
+  const [captchaBtnText, setCaptchaBtnText] = useState(0) // 获取验证码按钮的文字
 
-    props.setToken({
-      type: 'login/token',
-      token: 'xxxx'
-    })
-    props.setCount({
-      type: 'index/count',
-      count: '1'
-    })
-    navigate('/layout/myEvent', { state: { token: 'xxxxx' }, replace: false })
-  }
   // 受控组件输入
   const handleSetState = (e) => {
     if (e.target.name === 'phone') {
@@ -44,9 +35,30 @@ const Login = (props) => {
     }
   }
   // 获取验证码
-  const handleGetCaptcha = () => {
-
+  const handleGetCaptcha = async () => {
+    if (captchaBtnText) return false
+    if (!/^[1]{1}[0-9]{10}$/.test(data.phone)) {
+      return Toast.show({
+        icon: 'fail',
+        content: '手机号不符合规则'
+      })
+    }
+    const res = await captcha({
+      phone: data.phone,
+      use_type: 1
+    })
+    console.log('res', res)
+    // if (res.code !== 200) return
+    // 开启定时器
+    await setCaptchaBtnText(59)
   }
+  useEffect(() => {
+    if (captchaBtnText > 0) {
+      setTimeout(() => {
+        setCaptchaBtnText(val => val - 1)
+      }, 1000)
+    }
+  }, [captchaBtnText])
   // 关闭弹窗
   const onClose = () => {
     setVisible(false)
@@ -60,7 +72,7 @@ const Login = (props) => {
   const onFail = () => {
     Toast.show({
       icon: 'fail',
-      content: '名称已存在'
+      content: '验证错误'
     })
   }
   const onRefresh = () => {
@@ -80,21 +92,34 @@ const Login = (props) => {
         content: '验证码不符合规则'
       })
     }
-    const toast = Toast.show({
-      content: '登录中',
-      duration: 0,
-      maskClickable: false,
-      icon: 'loading'
-
-    })
+    setVisible(true)
+  }
+  const handLogin = async () => {
+    const res = await login(data)
     // 登陆成功
+    // props.setToken({
+    //   type: 'login/token',
+    //   token: 'xxxx'
+    // })
+    // props.setCount({
+    //   type: 'index/count',
+    //   count: '1'
+    // })
+    if (res.code !== 200) {
+      setVisible(false)
+      return false
+    }
     utils.setUserInfo({
       token: 'asdasdsadasdadasdasdasd'
     })
-    setTimeout(() => {
-      toast.close()
-    }, 2000)
+    utils.setToken('asdasdsadasdadasdasdasd')
+    Toast.show({
+      icon: 'success',
+      content: '登陆成功'
+    })
+    navigate('/layout/myEvent', { state: { token: 'xxxxx' }, replace: false })
   }
+
   return (
     <div className='login'>
       <Crumbs1 text="登录"></Crumbs1>
@@ -106,7 +131,7 @@ const Login = (props) => {
       <div className="code">
         <label htmlFor="code">验证码</label>
         <input type="number" name="captcha" id="" onChange={(e) => handleSetState(e)} value={data.captcha} />
-        <span className='get' onClick={() => handleGetCaptcha()}>{captchaBtnText || '获取验证码'}</span>
+        <span className='get' onClick={() => handleGetCaptcha()}>{captchaBtnText || '获取验证码' }</span>
       </div>
       <div className="submit">
         <div className="submit-btn" onClick={() => loginNow()}>立即登录</div>
@@ -118,7 +143,7 @@ const Login = (props) => {
             height={getWidth()}
             imgUrl={require('../../assets/分享-分享图.png')}
             visible={visible}
-            onSuccess={() => loginNow()}
+            onSuccess={() => handLogin()}
             onFail={() => onFail()}
             onRefresh={() => onRefresh()}
           />

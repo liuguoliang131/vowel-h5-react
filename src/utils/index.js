@@ -1,5 +1,8 @@
 /* eslint-disable no-undef */
-import { USER_INFO } from './uniField'
+import {
+  USER_INFO,
+  TOKEN
+} from './uniField'
 const utils = {
   goLogin: () => {
     App.postMessage(JSON.stringify({
@@ -44,6 +47,14 @@ const utils = {
   },
   delUserInfo: () => {
     localStorage.removeItem(USER_INFO)
+  },
+  // 获取token
+  getToken: () => {
+    const token = localStorage.getItem(TOKEN)
+    return token || ''
+  },
+  setToken: (data) => {
+    localStorage.setItem(TOKEN, data)
   }
 }
 export default utils
