@@ -1,21 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router'
 import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
+import { promotionListApi } from '../../axios/api'
+let currentPage = 1
 function MyEvent () {
   console.log('myevent')
-  const [data, setData] = useState([
-    { id: '1', status: 1 },
-    { id: '2', status: 0 }
-  ])
+  const [data, setData] = useState([])
   const navigate = useNavigate()
+  // 查看奖品
   const handleViewPrize = (item, e) => {
     e.stopPropagation()
     navigate('/layout/myPrize', { state: { ...item }, replace: false })
   }
+  // 查看活动详情
   const handleViewDetail = (item) => {
     console.log('handleViewDetail', item)
     navigate('/layout/home', { state: { ...item }, replace: false })
@@ -23,35 +24,54 @@ function MyEvent () {
 
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
-    const append = await mockRequest([
-      { id: '1', status: 1 },
-      { id: '2', status: 0 }
-    ])
-    setData(val => [...val, ...append])
-    setHasMore(append.length > 0)
+    // const append = await mockRequest([
+    //   { id: '1', status: 1 },
+    //   { id: '2', status: 0 }
+    // ])
+    const res = await promotionListApi({
+      page: currentPage++
+    })
+    console.log('res', res)
+    if (!res.data) {
+      setHasMore(false)
+    } else {
+      setData(val => [...val, ...res.data])
+      setHasMore(true)
+    }
   }
-
+  // 下拉刷新
+  const onRefresh = async () => {
+    currentPage = 1
+    const res = await promotionListApi({
+      page: currentPage++
+    })
+    console.log('res', res)
+    if (!res.data) {
+      setData([])
+      setHasMore(false)
+    } else {
+      setData(val => [...val, ...res.data])
+      setHasMore(true)
+    }
+  }
   return (
     <div className="myEvent">
       <Crumbs1 text='我的活动'></Crumbs1>
       <PullToRefresh
-        onRefresh={async () => {
-          await sleep(1000)
-          setData([...data, ...data])
-        }}
+        onRefresh={async () => onRefresh()}
       >
       <div className="list">
         {
           data.map((item, index) => (
             <div className="item" key={index} onClick={() => handleViewDetail(item)}>
               <div className="item-row1">
-              《念君安》新歌上线
+                {item.title}
               </div>
               <div className="item-row2">
-                购买即可抽免单奖励，更有超值大礼
+                {item.sub_title}
               </div>
               <div className="item-row3">
-              抢购时间：2020.08.25 10:00-2020.08.25 10:00
+              抢购时间：{item.start_time}-{item.end_time}
               </div>
               <div className="item-row4">
                 <div className="item-row4-l">

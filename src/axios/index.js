@@ -36,7 +36,7 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(function (response) {
   console.log('response', response)
   toast.close()
-  if (response.data.code !== 200) {
+  if (response.data.code !== 0) {
     Toast.show({
       icon: 'fail',
       content: response.data.msg || 'error'

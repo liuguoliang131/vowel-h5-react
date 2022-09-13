@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
-import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
+import copy from 'copy-to-clipboard'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
+import { promotionPrizeListApi } from '../../axios/api'
+let currentPage = 1
 function MyPrize () {
   const location = useLocation()
   const navigate = useNavigate()
@@ -16,120 +19,162 @@ function MyPrize () {
     { type: '4', id: 4 },
     { type: '5', id: 5 }
   ])
+  const [qrcode, setQrcode] = useState('')
   const handleGo = (item) => {
-    if (item.type === '5') {
+    if (item.type === 4) {
       navigate('/layout/myCourse', { state: { ...item }, replace: false })
+    } else if (item.type === 2) {
+      // 跳转到原生app查看奇点页
+
     }
+  }
+
+  const handleCopy = (item) => {
+    copy(item.batch_no)
+    Toast.show({
+      icon: 'success',
+      content: '复制成功'
+    })
   }
 
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
-    const append = await mockRequest([
-      { type: '11', id: 24 },
-      { type: '51', id: 25 }
+    setData([
+      { type: 1, id: 1 },
+      { type: 2, id: 2 },
+      { type: 3, id: 3, batch_no: '121212412124' },
+      { type: 4, id: 4 },
+      { type: 4, id: 5 }
     ])
-    setData(val => [...val, ...append])
-    setHasMore(append.length > 0)
+    setHasMore(false)
+    return false
+    // try {
+    //   const res = await promotionPrizeListApi({
+    //     promotion_id: '1' || location.state.id,
+    //     page: currentPage++
+    //   })
+    //   console.log('res', res)
+    //   if (res.code !== 0) {
+    //     setHasMore(false)
+    //     return false
+    //   }
+    //   if (!res.data || !res.data.list || !res.data.list.length) {
+    //     setHasMore(false)
+    //   } else {
+    //     setData(val => [...val, ...res.data.list])
+    //     if (currentPage === 2) {
+    //       setQrcode(res.data.customer_service || '')
+    //     }
+    //     setHasMore(true)
+    //   }
+    // } catch (error) {
+    //   setHasMore(false)
+    //   throw error
+    // }
+  }
+  // 下拉刷新
+  const onRefresh = async () => {
+    try {
+      currentPage = 1
+      const res = await promotionPrizeListApi({
+        promotion_id: '1' || location.state.id,
+        page: currentPage++
+      })
+      console.log('res', res)
+      if (!res.data || !res.data.list || !res.data.list.length) {
+        setData([])
+        setHasMore(false)
+      } else {
+        setQrcode(res.data.customer_service || '')
+        setData(val => [...val, ...res.data])
+        setHasMore(true)
+      }
+    } catch (error) {
+      setHasMore(false)
+      throw error
+    }
   }
 
   return (
     <div className="myPrize">
       <Crumbs1 text="我的奖品"></Crumbs1>
       <PullToRefresh
-        onRefresh={async () => {
-          await sleep(1000)
-          setData([...data, ...data])
-        }}
+        onRefresh={async () => onRefresh()}
       >
       <div className="list">
         {
           data.map((item, index) => {
-            if (item.type === '1') {
+            if (item.type === 1) {
               // 实物
               return (
                 <div className="item type1" key={index}>
                   <div className="item-row1">
-                  获得苹果手表S7
+                  {item.title}
                   <span>×1份</span>
                   </div>
                   <div className="item-row2">
-                    联系客服登记领取
+                    {item.note}
                   </div>
                   <div className='item-row3'>
-                    <img src="asdasd" alt="" />
+                    <img src={item.img_url} alt="" />
                   </div>
                 </div>
               )
-            } else if (item.type === '2') {
+            } else if (item.type === 3) {
+              // 卡券
               return (
                 <div className="item type2" key={index}>
                   <div className="item-row1">
-                  获得一路听天下读书年卡
+                  {item.title}
                   <span>×1份</span>
                   </div>
                   <div className="item-row2">
-                  复制以下兑换码前往“一路听天下”APP内兑换
+                  {item.note}
                   </div>
                   <div className='item-row3'>
-                    <img src="asdasd" alt="" />
+                    <img src={item.img_url} alt="" />
                   </div>
                   <div className="item-row4">
-                    <div className="item-row4-l">
-                    AFHK3980TG5SGML417
+                    <div className="item-row4-l copytxt">
+                    {item.batch_no}
                     </div>
-                    <div className="item-row4-r">
+                    <div className="item-row4-r" onClick={() => handleCopy(item)}>
                       复制
                     </div>
                   </div>
                 </div>
               )
-            } else if (item.type === '3') {
-              // 免单
-              return (
-                <div className="item type3" key={index}>
-                  <div className="item-row1">
-                  获得免单奖励
-                  <span>×1份</span>
-                  </div>
-                  <div className="item-row2">
-                  联系客服登记领取
-                  </div>
-                  <div className='item-row3'>
-                    <img src="asdasd" alt="" />
-                  </div>
-                </div>
-              )
-            } else if (item.type === '4') {
+            } else if (item.type === 2) {
               // 获得奇点
               return (
                 <div className="item type4" key={index}>
                   <div className="item-row1">
-                  获得300奇点
-                  <span>×1份</span>
+                  {item.title}
+                  <span>×{item.integral_num}份</span>
                   </div>
                   <div className="item-row2">
-                  前往“我的”-“资产管理、奇点”中查看
+                  {item.note}
                   </div>
                   <div className='type4-row3'>
-                    <img src={require('../../assets/Frame 1000006181.png')} alt="" />
+                    <img src={item.img_url} alt="" />
                   </div>
                   <div className="type4-row4">
-                    <span>立即查看</span>
+                    <span onClick={() => handleGo(item)}>立即查看</span>
                   </div>
                 </div>
               )
-            } else {
+            } else if (item.type === 4) {
               return (
                 <div className="item type5" key={index}>
                   <div className="item-row1">
-                  获得元音符定制尤克里里线上课程
+                  {item.title}
                   <span>×1份</span>
                   </div>
                   <div className="item-row2">
-                  点击下方按钮观看课程
+                  {item.note}
                   </div>
                   <div className="type5-row3">
-                    <span onClick={() => handleGo({ type: '5' })}>
+                    <span onClick={() => handleGo(item)}>
                       <i>
                         <img src={require('../../assets/play-icon.png')} alt="" />
                       </i>
@@ -137,21 +182,45 @@ function MyPrize () {
                     </span>
                   </div>
                   <div className="type5-row4">
-                  有效期为：获得奖品日起180天内随意观看！
+                    {
+                      item.expiration_time ? (`有效期为：获得奖品日起${item.expiration_time}天内随意观看！`) : '奖品永久有效'
+                    }
                   </div>
                 </div>
               )
+            } else {
+              return null
+              // 免单
+              // return (
+              //   <div className="item type3" key={index}>
+              //     <div className="item-row1">
+              //     获得免单奖励
+              //     <span>×1份</span>
+              //     </div>
+              //     <div className="item-row2">
+              //     联系客服登记领取
+              //     </div>
+              //     <div className='item-row3'>
+              //       <img src="asdasd" alt="" />
+              //     </div>
+              //   </div>
+              // )
             }
           })
 
         }
         <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
-        <div className="footer">
-          <img src="qweqw" alt="" className='qrcode' />
+        {
+          qrcode
+            ? (<div className="footer">
+          <img src={qrcode} alt="" className='qrcode' />
           <div className="footer-tip">
             微信扫码添加客服
           </div>
-        </div>
+        </div>)
+            : null
+        }
+
       </div>
       </PullToRefresh>
     </div>

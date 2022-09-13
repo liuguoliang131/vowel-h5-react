@@ -23,7 +23,7 @@ export const login = (data) => {
 }
 // 我的活动列表
 // eslint-disable-next-line camelcase
-export const promotion_list = (data) => {
+export const promotionListApi = (data) => {
   return axios({
     method: 'post',
     url: '/h5/promotion/list',
@@ -33,7 +33,7 @@ export const promotion_list = (data) => {
 
 // 我的奖品列表
 // eslint-disable-next-line camelcase
-export const promotion_prizeList = (data) => {
+export const promotionPrizeListApi = (data) => {
   return axios({
     method: 'post',
     url: '/h5/promotion/prizeList',
@@ -42,7 +42,7 @@ export const promotion_prizeList = (data) => {
 }
 // 我的课程章节列表
 // eslint-disable-next-line camelcase
-export const course_lessonList = (data) => {
+export const courseLessonListApi = (data) => {
   return axios({
     method: 'post',
     url: '/h5/course/lessonList',

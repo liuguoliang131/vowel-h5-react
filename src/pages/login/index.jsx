@@ -105,19 +105,19 @@ const Login = (props) => {
     //   type: 'index/count',
     //   count: '1'
     // })
-    if (res.code !== 200) {
+    if (res.code !== 0) {
       setVisible(false)
       return false
     }
     utils.setUserInfo({
-      token: 'asdasdsadasdadasdasdasd'
+      ...res.data
     })
-    utils.setToken('asdasdsadasdadasdasdasd')
+    utils.setToken(res.data.token)
     Toast.show({
       icon: 'success',
       content: '登陆成功'
     })
-    navigate('/layout/myEvent', { state: { token: 'xxxxx' }, replace: false })
+    navigate('/layout/myEvent', { state: { token: res.data.token }, replace: false })
   }
 
   return (
