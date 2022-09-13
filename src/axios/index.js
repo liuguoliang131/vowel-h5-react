@@ -6,12 +6,11 @@ const NODE_ENV = process.env.NODE_ENV
 const token = utils.getToken()
 let toast = null
 const instance = axios.create({
-  baseURL: process.env.REACT_APP_BASE_API || 'https://some-domain.com/api',
+  baseURL: '/api',
   timeout: 20000,
   headers: {
     'x-token': token,
     ak: 'hanhou-app',
-    ts: Date.now(),
     sign: ''
   }
 })
@@ -26,6 +25,7 @@ instance.interceptors.request.use(function (config) {
     icon: 'loading'
 
   })
+  config.headers.ts = Date.now()
   return config
 }, function (error) {
   // 对请求错误做些什么

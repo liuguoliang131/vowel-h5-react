@@ -13,7 +13,7 @@ const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()
   const [data, setData] = useState({
-    phone: '',
+    phone: '13611037366',
     captcha: ''
   })
   const [visible, setVisible] = useState(false) // 弹窗开关

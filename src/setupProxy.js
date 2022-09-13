@@ -1,22 +1,29 @@
-// const { createProxyMiddleware } = require('http-proxy-middleware')
-// module.exports = function (app) {
-//   app.use(createProxyMiddleware('/api', //遇见/api-elm前缀的请求,就会触发该代理配置
-//     {
-//       target: "http://localhost:9000", //请求转发给谁（能返回数据的服务器地址）
-//       changeOrigin: true,  //控制服务器收到的响应头中Host字段的值
-//       pathRewrite: { '^/api': '' } //重写请求路径，保证交给后台服务器是正常地请求地址（必须配置）
-//     }))
-// }
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
+const { createProxyMiddleware } = require('http-proxy-middleware')
+// process.env.REACT_APP_BASE_API
 module.exports = function (app) {
+  // eslint-disable-next-line no-unused-expressions
   app.use(
-    '/api',
-    createProxyMiddleware({
-      target: 'http://localhost:9000',
+    createProxyMiddleware('/api', {
+      host: '192.168.110.122:3000',
+      target: 'http://124.70.107.130:8033',
       changeOrigin: true,
-      pathRewrite: { '^/api': '/giao' }
+      pathRewrite: { '^/api': '/' }
     })
-  );
-};
+  // eslint-disable-next-line no-sequences
+  )
+
+  // app.use(
+  //   '/',
+  //   createProxyMiddleware({
+  //     target: 'http://localhost:3000',
+  //     changeOrigin: false
+  //   })
+  // )
+}
+
+// const proxy = require('http-proxy-middleware')
+// module.exports = function (app) {
+//   app.use(proxy('/api', { target: 'http://124.70.107.130:8033' }))
+//   app.use(proxy('/*.svg', { target: 'http://localhost:5000/' }))
+// }
