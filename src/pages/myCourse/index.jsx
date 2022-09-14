@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
-import { sleep } from 'antd-mobile/es/utils/sleep'
+// import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
@@ -16,7 +16,7 @@ function MyCourse () {
     expiration_time: '2022.09.08 11:05:30',
     push_award_time: '2022.09.08 11:05:30'
   })
-  const [loading, setLoading] = useState('false')
+
   // 播放按钮
   const handlePauseOthter = (index, e) => {
     console.log(index, e)

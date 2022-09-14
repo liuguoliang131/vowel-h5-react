@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router'
 import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
 import copy from 'copy-to-clipboard'
+import utils from '../../utils'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
@@ -26,6 +27,7 @@ function MyPrize () {
     } else if (item.type === 2) {
       // 跳转到原生app查看奇点页
 
+      utils.openAppPage({ page: 'myScorePage', params: { ...item }, isNeedLogin: true })
     }
   }
 

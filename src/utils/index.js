@@ -37,6 +37,14 @@ const utils = {
       params: { username, path }
     }))
   },
+  // 跳转APP
+  openAppPage: (pageJSON) => {
+    // {"page":"myScorePage","params":{}, "isNeedLogin": true}
+    App.postMessage(JSON.stringify({
+      type: 'openAppPage',
+      params: pageJSON
+    }))
+  },
   // 获取用户登陆后的信息
   getUserInfo: () => {
     const info = localStorage.getItem(USER_INFO)

@@ -2,21 +2,27 @@ $one:80.5px;
 .LuckyRolling {
   text-align: center;
   .bg-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: auto;
     width: 332px;
     height: 332px;
+    background-image: url('../../../../../static/Rectangle\ 19.png'),url('../../../../../static/Rectangle\ 18.png');
+    background-position: 6px 6px,0 0;
+    background-size: 320px 320px,332px 332px;
+    background-repeat: no-repeat,no-repeat;
   }
   .LuckyRolling-box {
     position: relative;
-    margin: 5px 0 0 5px;
     width: 322px;
     height: 322px;
-    background-color: rgba(255,255,255,0.4);
     .start-btn {
       position: absolute;
       top: $one;
       left: $one;
-      background-color: yellow;
+      background: no-repeat url('../../../../../static/Frame\ 1000006089.png') center;
+      background-size: 136px 136px;
       width: 2*$one;
       height: 2*$one;
     }

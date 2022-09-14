@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import './index.scss'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
-import CountDown from './components/countDown/index.jsx'
+import Panel from './components/panel'
 import LuckyRolling from './components/luckyRolling/index.jsx'
 import TaskList from './components/taskList/index.jsx'
 import DetailedPicture from './components/detailedPicture/index.jsx'
@@ -25,8 +25,10 @@ const Home = (props) => {
     <div className='home'>
       <Crumbs></Crumbs>
       <TopWord></TopWord>
-      <div className="mb14"></div>
-      <CountDown></CountDown>
+      <Panel></Panel>
+      <div className="text-1">
+        —— 奖池已开放，抓紧抽奖吧 ——
+      </div>
       <div className="mb14"></div>
       <LuckyRolling></LuckyRolling>
       <div className="mb16"></div>

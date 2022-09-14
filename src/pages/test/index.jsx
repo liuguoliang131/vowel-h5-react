@@ -1,43 +1,27 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, createRef } from 'react'
 
-import { Vertify } from '@alex_xu/react-slider-vertify'
-
+import QRCode from 'qrcodejs2'
 function Test () {
-  const [visible, setVisible] = useState(false)
-  const show = () => {
-    setVisible(true)
+  const canvasRef = createRef()
+  const getQrcode = (qWidth, qHeight, qText, qRender, dom) => {
+    const qr = new QRCode(dom, {
+      width: qWidth,
+      height: qHeight,
+      text: qText,
+      render: qRender
+    })
   }
-  const hide = () => {
-    setVisible(false)
+  const initCanvas = () => {
+    if (canvasRef.current) {
+      getQrcode(100, 100, 'asdasdasd', 'canvas', canvasRef.current)
+    }
   }
-  const style = {
-    display: 'inline-block',
-    marginRight: '20px',
-    marginBottom: '20px',
-    width: '100px',
-    padding: '5px 20px',
-    color: '#fff',
-    textAlign: 'center',
-    cursor: 'pointer',
-    background: '#1991FA'
-  }
+  useEffect(() => {
+    initCanvas()
+  }, [canvasRef])
   return (
     <>
-      <div onClick={show} style={style}>
-        显示
-      </div>
-      <div onClick={hide} style={style}>
-        隐藏
-      </div>
-      <Vertify
-        width={320}
-        height={160}
-        imgUrl={require('../../assets/分享-分享图.png')}
-        visible={visible}
-        onSuccess={() => alert('success')}
-        onFail={() => alert('fail')}
-        onRefresh={() => alert('refresh')}
-      />
+      <div ref={canvasRef}></div>
     </>
   )
 }
