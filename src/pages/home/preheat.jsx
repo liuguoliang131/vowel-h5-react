@@ -26,7 +26,7 @@ const Home = (props) => {
       <Crumbs></Crumbs>
       <TopWord></TopWord>
       <div className="mb14"></div>
-      <CountDown></CountDown>
+      <CountDown startTime={new Date('2022-09-22 00:00:00').getTime()}></CountDown>
       <div className="mb14"></div>
       <LuckyRolling></LuckyRolling>
       <div className="mb16"></div>

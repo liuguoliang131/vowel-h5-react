@@ -1,6 +1,7 @@
 import Item from 'antd/lib/list/Item'
 import React, { useState, useEffect, useRef } from 'react'
 import './index.scss'
+let timer = null
 function Panel () {
   const viewRef = useRef()
   const [data, setData] = useState([
@@ -19,7 +20,7 @@ function Panel () {
     const scrollTop = viewRef.current.scrollTop
     console.log('视口高度clientHeight', viewRef.current.clientHeight, '滚动块高度scrollHeight:', viewRef.current.scrollHeight, 'scrollTop:', viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
 
-    setInterval(() => {
+    timer = setInterval(() => {
       console.log('父盒子上距离', viewRef.current)
       console.log('1', theScroll.offsetTop)
       if (-1 * theScroll.offsetTop < theScroll.offsetHeight - clientHeight) {
@@ -36,8 +37,13 @@ function Panel () {
     }, 5000)
   }
   useEffect(() => {
+    console.log('mount')
     startScroll()
   }, [data, viewRef])
+  useEffect(() => {
+    console.log('unmount')
+    // clearTimeout(timer)
+  }, [])
   return (
     <div className="panel">
       <div className="panel-content" ref={viewRef}>
