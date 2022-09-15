@@ -13,6 +13,7 @@ import { Toast } from 'antd-mobile'
 // }else {
 
 // }
+let timer = null
 const utils = {
   // 是否有App全局变量 判断是否在app内
   ownApp: (success, fail) => {
@@ -38,7 +39,8 @@ const utils = {
         Toast.show({
           content: '即将跳转到元音符App下载页面'
         })
-        setTimeout(() => {
+        if (timer) clearTimeout(timer)
+        timer = setTimeout(() => {
           window.location.href = 'https://h5.yuanyinfu.com/h5/app'
         }, 2000)
       }
@@ -143,6 +145,30 @@ const utils = {
       }
     } else {
       return params
+    }
+  },
+  // 返回年月日时分秒
+  getTimeData: (date) => {
+    const time = new Date(date)
+    let y = time.getFullYear()
+    let mon = time.getMonth() + 1
+    let dd = time.getDate()
+    let hh = time.getHours()
+    let MM = time.getMinutes()
+    let ss = time.getSeconds()
+    y = y < 10 ? `0${y}` : y
+    mon = mon < 10 ? `0${mon}` : mon
+    dd = dd < 10 ? `0${dd}` : dd
+    hh = hh < 10 ? `0${hh}` : hh
+    MM = MM < 10 ? `0${MM}` : MM
+    ss = ss < 10 ? `0${ss}` : ss
+    return {
+      y,
+      mon,
+      dd,
+      hh,
+      MM,
+      ss
     }
   }
 }

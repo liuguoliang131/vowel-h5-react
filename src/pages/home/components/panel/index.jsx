@@ -1,27 +1,34 @@
 import React, { Component, createRef } from 'react'
+import { promotionDrawCycleListApi } from '../../../../axios/api'
 import './index.scss'
 let timer = null
 class Panel extends Component {
   viewRef = createRef()
   state = {
-    data: [
-      { title: '133xxxx1234 获得苹果手机x1' },
-      { title: '122xxxx1234 获得苹果x1' },
-      { title: '188xxxx1234 获得梨子x1' },
-      { title: '165xxxx1234 获得弹夹x1' },
-      { title: '133xxxx1234 获得苹果手机x1' }
-    ]
+    data: []
+  }
+
+  getData = async () => {
+    const res = await promotionDrawCycleListApi({
+      promotion_id: this.props.id
+    })
+    if (res.code !== 0) {
+      return false
+    }
+    this.setState({
+      data: res.data
+    })
   }
 
   // 轮播动画
-  startScroll = () => {
+  startScroll = async () => {
     console.log('viewRef', this.viewRef)
     const theScroll = this.viewRef.current.children[0]
     const clientHeight = this.viewRef.current.clientHeight
     const scrollHeight = this.viewRef.current.scrollHeight
     const scrollTop = this.viewRef.current.scrollTop
     console.log('视口高度clientHeight', this.viewRef.current.clientHeight, '滚动块高度scrollHeight:', this.viewRef.current.scrollHeight, 'scrollTop:', this.viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
-
+    clearInterval(timer)
     timer = setInterval(() => {
       // console.log('父盒子上距离', this.viewRef.current)
       // console.log('1', theScroll.offsetTop)
@@ -40,6 +47,10 @@ class Panel extends Component {
   }
 
   componentDidMount () {
+    this.getData()
+  }
+
+  componentDidUpdate () {
     this.startScroll()
   }
 
@@ -55,7 +66,7 @@ class Panel extends Component {
           <div className="panel-scroll">
           {this.state.data.map((item, index) => (
             <div className="panel-item" key={index}>
-              {item.title}
+              {item}
             </div>
           ))}
           </div>

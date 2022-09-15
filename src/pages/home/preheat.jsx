@@ -1,17 +1,20 @@
-// import React, { useEffect } from 'react'
+
 import React, { useState } from 'react'
-// import { getTest } from '../../axios/api'
 import { connect } from 'react-redux'
-// import { useLocation } from 'react-router-dom'
+
 import './preheat.scss'
+import { useLocation, useNavigate } from 'react-router-dom'
 import Crumbs from '../../components/crumbs/index.jsx'
-import TopWord from './components/topWord/index.jsx'
 import CountDown from './components/countDown/index.jsx'
+import TopWord from './components/topWord/index.jsx'
+import Panel from './components/panel'
 import LuckyRolling from './components/luckyRolling/index.jsx'
 import TaskList from './components/taskList/index.jsx'
 import DetailedPicture from './components/detailedPicture/index.jsx'
 import AudioPlayer from './components/audioPlayer/index.jsx'
 import Dialog from '../../components/dialog/index.jsx'
+import utils from '../../utils'
+import { promotionActivityDetailApi } from '../../axios/api'
 const Home = (props) => {
   const [visible, setVisible] = useState(true)
   const btn1Fn = () => {

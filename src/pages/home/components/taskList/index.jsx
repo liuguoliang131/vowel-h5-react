@@ -45,7 +45,7 @@ function TaskList (props) {
                     <div className="col2-2">每邀请{item.reach_num}位，抽奖机会<span className='col2-2-n'>+{item.give_num}</span></div>
                   </div>
                   <div className="col3">
-                    <div className="col3-1">
+                    <div className="col3-1" onClick={() => props.to()}>
                       <img src={row3IMG} alt="" />
                       <div>立即分享</div>
                     </div>

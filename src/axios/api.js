@@ -58,3 +58,28 @@ export const promotionActivityDetailApi = (data) => {
     data
   })
 }
+// 抽奖
+export const promotionPrizeDrawApi = (data) => {
+  return axios({
+    method: 'post',
+    url: '/h5//promotion/prizeDraw',
+    data
+  })
+}
+// 轮播中奖数据
+export const promotionDrawCycleListApi = (data) => {
+  return axios({
+    method: 'post',
+    url: '/h5//promotion/drawCycleList',
+    data
+  })
+}
+
+// 海报
+export const promotionSharePosterListApi = (data) => {
+  return axios({
+    method: 'post',
+    url: '/h5//promotion/sharePoster',
+    data
+  })
+}

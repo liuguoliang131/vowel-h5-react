@@ -1,11 +1,20 @@
-import React, { createRef, useEffect } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 import utils from '../../utils/index'
 import QRCode from 'qrcodejs2'
+import { promotionSharePosterListApi } from '../../axios/api'
+import { useLocation } from 'react-router-dom'
 function Poster () {
-  const fullRef = createRef()
-  const viewRef = createRef()
+  const [data, setData] = useState({
+    user_name: '',
+    user_avatar: '',
+    poster_url: '',
+    share_sign: ''
+  })
+  const fullRef = useRef()
+  const viewRef = useRef()
+  const location = useLocation()
   // 生成二维码函数
   const getQrcode = (qWidth, qHeight, qText, qRender, dom) => {
     return new QRCode(dom, {
@@ -14,6 +23,15 @@ function Poster () {
       text: qText,
       render: qRender
     })
+  }
+  const getData = async () => {
+    const res = await promotionSharePosterListApi({
+      id: location.state.id || 1
+    })
+    if (res.code !== 0) {
+      return false
+    }
+    setData(res.data)
   }
   const initCanvas = () => {
     console.log('viewRef', viewRef)
@@ -53,7 +71,7 @@ function Poster () {
       // 创建图片
       const image = new Image()
       // 设置图片地址
-      image.src = require('../../assets/分享-分享图.png')
+      image.src = data.poster_url
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
       image.onload = function () {
         // 4各参数 图片的起始坐标和宽高
@@ -61,7 +79,7 @@ function Poster () {
 
         // 层级之上
         const avaImg = new Image()
-        avaImg.src = require('../../assets/fx.png')
+        avaImg.src = data.user_avatar
         avaImg.onload = function () {
           console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
 
@@ -76,12 +94,12 @@ function Poster () {
         // ctx.direction = 'ltr' // 文本方向从左向右
         ctx.textAlign = 'left' // 左对齐
         console.log('title.x, title.y', title.x, title.y)
-        ctx.fillText('这是一个昵称', title.x, title.y)
+        ctx.fillText(data.user_name, title.x, title.y)
         // 生成二维码
         const qrCanvas = document.createElement('div')
         qrCanvas.height = qr.height
         qrCanvas.width = qr.width
-        const qrcodeObj = getQrcode(qr.width, qr.height, 'NeiRong', 'canvas', qrCanvas)
+        const qrcodeObj = getQrcode(qr.width, qr.height, data.share_sign, 'canvas', qrCanvas)
         const codeImg = qrcodeObj._el.children[1]
         codeImg.onload = function () {
           ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
@@ -97,17 +115,27 @@ function Poster () {
     btn.click()
   }
   useEffect(() => {
+    getData()
+  })
+  useEffect(() => {
     initCanvas()
-  }, [fullRef, viewRef])
+  }, [fullRef, viewRef, data])
   return (
     <div className="poster">
       <Crumbs1 text="抽奖海报"></Crumbs1>
-      <div className="poster-box">
-        <div className='full' ref={fullRef}>
-          <canvas ref={viewRef}></canvas>
-        </div>
-        {/* <img src={require('../../assets/分享-分享图.png')} alt="" /> */}
-      </div>
+      {
+        data.user_name
+          ? (
+          <div className="poster-box">
+            <div className='full' ref={fullRef}>
+              <canvas ref={viewRef}></canvas>
+            </div>
+          </div>
+            )
+          : null
+
+      }
+
       <div className="bottom-box">
         <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
           点击保存海报
