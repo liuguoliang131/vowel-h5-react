@@ -55,7 +55,7 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to={'/login'} />
+    element: <Navigate to={'/layout'} />
   }
 ]
 const GetRoutes = () => {

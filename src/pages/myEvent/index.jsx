@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react'
+import utils from '../../utils/index'
 import { useNavigate } from 'react-router'
 import Crumbs1 from '../../components/crumbs1'
-import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { promotionListApi } from '../../axios/api'
-let currentPage = 1
+const currentPage = 1
 function MyEvent () {
   console.log('myevent')
+  const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([])
   const navigate = useNavigate()
   // 查看奖品
@@ -19,7 +21,14 @@ function MyEvent () {
   // 查看活动详情
   const handleViewDetail = (item) => {
     console.log('handleViewDetail', item)
-    navigate('/layout/home', { state: { ...item }, replace: false })
+    if (item.status === 1) {
+      // utils.hashPush('/layout/home', item)
+      navigate('/layout/home', { state: { ...item }, replace: false })
+    } else {
+      Toast.show({
+        content: '活动结束了'
+      })
+    }
   }
 
   const [hasMore, setHasMore] = useState(true)
@@ -29,8 +38,9 @@ function MyEvent () {
     //   { id: '2', status: 0 }
     // ])
     const res = await promotionListApi({
-      page: currentPage++
+      page: currentPage
     })
+    setCurrentPage(val => val + 1)
     console.log('res', res)
     if (!res.data) {
       setHasMore(false)
@@ -41,10 +51,11 @@ function MyEvent () {
   }
   // 下拉刷新
   const onRefresh = async () => {
-    currentPage = 1
+    setCurrentPage(1)
     const res = await promotionListApi({
-      page: currentPage++
+      page: currentPage
     })
+    setCurrentPage(val => val + 1)
     console.log('res', res)
     if (!res.data) {
       setData([])

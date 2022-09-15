@@ -18,7 +18,7 @@ class AudioPlayer extends Component {
 
   handlePlay = () => {
     if (!audio.readyState) {
-      return Toast({
+      return Toast.show({
         content: '歌曲加载中，请稍等'
       })
     }
@@ -31,8 +31,8 @@ class AudioPlayer extends Component {
   render () {
     return (
       <div className="audioPlayer">
-        <img src={coverIMG} alt="" className='cover' />
-        <div className="title">《念君安》立即试听</div>
+        <img src={this.props.music_pic} alt="" className='cover' />
+        <div className="title">{this.props.music_name}</div>
         <div className="playbtn" onClick={() => this.handlePlay()}>
           {
             this.state.isPlay ? (<img src={suspendIMG} alt="" />) : (<img src={playIMG} alt="" />)
@@ -43,10 +43,14 @@ class AudioPlayer extends Component {
   }
 
   componentDidMount () {
-    audio.src = song
+
   }
 
   componentDidUpdate (prevProps, prevState) {
+    console.log('audioPlayer update', this.props)
+    if (prevProps !== this.props) {
+      audio.src = this.props.music_url
+    }
     if (this.state.isPlay !== prevState.isPlay) {
       clearTimeout(timer)
       if (this.state.isPlay) {

@@ -38,7 +38,10 @@ class LuckyRolling extends React.Component {
       <div className="LuckyRolling">
         <div className="bg-box">
           <div className="LuckyRolling-box">
-            <div className="start-btn" onClick={() => this.playStart()}></div>
+            <div className="start-btn" onClick={() => this.playStart()}>
+              <div className="start-btn-row1">点击抽奖</div>
+              <div className="start-btn-row2">剩余抽奖机会1次</div>
+            </div>
             {
               this.state.prizeList.map(item => {
                 switch (item.sort) {

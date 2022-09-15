@@ -3,7 +3,47 @@ import {
   USER_INFO,
   TOKEN
 } from './uniField'
+import { Toast } from 'antd-mobile'
+
+// let webUrl = ''
+// if(process.env.NODE_ENV==='development') {
+//   webUrl = 'localhost'
+// }else if(process.env.NODE_ENV==='test') {
+
+// }else {
+
+// }
 const utils = {
+  // 是否有App全局变量 判断是否在app内
+  ownApp: (success, fail) => {
+    try {
+      if (App) {
+        return success()
+      } else {
+        if (fail) {
+          return fail()
+        } else {
+          Toast.show({
+            content: '即将跳转到元音符App下载页面'
+          })
+          setTimeout(() => {
+            window.location.href = 'https://h5.yuanyinfu.com/h5/app'
+          }, 2000)
+        }
+      }
+    } catch (error) {
+      if (fail) {
+        fail()
+      } else {
+        Toast.show({
+          content: '即将跳转到元音符App下载页面'
+        })
+        setTimeout(() => {
+          window.location.href = 'https://h5.yuanyinfu.com/h5/app'
+        }, 2000)
+      }
+    }
+  },
   goLogin: () => {
     App.postMessage(JSON.stringify({
       type: 'goLogin',
@@ -12,11 +52,18 @@ const utils = {
   },
 
   isLogin: () => {
-    App.postMessage(JSON.stringify({
-      type: 'isLogin',
-      params: {},
-      callback: 'isLoginResult'
-    }))
+    utils.ownApp(() => {
+      const is = App.postMessage(JSON.stringify({
+        type: 'isLogin',
+        params: {},
+        callback: 'isLoginResult'
+      }))
+      if (!is) {
+        this.goLogin()
+      }
+    }, () => {
+      window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
+    })
   },
 
   isLoginResult: (value) => {
@@ -63,6 +110,40 @@ const utils = {
   },
   setToken: (data) => {
     localStorage.setItem(TOKEN, data)
+  },
+  delToken: () => {
+    localStorage.removeItem(TOKEN)
+  },
+  // 跳转页面
+  hashPush: (hash = '/', params = {}) => {
+    const paramArr = []
+    Object.keys(params).forEach(item => {
+      paramArr.push(`${item}=${params[item]}`)
+    })
+    let toPath = window.location.origin + `/#${hash}`
+    if (paramArr.length) {
+      toPath = toPath + '?' + paramArr.join('&')
+    }
+    window.location.href = toPath
+  },
+  // 获取URL params参数
+  getUrlParams: (url = window.location.href) => {
+    const params = {}
+    if (url.includes('?')) {
+      const strArr = url.split('?')
+      if (strArr.length > 1) {
+        const strArr1 = strArr[1].split('&')
+        strArr1.forEach(item => {
+          const strArr2 = item.split('=')
+          params[strArr2[0]] = strArr2[1]
+        })
+        return params
+      } else {
+        return params
+      }
+    } else {
+      return params
+    }
   }
 }
 export default utils

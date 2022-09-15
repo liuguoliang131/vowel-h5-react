@@ -18,6 +18,10 @@ $one:80.5px;
     width: 322px;
     height: 322px;
     .start-btn {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
       position: absolute;
       top: $one;
       left: $one;
@@ -25,6 +29,20 @@ $one:80.5px;
       background-size: 136px 136px;
       width: 2*$one;
       height: 2*$one;
+      text-align: center;
+      .start-btn-row1 {
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        color: #FD03B3;
+      }
+      .start-btn-row2 {
+        transform: scale(0.85);
+        padding-top: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #999999;
+      }
     }
     // 奖项
     .prize {

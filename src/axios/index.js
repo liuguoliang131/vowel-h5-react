@@ -3,13 +3,12 @@ import utils from '../utils/index'
 import { Toast } from 'antd-mobile'
 const NODE_ENV = process.env.NODE_ENV
 // console.log('NODE_ENV', NODE_ENV, process.env.REACT_APP_BASE_API)
-const token = utils.getToken()
 let toast = null
 const instance = axios.create({
   baseURL: '/api',
   timeout: 20000,
   headers: {
-    'x-token': token,
+    'x-token': '',
     ak: 'hanhou-app',
     sign: ''
   }
@@ -26,6 +25,7 @@ instance.interceptors.request.use(function (config) {
 
   })
   config.headers.ts = Date.now()
+  config.headers['x-token'] = utils.getToken()
   return config
 }, function (error) {
   // 对请求错误做些什么
@@ -41,6 +41,12 @@ instance.interceptors.response.use(function (response) {
       icon: 'fail',
       content: response.data.msg || 'error'
     })
+    if (response.data.code === 700 || response.data.code === 701 || response.data.code === 702) {
+      utils.delUserInfo()
+      utils.delToken()
+      // 首先判断是不是APP内 如果是APP调APP登录，不是跳H5登录
+      utils.isLogin()
+    }
   }
   // 对响应数据做点什么
   return response.data

@@ -1,8 +1,10 @@
 import React from 'react'
 import './index.scss'
-function TopWord () {
+function TopWord (props) {
   return (
-    <div className='TopWord'></div>
+    <div className='TopWord'>
+      <img src={props.mainImg} alt="" />
+    </div>
   )
 }
 

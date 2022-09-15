@@ -8,17 +8,18 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 import { promotionPrizeListApi } from '../../axios/api'
-let currentPage = 1
+
 function MyPrize () {
   const location = useLocation()
   const navigate = useNavigate()
   console.log('location', location)
+  const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([
-    { type: '1', id: 1 },
-    { type: '2', id: 2 },
-    { type: '3', id: 3 },
-    { type: '4', id: 4 },
-    { type: '5', id: 5 }
+    // { type: '1', id: 1 },
+    // { type: '2', id: 2 },
+    // { type: '3', id: 3 },
+    // { type: '4', id: 4 },
+    // { type: '5', id: 5 }
   ])
   const [qrcode, setQrcode] = useState('')
   const handleGo = (item) => {
@@ -41,47 +42,47 @@ function MyPrize () {
 
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
-    setData([
-      { type: 1, id: 1 },
-      { type: 2, id: 2 },
-      { type: 3, id: 3, batch_no: '121212412124' },
-      { type: 4, id: 4 },
-      { type: 4, id: 5 }
-    ])
-    setHasMore(false)
-    return false
-    // try {
-    //   const res = await promotionPrizeListApi({
-    //     promotion_id: '1' || location.state.id,
-    //     page: currentPage++
-    //   })
-    //   console.log('res', res)
-    //   if (res.code !== 0) {
-    //     setHasMore(false)
-    //     return false
-    //   }
-    //   if (!res.data || !res.data.list || !res.data.list.length) {
-    //     setHasMore(false)
-    //   } else {
-    //     setData(val => [...val, ...res.data.list])
-    //     if (currentPage === 2) {
-    //       setQrcode(res.data.customer_service || '')
-    //     }
-    //     setHasMore(true)
-    //   }
-    // } catch (error) {
-    //   setHasMore(false)
-    //   throw error
-    // }
+    // setData([
+    //   { type: 1, id: 1 },
+    //   { type: 2, id: 2 },
+    //   { type: 3, id: 3, batch_no: '121212412124' },
+    //   { type: 4, id: 4 },
+    //   { type: 4, id: 5 }
+    // ])
+    // setHasMore(false)
+    // return false
+    try {
+      const res = await promotionPrizeListApi({
+        promotion_id: location.state.id,
+        page: currentPage
+      })
+      setCurrentPage(val => val + 1)
+      console.log('res', res)
+      if (res.code !== 0) {
+        setHasMore(false)
+        return false
+      }
+      if (!res.data || !res.data.list || !res.data.list.length) {
+        setHasMore(false)
+      } else {
+        setData(val => [...val, ...res.data.list])
+        setQrcode(res.data.customer_service || '')
+        setHasMore(true)
+      }
+    } catch (error) {
+      setHasMore(false)
+      throw error
+    }
   }
   // 下拉刷新
   const onRefresh = async () => {
     try {
-      currentPage = 1
+      setCurrentPage(1)
       const res = await promotionPrizeListApi({
-        promotion_id: '1' || location.state.id,
-        page: currentPage++
+        promotion_id: location.state.id,
+        page: currentPage
       })
+      setCurrentPage(val => val + 1)
       console.log('res', res)
       if (!res.data || !res.data.list || !res.data.list.length) {
         setData([])
@@ -215,7 +216,9 @@ function MyPrize () {
         {
           qrcode
             ? (<div className="footer">
-          <img src={qrcode} alt="" className='qrcode' />
+              <a download={'元音符客服二维码'} href={qrcode}>
+                <img src={qrcode} alt="" className='qrcode' />
+              </a>
           <div className="footer-tip">
             微信扫码添加客服
           </div>

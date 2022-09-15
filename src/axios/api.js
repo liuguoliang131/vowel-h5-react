@@ -1,5 +1,5 @@
 import axios from './index'
-
+import utils from '../utils'
 // 获取验证码
 export const captcha = (data) => {
   return axios({
@@ -51,7 +51,7 @@ export const courseLessonListApi = (data) => {
 }
 // 活动详情
 // eslint-disable-next-line camelcase
-export const promotion_activityDetail = (data) => {
+export const promotionActivityDetailApi = (data) => {
   return axios({
     method: 'post',
     url: '/h5/promotion/activityDetail',

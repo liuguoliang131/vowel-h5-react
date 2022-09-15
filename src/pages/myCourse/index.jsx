@@ -5,8 +5,9 @@ import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
-let currentPage = 1
+
 function MyCourse () {
+  const [currentPage, setCurrentPage] = useState(1)
   const [list] = useState([
     { name: '第一课', id: 1 },
     { name: '第二课', id: 2 },
@@ -36,8 +37,9 @@ function MyCourse () {
     // try {
     //   const res = await courseLessonListApi({
     //     course_id: '1' || location.state.id,
-    // page:currentPage++
+    // page:currentPage
     //   })
+    // setCurrentPage(val => val + 1)
     //   if (res.code !== 0) {
     //     setHasMore(false)
     //   }
@@ -66,11 +68,12 @@ function MyCourse () {
   // 下拉刷新
   const onRefresh = async () => {
     try {
-      currentPage = 1
+      setCurrentPage(1)
       const res = await courseLessonListApi({
         course_id: '1' || location.state.id,
-        page: currentPage++
+        page: currentPage
       })
+      setCurrentPage(val => val + 1)
       console.log('res', res)
       if (!res.data || !res.data.list || !res.data.list.length) {
         setData([])

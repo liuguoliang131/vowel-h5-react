@@ -159,12 +159,16 @@
     .footer {
       height: 234px;
       text-align: center;
-      .qrcode {
-        margin: auto;
-        width: 128px;
-        height: 128px;
-        padding-top: 32px;
+      a {
+        display: flex;
+        .qrcode {
+          margin: auto;
+          width: 128px;
+          height: 128px;
+          padding-top: 32px;
+        }
       }
+      
       .footer-tip {
         padding-top: 5px;
         font-size: 14px;

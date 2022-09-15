@@ -1,7 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import './index.scss'
-const backIMG = require('../../assets/back1.png')
+const backIMG = require('../../assets/back.png')
 function Crumbs1 (props) {
   const navigate = useNavigate()
   const onBack = () => {
