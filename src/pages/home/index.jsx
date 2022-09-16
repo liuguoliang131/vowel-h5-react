@@ -138,41 +138,25 @@ const Home = (props) => {
     }
     timer = setInterval(() => {
       const now = new Date().getTime()
+      const newData = { ...data }
       if (now < data.draw_start_time) {
-        setData({
-          ...data,
-          drawStatus: 0 // 抽奖未开始
-        })
+        newData.drawStatus = 0 // 抽奖未开始
       } else if (now >= data.draw_start_time && now < data.draw_end_time) {
-        setData({
-          ...data,
-          drawStatus: 1 // 进行中
-        })
+        newData.drawStatus = 1 // 抽奖开始
       } else {
-        setData({
-          ...data,
-          drawStatus: 2 // 结束中
-        })
+        newData.drawStatus = 2 // 抽奖结束
       }
       if (now < data.start_time) {
-        setData({
-          ...data,
-          status: 0 // 活动未开始
-        })
+        newData.status = 0
       } else if (now >= data.start_time && now < data.end_time) {
-        setData({
-          ...data,
-          status: 1 // 进行中
-        })
+        newData.status = 1
       } else {
-        setData({
-          ...data,
-          status: 2 // 结束中
-        })
+        newData.status = 2
       }
       if (now > data.start_time && now > data.draw_end_time) {
         clearTimeout(timer)
       }
+      setData(newData)
     }, 1000)
   }
   useEffect(() => {

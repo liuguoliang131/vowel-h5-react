@@ -85,7 +85,7 @@ class LuckyRolling extends React.Component {
           ? (
           <div className="bg-box">
             <div className="LuckyRolling-box">
-            {this.props.status === 2
+            {this.props.drawStatus === 2
               ? (
                 <div className={'start-btn gray'}>
                 <div className="start-btn-row1">已结束</div>
@@ -256,6 +256,7 @@ class LuckyRolling extends React.Component {
   // 点击开始
   playStart = async () => {
     if (!this.props.drawStatus) {
+      console.log('play', this.props)
       this.props.success(1)
       return false
     }
