@@ -70,48 +70,59 @@ function Poster () {
         height: full.offsetWidth * 82 / scaleWidth
       }
       const ctx = canvas.getContext('2d')
-      // 创建图片
+      // 创建图片 背景图
       let image = null
       image = new Image()
+      image.crossOrigin = 'anonymous'
       image.setAttribute('crossOrigin', 'anonymous')
+
+      // 二维码图片
+      const codeImg = new Image()
+      codeImg.setAttribute('crossOrigin', 'anonymous')
+      codeImg.crossOrigin = 'anonymous'
+      // 生成二维码
+      const qrCanvas = document.createElement('div')
+      qrCanvas.height = qr.height
+      qrCanvas.width = qr.width
+      const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
+      const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
+      console.log('qrcodeObj src', qrcodeObj._el.children[1])
+      codeImg.onload = function () {
+        console.log('codeImg.src1', codeImg.src)
+        ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
+      }
+
       // 设置图片地址
-      image.src = data.poster_url
+      image.src = data.poster_url + '?v=' + Math.random()
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
       image.onload = function () {
         // 4各参数 图片的起始坐标和宽高
         ctx.drawImage(image, 0, 0, full.offsetWidth, full.offsetHeight)
-        // 生成二维码
-        let qrCanvas = null
-        qrCanvas = document.createElement('div')
-        qrCanvas.height = qr.height
-        qrCanvas.width = qr.width
-        const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
-        const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
-        let codeImg = null
-        codeImg = qrcodeObj._el.children[1]
-        image.setAttribute('crossOrigin', 'anonymous')
-        codeImg.onload = function () {
-          // ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
-          // 绘制文本
-          ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
-          // ctx.direction = 'ltr' // 文本方向从左向右
-          ctx.textAlign = 'left' // 左对齐
-          // ctx.fillStyle = '#ffff'
-          console.log('title.x, title.y', title.x, title.y)
-          ctx.fillText(data.user_name, title.x, title.y)
-          // 层级之上
-          let avaImg = null
-          avaImg = new Image()
-          avaImg.setAttribute('crossOrigin', 'anonymous')
-          avaImg.src = data.user_avatar
-          avaImg.onload = function () {
-            console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
-            // 创建圆形裁剪路径
-            ctx.arc(ava.x + (ava.width / 2), ava.y + (ava.height / 2), ava.width / 2, 0, Math.PI * 2)
-            ctx.clip()
-            // 创建完后绘制
-            // ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
-          }
+
+        // 绘制文本
+        ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
+        // ctx.direction = 'ltr' // 文本方向从左向右
+        ctx.textAlign = 'left' // 左对齐
+        // ctx.fillStyle = '#ffff'
+        console.log('title.x, title.y', title.x, title.y)
+        ctx.fillText(data.user_name, title.x, title.y)
+
+        // 赋值二维码图片 出发加载事件
+        codeImg.src = qrcodeObj._el.children[1].src
+
+        // 层级之上
+        const avaImg = new Image()
+        avaImg.crossOrigin = 'anonymous'
+        avaImg.setAttribute('crossOrigin', 'anonymous')
+        avaImg.src = data.user_avatar + '?v=' + Math.random()
+        console.log('avaImg src', avaImg.src)
+        avaImg.onload = function () {
+          console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
+          // 创建圆形裁剪路径
+          ctx.arc(ava.x + (ava.width / 2), ava.y + (ava.height / 2), ava.width / 2, 0, Math.PI * 2)
+          ctx.clip()
+          // 创建完后绘制
+          ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
         }
       }
     }
