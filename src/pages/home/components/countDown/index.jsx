@@ -15,10 +15,10 @@ class CountDown extends React.Component {
 
   initTimeCount = () => {
     console.log('props', this.props)
-    const startTime = new Date('2022-09-14 22:53:00').getTime()
+    // const startTime = new Date('2022-09-14 22:53:00').getTime()
     const nowTime = new Date().getTime()
-    console.log('count-down', startTime - nowTime)
-    let count = startTime - nowTime
+    console.log('count-down', this.props.draw_start_time - nowTime)
+    let count = this.props.draw_start_time - nowTime
     if (count <= 0) {
       // // 跳转
       // this.props.to('/layout/home', { state: { token: 'giao' }, replace: false })

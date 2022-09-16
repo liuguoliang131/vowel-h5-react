@@ -1,6 +1,7 @@
 // Suspense用于组件切换时的空白期的显示
 import React, { Suspense, lazy } from 'react'
 import { Navigate, HashRouter, useRoutes, Routes, Route } from 'react-router-dom'
+import utils from '../utils'
 import Home from '../pages/home/index.jsx'
 import Preheat from '../pages/home/preheat.jsx'
 import Login from '../pages/login/index.jsx'
@@ -85,6 +86,10 @@ const routes = [
     element: <Navigate to={'/layout'} />
   }
 ]
+window.onpopstate = function () {
+  const isApp = utils.isApp()
+  console.log('onpopstate isApp', isApp)
+}
 const GetRoutes = () => {
   console.log('GetRoutes')
   // console.log(window.location)
