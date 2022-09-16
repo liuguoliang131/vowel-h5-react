@@ -26,7 +26,7 @@ function Poster () {
   }
   const getData = async () => {
     const res = await promotionSharePosterListApi({
-      id: location.state.id || 1
+      promotion_id: location.state.id || 1
     })
     if (res.code !== 0) {
       return false
@@ -70,6 +70,7 @@ function Poster () {
       const ctx = canvas.getContext('2d')
       // 创建图片
       const image = new Image()
+      image.setAttribute('crossOrigin', 'anonymous')
       // 设置图片地址
       image.src = data.poster_url
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
@@ -79,6 +80,7 @@ function Poster () {
 
         // 层级之上
         const avaImg = new Image()
+        avaImg.setAttribute('crossOrigin', 'anonymous')
         avaImg.src = data.user_avatar
         avaImg.onload = function () {
           console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
@@ -99,8 +101,10 @@ function Poster () {
         const qrCanvas = document.createElement('div')
         qrCanvas.height = qr.height
         qrCanvas.width = qr.width
-        const qrcodeObj = getQrcode(qr.width, qr.height, data.share_sign, 'canvas', qrCanvas)
+        const shareUrl = window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
+        const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
         const codeImg = qrcodeObj._el.children[1]
+        codeImg.setAttribute('crossOrigin', 'anonymous')
         codeImg.onload = function () {
           ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
         }
@@ -116,10 +120,10 @@ function Poster () {
   }
   useEffect(() => {
     getData()
-  })
+  }, [])
   useEffect(() => {
     initCanvas()
-  }, [fullRef, viewRef, data])
+  }, [data])
   return (
     <div className="poster">
       <Crumbs1 text="抽奖海报"></Crumbs1>
