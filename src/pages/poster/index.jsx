@@ -73,7 +73,7 @@ function Poster () {
       // 创建图片
       let image = null
       image = new Image()
-      image.crossOrigin = 'Anonymous'
+      image.setAttribute('crossOrigin', 'anonymous')
       // 设置图片地址
       image.src = data.poster_url
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
@@ -89,7 +89,7 @@ function Poster () {
         const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
         let codeImg = null
         codeImg = qrcodeObj._el.children[1]
-        image.crossOrigin = 'Anonymous'
+        image.setAttribute('crossOrigin', 'anonymous')
         codeImg.onload = function () {
           ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
           // 绘制文本
@@ -102,7 +102,7 @@ function Poster () {
           // 层级之上
           let avaImg = null
           avaImg = new Image()
-          avaImg.crossOrigin = 'Anonymous'
+          avaImg.setAttribute('crossOrigin', 'anonymous')
           avaImg.src = data.user_avatar
           avaImg.onload = function () {
             console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
