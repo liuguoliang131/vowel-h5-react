@@ -71,7 +71,8 @@ function Poster () {
       }
       const ctx = canvas.getContext('2d')
       // 创建图片
-      const image = new Image()
+      let image = null
+      image = new Image()
       image.crossOrigin = 'Anonymous'
       // 设置图片地址
       image.src = data.poster_url
@@ -80,12 +81,14 @@ function Poster () {
         // 4各参数 图片的起始坐标和宽高
         ctx.drawImage(image, 0, 0, full.offsetWidth, full.offsetHeight)
         // 生成二维码
-        const qrCanvas = document.createElement('div')
+        let qrCanvas = null
+        qrCanvas = document.createElement('div')
         qrCanvas.height = qr.height
         qrCanvas.width = qr.width
         const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
         const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
-        const codeImg = qrcodeObj._el.children[1]
+        let codeImg = null
+        codeImg = qrcodeObj._el.children[1]
         image.crossOrigin = 'Anonymous'
         codeImg.onload = function () {
           ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
@@ -97,7 +100,8 @@ function Poster () {
           console.log('title.x, title.y', title.x, title.y)
           ctx.fillText(data.user_name, title.x, title.y)
           // 层级之上
-          const avaImg = new Image()
+          let avaImg = null
+          avaImg = new Image()
           avaImg.crossOrigin = 'Anonymous'
           avaImg.src = data.user_avatar
           avaImg.onload = function () {
