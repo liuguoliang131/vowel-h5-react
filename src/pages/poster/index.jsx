@@ -88,6 +88,7 @@ function Poster () {
       const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
       console.log('qrcodeObj src', qrcodeObj._el.children[1])
       codeImg.onload = function () {
+        alert('code2onload')
         console.log('codeImg.src1', codeImg.src)
         ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
       }
