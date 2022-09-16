@@ -154,6 +154,35 @@ const utils = {
       return params
     }
   },
+  // 获取hash值和后缀参数
+  getHashQuery: (url = window.location.href) => {
+    let hash = '/'
+    if (url.includes('#')) {
+      hash = url.split('#')[1]
+    }
+    const params = {
+      path: hash,
+      query: {
+
+      }
+    }
+    if (hash.indexOf('?')) {
+      const strArr = hash.split('?')
+      params.path = strArr[0]
+      if (strArr.length > 1) {
+        const strArr1 = strArr[1].split('&')
+        strArr1.forEach(item => {
+          const strArr2 = item.split('=')
+          params.query[strArr2[0]] = strArr2[1]
+        })
+        return params
+      } else {
+        return params
+      }
+    } else {
+      return params
+    }
+  },
   // 返回年月日时分秒
   getTimeData: (date) => {
     const time = new Date(date)

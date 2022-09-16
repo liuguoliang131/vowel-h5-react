@@ -118,7 +118,7 @@ const Login = (props) => {
       content: '登陆成功'
     })
     const back = utils.getUrlParams().back || '/layout/myEvent'
-    navigate(back, { state: { token: res.data.token }, replace: false })
+    navigate(back, { state: { ...utils.getUrlParams() }, replace: false })
   }
 
   return (

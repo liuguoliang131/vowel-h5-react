@@ -83,17 +83,14 @@ const routes = [
   },
   {
     path: '*',
-    element: <Navigate to={'/layout'} />
+    element: <Navigate to={'/login'} />
   }
 ]
-window.onpopstate = function () {
-  const isApp = utils.isApp()
-  console.log('onpopstate isApp', isApp)
-}
+
 const GetRoutes = () => {
   console.log('GetRoutes')
-  // console.log(window.location)
-  // window
+  const params = utils.getHashQuery()
+  console.log(params)
   return useRoutes(routes)
 }
 const SetRoutes = () => {
