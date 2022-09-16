@@ -121,8 +121,7 @@ function Poster () {
       btn.click()
     } catch (error) {
       Toast.show({
-        content: `${error.message}`,
-        icon: 'error'
+        content: `${JSON.stringify(error)}`
       })
     }
   }
