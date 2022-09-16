@@ -18,18 +18,18 @@ class CountDown extends React.Component {
     // const startTime = new Date('2022-09-14 22:53:00').getTime()
     const nowTime = new Date().getTime()
     console.log('count-down', this.props.draw_start_time - nowTime)
+    if (!this.props.draw_start_time) return false
     let count = this.props.draw_start_time - nowTime
-    if (count <= 0) {
-      // // 跳转
-      // this.props.to('/layout/home', { state: { token: 'giao' }, replace: false })
-      this.setState({
-        panelShow: true
-      })
-      return false
-    }
+    // if (count <= 0) {
+    //   // // 跳转
+    //   // this.props.to('/layout/home', { state: { token: 'giao' }, replace: false })
+    //   this.setState({
+    //     panelShow: true
+    //   })
+    //   return false
+    // }
     if (timer) {
-      clearTimeout(timer)
-      timer = null
+      return false
     }
     timer = setInterval(() => {
       count -= 1000
@@ -59,7 +59,13 @@ class CountDown extends React.Component {
   }
 
   componentDidMount () {
-    this.initTimeCount()
+
+  }
+
+  componentDidUpdate (prevProps) {
+    if (prevProps !== this.props) {
+      this.initTimeCount()
+    }
   }
 
   render () {

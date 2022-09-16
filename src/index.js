@@ -14,6 +14,8 @@ if (document.cookie) {
       utils.setToken(token)
     }
   })
+} else {
+  utils.delToken()
 }
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
