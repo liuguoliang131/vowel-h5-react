@@ -2,6 +2,7 @@ import React from 'react'
 import './index.scss'
 import { promotionPrizeDrawApi } from '../../../../axios/api'
 const prizeBoxBG = require('../../../../assets/Cube_Rounded0011 10.png')
+const emptyIMG = require('../../../../assets/OhGodPleaseNo.png')
 // let timer = null
 class LuckyRolling extends React.Component {
   state = {
@@ -12,13 +13,21 @@ class LuckyRolling extends React.Component {
 
   getPrizes = () => {
     const prizeList = [...this.props.prize_list]
-    const emptyPrize = this.props.prize_list.find(item => {
+    let emptyPrize = this.props.prize_list.find(item => {
       if (item.type === 5) {
         return true
       } else {
         return false
       }
     })
+    if (!emptyPrize) {
+      emptyPrize = {
+        type: 5,
+        note: '谢谢惠顾',
+        pic_url: emptyIMG,
+        title: '谢谢惠顾'
+      }
+    }
     for (let i = prizeList.length; i < 12; i++) {
       prizeList.push({
         ...emptyPrize
