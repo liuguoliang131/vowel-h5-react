@@ -186,7 +186,7 @@ const Home = (props) => {
     <div className='home'>
       <Crumbs to={() => handleGoPoster()}></Crumbs>
       <TopWord mainImg={data.main_img}></TopWord>
-      <CountDown></CountDown>
+      <CountDown draw_start_time={data.draw_start_time}></CountDown>
       <div className="mb14"></div>
       <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
       <div className="mb16"></div>

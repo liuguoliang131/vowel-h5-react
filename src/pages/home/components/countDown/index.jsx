@@ -1,6 +1,6 @@
 import React from 'react'
 import './index.scss'
-import widthNavigate from '../../../../components/withNavigate'
+// import widthNavigate from '../../../../components/withNavigate'
 import Panel from '../panel'
 let timer = null
 class CountDown extends React.Component {
@@ -14,7 +14,7 @@ class CountDown extends React.Component {
   }
 
   initTimeCount = () => {
-    console.log('props', this.props)
+    console.log('countDown props', this.props)
     // const startTime = new Date('2022-09-14 22:53:00').getTime()
     const nowTime = new Date().getTime()
     console.log('count-down', this.props.draw_start_time - nowTime)
@@ -63,8 +63,32 @@ class CountDown extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
+    console.log('countDown update', this.props)
     if (prevProps !== this.props) {
       this.initTimeCount()
+    }
+  }
+
+  renderCountDown () {
+    if (this.state.panelShow) {
+      return (<Panel></Panel>)
+    } else {
+      return (
+        <div className='CountDown'>
+          <div className="round-box">
+            <div className="round-box-text1">
+              距离奖池开启剩
+            </div>
+            <div className="round-box-text2">
+              <div className="text2-hh">{this.state.data.hh}</div>
+              <div className="text2-colon">:</div>
+              <div className="text2-MM">{this.state.data.MM}</div>
+              <div className="text2-colon">:</div>
+              <div className="text2-ss">{this.state.data.ss}</div>
+            </div>
+          </div>
+        </div>
+      )
     }
   }
 
@@ -72,26 +96,11 @@ class CountDown extends React.Component {
     return (
       <>
       {
-        this.state.panelShow
+        this.props.draw_start_time
           ? (
-          <Panel></Panel>
+              this.renderCountDown()
             )
-          : (
-          <div className='CountDown'>
-        <div className="round-box">
-          <div className="round-box-text1">
-            距离奖池开启剩
-          </div>
-          <div className="round-box-text2">
-            <div className="text2-hh">{this.state.data.hh}</div>
-            <div className="text2-colon">:</div>
-            <div className="text2-MM">{this.state.data.MM}</div>
-            <div className="text2-colon">:</div>
-            <div className="text2-ss">{this.state.data.ss}</div>
-          </div>
-        </div>
-      </div>
-            )
+          : null
       }
       </>
 
@@ -103,5 +112,5 @@ class CountDown extends React.Component {
     timer = null
   }
 }
-const ComponentCountDown = widthNavigate(CountDown)
-export default ComponentCountDown
+// const ComponentCountDown = widthNavigate(CountDown)
+export default CountDown

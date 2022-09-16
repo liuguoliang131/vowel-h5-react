@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.js'
 import utils from './utils/index'
-// document.cookie = 'x-token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiYzI5YjU5ZDAtZmIwNC00Y2Y4LTk2NzAtMjAwNDI1Zjc2MzFjIiwiSUQiOjM3LCJQaG9uZSI6IjE1OTEwNjA1MDkxIiwiQnVmZmVyVGltZSI6ODY0MDAsImV4cCI6MTY2MzU2NDkyNCwiaXNzIjoiSEFIQU9vNjMyNDYzMSIsIm5iZiI6MTY2Mjk1OTEyNH0.FoN1BAtiuKJjmhZ6dsrlSlSywZ5krt54ZS16FmojY-3DM7jmiGsqlwBKw-tO6a-1mzZtAf4VaN2CfHjW9gEyCg'
+// document.cookie = 'x-token=eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJVVUlEIjoiZWM1MmQ5NDUtZmJiNS00MTk2LThkZWQtYWVhMDRiNGJlYjEzIiwiSUQiOjEwMDAzMiwiUGhvbmUiOiIxNTgwMTI1MjM5MiIsIkJ1ZmZlclRpbWUiOjg2NDAwLCJleHAiOjE2NjM5MDQ0ODcsImlzcyI6IkhBSEFPbzYzMjQ2MzEiLCJuYmYiOjE2NjMyOTg2ODd9.k8JSInMzNt2lhD2AXPwEb_9yb9RyBHdDfRuO272zxsxa20R3o7kKhdPFOH6vjsCDqN6B2BrYI8QLzrMRFiBUMA'
 if (document.cookie) {
   console.log(document.cookie)
   const arr = document.cookie.split('&')
