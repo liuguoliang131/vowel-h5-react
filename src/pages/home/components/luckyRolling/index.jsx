@@ -2,12 +2,12 @@ import React from 'react'
 import './index.scss'
 import { promotionPrizeDrawApi } from '../../../../axios/api'
 const prizeBoxBG = require('../../../../assets/Cube_Rounded0011 10.png')
-let timer = null
+// let timer = null
 class LuckyRolling extends React.Component {
   state = {
     prizeList: [],
-    start: false,
-    btnStatus: null
+    start: false
+    // btnStatus: null
   }
 
   getPrizes = () => {
@@ -33,27 +33,27 @@ class LuckyRolling extends React.Component {
     console.log('prizeList', prizeList)
   }
 
-  // 定时器 抽奖时间控制按钮是否可点
-  setButtonStatus = () => {
-    if (timer) clearTimeout(timer)
-    timer = setInterval(() => {
-      const now = new Date().getTime()
-      if (now < this.props.draw_start_time) {
-        this.setState({
-          btnStatus: 1
-        })
-      } else if (now >= this.props.draw_start_time && now < this.props.draw_end_time) {
-        this.setState({
-          btnStatus: 2
-        })
-      } else {
-        this.setState({
-          btnStatus: 3
-        })
-        clearTimeout(timer)
-      }
-    }, 1000)
-  }
+  // // 定时器 抽奖时间控制按钮是否可点
+  // setButtonStatus = () => {
+  //   if (timer) clearTimeout(timer)
+  //   timer = setInterval(() => {
+  //     const now = new Date().getTime()
+  //     if (now < this.props.draw_start_time) {
+  //       this.setState({
+  //         btnStatus: 1
+  //       })
+  //     } else if (now >= this.props.draw_start_time && now < this.props.draw_end_time) {
+  //       this.setState({
+  //         btnStatus: 2
+  //       })
+  //     } else {
+  //       this.setState({
+  //         btnStatus: 3
+  //       })
+  //       clearTimeout(timer)
+  //     }
+  //   }, 1000)
+  // }
 
   componentDidMount () {
     console.log('luckyRolling mount', window.location)
@@ -65,7 +65,7 @@ class LuckyRolling extends React.Component {
       if (this.props.prize_list) {
         this.getPrizes()
       }
-      this.setButtonStatus()
+      // this.setButtonStatus()
     }
   }
 
@@ -76,7 +76,7 @@ class LuckyRolling extends React.Component {
           ? (
           <div className="bg-box">
             <div className="LuckyRolling-box">
-            {this.state.btnStatus === 3
+            {this.props.status === 2
               ? (
                 <div className={'start-btn gray'}>
                 <div className="start-btn-row1">已结束</div>
@@ -246,10 +246,8 @@ class LuckyRolling extends React.Component {
 
   // 点击开始
   playStart = async () => {
-    if (this.state.btnStatus === 1) {
+    if (!this.props.drawStatus) {
       this.props.success(1)
-      return false
-    } else if (this.state.btnStatus === null) {
       return false
     }
     // 获取结果  然后开始动画
