@@ -89,11 +89,14 @@ const utils = {
   // 跳转APP
   openAppPage: (pageJSON) => {
     // {"page":"myScorePage","params":{}, "isNeedLogin": true}
+    // 跳转到支付
+    // {"page":"musicDetailPage","isNeedLogin":false,"params":{"music_info_id":0}}
     App.postMessage(JSON.stringify({
       type: 'openAppPage',
       params: pageJSON
     }))
   },
+
   // 获取用户登陆后的信息
   getUserInfo: () => {
     const info = localStorage.getItem(USER_INFO)

@@ -61,6 +61,7 @@ class Panel extends Component {
 
   render () {
     return (
+      <>
       <div className="panel">
         <div className="panel-content" ref={this.viewRef}>
           <div className="panel-scroll">
@@ -72,6 +73,11 @@ class Panel extends Component {
           </div>
         </div>
       </div>
+      <div className="text-1">
+        —— 奖池已开放，抓紧抽奖吧 ——
+      </div>
+      </>
+
     )
   }
 }

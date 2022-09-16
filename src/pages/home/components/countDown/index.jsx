@@ -1,6 +1,7 @@
 import React from 'react'
 import './index.scss'
 import widthNavigate from '../../../../components/withNavigate'
+import Panel from '../panel'
 let timer = null
 class CountDown extends React.Component {
   state = {
@@ -8,7 +9,8 @@ class CountDown extends React.Component {
       hh: '00',
       MM: '00',
       ss: '00'
-    }
+    },
+    panelShow: false
   }
 
   initTimeCount = () => {
@@ -18,8 +20,11 @@ class CountDown extends React.Component {
     console.log('count-down', startTime - nowTime)
     let count = startTime - nowTime
     if (count <= 0) {
-      // 跳转
-      this.props.to('/layout/home', { state: { token: 'giao' }, replace: false })
+      // // 跳转
+      // this.props.to('/layout/home', { state: { token: 'giao' }, replace: false })
+      this.setState({
+        panelShow: true
+      })
       return false
     }
     if (timer) {
@@ -31,8 +36,9 @@ class CountDown extends React.Component {
       if (count <= 0) {
         clearTimeout(timer)
         timer = null
-        this.props.to('/layout/home',
-          { state: { token: 'giao' }, replace: false })
+        this.setState({
+          panelShow: true
+        })
         return false
       }
       let hh = parseInt(count / 1000 / 60 / 60)
@@ -58,7 +64,14 @@ class CountDown extends React.Component {
 
   render () {
     return (
-      <div className='CountDown'>
+      <>
+      {
+        this.state.panelShow
+          ? (
+          <Panel></Panel>
+            )
+          : (
+          <div className='CountDown'>
         <div className="round-box">
           <div className="round-box-text1">
             距离奖池开启剩
@@ -72,6 +85,10 @@ class CountDown extends React.Component {
           </div>
         </div>
       </div>
+            )
+      }
+      </>
+
     )
   }
 

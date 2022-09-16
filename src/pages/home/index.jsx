@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import './index.scss'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
+import CountDown from './components/countDown'
 import Panel from './components/panel'
 import LuckyRolling from './components/luckyRolling/index.jsx'
 import TaskList from './components/taskList/index.jsx'
@@ -13,6 +14,7 @@ import AudioPlayer from './components/audioPlayer/index.jsx'
 import Dialog from '../../components/dialog/index.jsx'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
+const timer = null
 const Home = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -43,6 +45,7 @@ const Home = (props) => {
     try {
       console.log('location', window.location)
       const urlParams = utils.getUrlParams()
+      console.log('urlParams', urlParams)
       const params = {}
       if (urlParams.share_sign) {
         params.id = Number(urlParams.id)
@@ -126,18 +129,39 @@ const Home = (props) => {
       replace: false
     })
   }
+  // 设置定时器 改变活动状态
+  const handleSetStatus = () => {
+    // if (timer) clearTimeout(timer)
+    // timer = setInterval(() => {
+    //   const now = new Date().getTime()
+    //   if (now < this.props.draw_start_time) {
+    //     this.setState({
+    //       btnStatus: 1
+    //     })
+    //   } else if (now >= this.props.draw_start_time && now < this.props.draw_end_time) {
+    //     this.setState({
+    //       btnStatus: 2
+    //     })
+    //   } else {
+    //     this.setState({
+    //       btnStatus: 3
+    //     })
+    //     clearTimeout(timer)
+    //   }
+    // }, 1000)
+  }
   useEffect(() => {
     console.log('home ', location)
     getDetail()
   }, [])
+  useEffect(() => {
+    handleSetStatus()
+  }, [data])
   return (
     <div className='home'>
       <Crumbs to={() => handleGoPoster()}></Crumbs>
       <TopWord mainImg={data.main_img}></TopWord>
-      <Panel></Panel>
-      <div className="text-1">
-        —— 奖池已开放，抓紧抽奖吧 ——
-      </div>
+      <CountDown></CountDown>
       <div className="mb14"></div>
       <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
       <div className="mb16"></div>
