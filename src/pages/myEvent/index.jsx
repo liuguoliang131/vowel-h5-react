@@ -71,10 +71,10 @@ function MyEvent () {
       <PullToRefresh
         onRefresh={async () => onRefresh()}
       >
-      <div className="list">
+      <div className="event-list">
         {
           data.map((item, index) => (
-            <div className="item" key={index} onClick={() => handleViewDetail(item)}>
+            <div className="event-item" key={index} onClick={() => handleViewDetail(item)}>
               <div className="item-row1">
                 {item.title}
               </div>
