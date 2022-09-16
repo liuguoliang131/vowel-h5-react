@@ -10,8 +10,7 @@ function Poster () {
   const [data, setData] = useState({
     user_name: '',
     user_avatar: '',
-    poster_url: '',
-    share_sign: ''
+    poster_url: ''
   })
   const fullRef = useRef()
   const viewRef = useRef()
@@ -22,7 +21,8 @@ function Poster () {
       width: qWidth,
       height: qHeight,
       text: qText,
-      render: qRender
+      render: qRender,
+      correctLevel: 1
     })
   }
   const getData = async () => {
@@ -34,6 +34,7 @@ function Poster () {
     }
     setData(res.data)
   }
+
   const initCanvas = () => {
     console.log('viewRef', viewRef)
     if (fullRef.current && viewRef.current) {
@@ -71,105 +72,120 @@ function Poster () {
       const ctx = canvas.getContext('2d')
       // 创建图片
       const image = new Image()
-      image.setAttribute('crossOrigin', 'anonymous')
+      image.crossOrigin = 'Anonymous'
       // 设置图片地址
       image.src = data.poster_url
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
       image.onload = function () {
         // 4各参数 图片的起始坐标和宽高
         ctx.drawImage(image, 0, 0, full.offsetWidth, full.offsetHeight)
-
-        // 层级之上
-        const avaImg = new Image()
-        avaImg.setAttribute('crossOrigin', 'anonymous')
-        avaImg.src = data.user_avatar
-        avaImg.onload = function () {
-          console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
-
-          // 创建圆形裁剪路径
-          ctx.arc(ava.x + (ava.width / 2), ava.y + (ava.height / 2), ava.width / 2, 0, Math.PI * 2)
-          ctx.clip()
-          // 创建完后绘制
-          ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
-        }
-        // 绘制文本
-        ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
-        // ctx.direction = 'ltr' // 文本方向从左向右
-        ctx.textAlign = 'left' // 左对齐
-        console.log('title.x, title.y', title.x, title.y)
-        ctx.fillText(data.user_name, title.x, title.y)
         // 生成二维码
         const qrCanvas = document.createElement('div')
         qrCanvas.height = qr.height
         qrCanvas.width = qr.width
-        const shareUrl = window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
+        const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
         const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
         const codeImg = qrcodeObj._el.children[1]
-        codeImg.setAttribute('crossOrigin', 'anonymous')
+        image.crossOrigin = 'Anonymous'
         codeImg.onload = function () {
           ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
+          // 绘制文本
+          ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
+          // ctx.direction = 'ltr' // 文本方向从左向右
+          ctx.textAlign = 'left' // 左对齐
+          // ctx.fillStyle = '#ffff'
+          console.log('title.x, title.y', title.x, title.y)
+          ctx.fillText(data.user_name, title.x, title.y)
+          // 层级之上
+          const avaImg = new Image()
+          avaImg.crossOrigin = 'Anonymous'
+          avaImg.src = data.user_avatar
+          avaImg.onload = function () {
+            console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
+            // 创建圆形裁剪路径
+            ctx.arc(ava.x + (ava.width / 2), ava.y + (ava.height / 2), ava.width / 2, 0, Math.PI * 2)
+            ctx.clip()
+            // 创建完后绘制
+            ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
+          }
         }
       }
     }
   }
+
   // 保存海报到本地
   const handleSavePoster = () => {
-    try {
-      alert('a')
-      const btn = document.createElement('a')
-      btn.download = '分享海报'
-      btn.href = viewRef.current.toDataURL('image/png;base64')
-      btn.click()
-    } catch (error) {
-      Toast.show({
-        content: `${JSON.stringify(error)}`
-      })
-    }
+    onSave()
+    // try {
+    //   const btn = document.createElement('a')
+    //   btn.download = '分享海报'
+    //   btn.href = viewRef.current.toDataURL('image/png;base64')
+    //   btn.click()
+    // } catch (error) {
+    //   console.log(error)
+    //   Toast.show({
+    //     content: `${JSON.stringify(error)}`
+    //   })
+    // }
+  }
+  const onSave = () => {
+    viewRef.current.toBlob((blob) => {
+      const timestamp = Date.now().toString()
+      const a = document.createElement('a')
+      document.body.append(a)
+      a.download = `${timestamp}.png`
+      a.href = URL.createObjectURL(blob)
+      a.click()
+      a.remove()
+    })
   }
   useEffect(() => {
     getData()
   }, [])
   useEffect(() => {
     initCanvas()
-  }, [data])
+  }, [viewRef, fullRef, data])
   return (
     <div className="poster">
       <Crumbs1 text="抽奖海报"></Crumbs1>
       {
-        data.user_name
+        data.share_sign
           ? (
-          <div className="poster-box">
+            <>
+            <div className="poster-box">
             <div className='full' ref={fullRef}>
               <canvas ref={viewRef}></canvas>
             </div>
           </div>
+          <div className="bottom-box">
+          <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
+            点击保存海报
+          </a>
+          <div className="bottom-box-share">
+            <div className="line">
+              <div className="line-1"></div>
+              <div className="line-1"></div>
+            </div>
+            <div className="share-title">分享至微信或朋友圈</div>
+            <div className="share-btns">
+              <div className="share-btns-friends">
+                <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-wx.png')} alt="" />
+                <span>微信</span>
+              </div>
+              <div className="share-btns-friends">
+              <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-friends.png')} alt="" />
+                <span>朋友圈</span>
+              </div>
+            </div>
+          </div>
+        </div>
+            </>
+
             )
           : null
 
       }
 
-      <div className="bottom-box">
-        <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
-          点击保存海报
-        </a>
-        <div className="bottom-box-share">
-          <div className="line">
-            <div className="line-1"></div>
-            <div className="line-1"></div>
-          </div>
-          <div className="share-title">分享至微信或朋友圈</div>
-          <div className="share-btns">
-            <div className="share-btns-friends">
-              <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-wx.png')} alt="" />
-              <span>微信</span>
-            </div>
-            <div className="share-btns-friends">
-            <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-friends.png')} alt="" />
-              <span>朋友圈</span>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
