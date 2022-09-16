@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react'
 import './index.scss'
+import { Toast } from 'antd-mobile'
 import Crumbs1 from '../../components/crumbs1'
 import utils from '../../utils/index'
 import QRCode from 'qrcodejs2'
@@ -113,10 +114,17 @@ function Poster () {
   }
   // 保存海报到本地
   const handleSavePoster = () => {
-    const btn = document.createElement('a')
-    btn.download = '分享海报'
-    btn.href = viewRef.current.toDataURL('image/png;base64')
-    btn.click()
+    try {
+      const btn = document.createElement('a')
+      btn.download = '分享海报'
+      btn.href = viewRef.current.toDataURL('image/png;base64')
+      btn.click()
+    } catch (error) {
+      Toast.show({
+        content: `${error.message}`,
+        icon: 'error'
+      })
+    }
   }
   useEffect(() => {
     getData()
