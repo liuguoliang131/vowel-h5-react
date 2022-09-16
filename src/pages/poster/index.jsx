@@ -115,6 +115,7 @@ function Poster () {
   // 保存海报到本地
   const handleSavePoster = () => {
     try {
+      alert('a')
       const btn = document.createElement('a')
       btn.download = '分享海报'
       btn.href = viewRef.current.toDataURL('image/png;base64')
