@@ -68,3 +68,15 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+思路：
+进入页面时就判断是否在app内 声明一个全局变量
+isApp=true
+在APP内 有cookie就保存 然后不阻拦
+
+
+isApp=false
+不在APP内
+ 有token就让进 
+ 没有token跳转login页，并且附带返回页面路径
