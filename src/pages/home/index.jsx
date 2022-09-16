@@ -6,7 +6,6 @@ import './index.scss'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
 import CountDown from './components/countDown'
-import Panel from './components/panel'
 import LuckyRolling from './components/luckyRolling/index.jsx'
 import TaskList from './components/taskList/index.jsx'
 import DetailedPicture from './components/detailedPicture/index.jsx'
@@ -14,7 +13,7 @@ import AudioPlayer from './components/audioPlayer/index.jsx'
 import Dialog from '../../components/dialog/index.jsx'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-const timer = null
+let timer = null
 const Home = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -131,24 +130,50 @@ const Home = (props) => {
   }
   // 设置定时器 改变活动状态
   const handleSetStatus = () => {
-    // if (timer) clearTimeout(timer)
-    // timer = setInterval(() => {
-    //   const now = new Date().getTime()
-    //   if (now < this.props.draw_start_time) {
-    //     this.setState({
-    //       btnStatus: 1
-    //     })
-    //   } else if (now >= this.props.draw_start_time && now < this.props.draw_end_time) {
-    //     this.setState({
-    //       btnStatus: 2
-    //     })
-    //   } else {
-    //     this.setState({
-    //       btnStatus: 3
-    //     })
-    //     clearTimeout(timer)
-    //   }
-    // }, 1000)
+    if (JSON.stringify(data) === '{}') {
+      return false
+    }
+    if (timer) {
+      return false
+    }
+    timer = setInterval(() => {
+      const now = new Date().getTime()
+      if (now < data.draw_start_time) {
+        setData({
+          ...data,
+          drawStatus: 0 // 抽奖未开始
+        })
+      } else if (now >= data.draw_start_time && now < data.draw_end_time) {
+        setData({
+          ...data,
+          drawStatus: 1 // 进行中
+        })
+      } else {
+        setData({
+          ...data,
+          drawStatus: 2 // 结束中
+        })
+      }
+      if (now < data.start_time) {
+        setData({
+          ...data,
+          status: 0 // 活动未开始
+        })
+      } else if (now >= data.start_time && now < data.end_time) {
+        setData({
+          ...data,
+          status: 1 // 进行中
+        })
+      } else {
+        setData({
+          ...data,
+          status: 2 // 结束中
+        })
+      }
+      if (now > data.start_time && now > data.draw_end_time) {
+        clearTimeout(timer)
+      }
+    }, 1000)
   }
   useEffect(() => {
     console.log('home ', location)
@@ -165,7 +190,7 @@ const Home = (props) => {
       <div className="mb14"></div>
       <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
       <div className="mb16"></div>
-      <TaskList taskList={data.task_list} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
+      <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
       <div className="mb16"></div>
       <DetailedPicture picList={data.pic_list}></DetailedPicture>
       <AudioPlayer {...data.music_info}></AudioPlayer>
