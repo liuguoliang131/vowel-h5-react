@@ -91,7 +91,7 @@ function Poster () {
         codeImg = qrcodeObj._el.children[1]
         image.setAttribute('crossOrigin', 'anonymous')
         codeImg.onload = function () {
-          ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
+          // ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
           // 绘制文本
           ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
           // ctx.direction = 'ltr' // 文本方向从左向右
@@ -110,7 +110,7 @@ function Poster () {
             ctx.arc(ava.x + (ava.width / 2), ava.y + (ava.height / 2), ava.width / 2, 0, Math.PI * 2)
             ctx.clip()
             // 创建完后绘制
-            ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
+            // ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
           }
         }
       }
