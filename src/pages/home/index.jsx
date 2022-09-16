@@ -46,9 +46,9 @@ const Home = (props) => {
       const urlParams = utils.getUrlParams()
       console.log('urlParams', urlParams)
       const params = {}
-      if (urlParams.share_sign) {
+      if (urlParams.id) {
         params.id = Number(urlParams.id)
-        params.share_sign = urlParams.share_sign
+        params.share_sign = urlParams.share_sign || ''
       } else {
         params.id = location.state.id
       }
