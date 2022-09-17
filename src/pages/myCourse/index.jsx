@@ -5,7 +5,7 @@ import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
-
+import utils from '../../utils'
 function MyCourse () {
   const [currentPage, setCurrentPage] = useState(1)
   const [list] = useState([
@@ -28,13 +28,13 @@ function MyCourse () {
       }
     }
   }
-
+  const hashParams = utils.getHashQuery()
   const [data, setData] = useState([])
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
     try {
       const res = await courseLessonListApi({
-        course_id: '1' || location.state.id,
+        course_id: location.state.course_id || hashParams.query.course_id,
         page: currentPage
       })
       setCurrentPage(val => val + 1)
@@ -69,7 +69,7 @@ function MyCourse () {
     try {
       setCurrentPage(1)
       const res = await courseLessonListApi({
-        course_id: location.state.id,
+        course_id: location.state.course_id || hashParams.query.course_id,
         page: currentPage
       })
       setCurrentPage(val => val + 1)
@@ -114,12 +114,19 @@ function MyCourse () {
               ))
             }
           </div>
-          <div className="footer">
+          {
+            dataTime.expiration_time
+              ? (
+              <div className="footer">
             <div className="footer-content">
               <div>提示：本次课程的有效期为</div>
               <div>{dataTime.expiration_time}-{dataTime.push_award_time}</div>
             </div>
           </div>
+                )
+              : null
+          }
+
           <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
         </div>
         </PullToRefresh>
