@@ -50,7 +50,7 @@ instance.interceptors.response.use(function (response) {
       utils.delUserInfo()
       utils.delToken()
       // 首先判断是不是APP内 如果是APP调APP登录，不是跳H5登录
-      utils.isLogin()
+      utils.goLogin()
     }
   }
   // 对响应数据做点什么

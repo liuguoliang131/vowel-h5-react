@@ -41,11 +41,14 @@ const utils = {
     }
   },
   goLogin: () => {
-    App.postMessage(JSON.stringify({
-      type: 'goLogin',
-      params: {}
-    }))
-    window.history.go(0)
+    utils.ownApp(() => {
+      App.postMessage(JSON.stringify({
+        type: 'goLogin',
+        params: {}
+      }))
+    }, () => {
+
+    })
   },
 
   isLogin: () => {
@@ -57,9 +60,6 @@ const utils = {
       }))
     }, () => {
       if (!utils.getToken()) {
-        Toast.show({
-          content: '重新登录'
-        })
         const urlParams = utils.getUrlParams()
         // 如果url有参数 那么跳转到login进行登录 share_sign
         utils.hashPush('/login', {
@@ -241,7 +241,7 @@ const utils = {
 }
 window.isLoginResult = function (token) {
   if (!token) {
-    utils.goLogin()
+    // utils.goLogin()
   } else {
     utils.setAppToken(token)
   }
