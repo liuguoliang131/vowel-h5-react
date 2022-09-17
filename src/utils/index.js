@@ -14,6 +14,7 @@ import { Toast } from 'antd-mobile'
 
 // }
 console.log('utils')
+
 let timer = null
 const utils = {
   isApp: () => {
@@ -72,17 +73,11 @@ const utils = {
     // })
 
     if (utils.isApp()) {
-      const token = App.postMessage(JSON.stringify({
+      App.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
-        callback: utils.isLoginResult
+        callback: 'isLoginResult'
       }))
-      alert(`app-token:${token}`)
-      // if (!token) {
-      //   utils.goLogin()
-      // } else {
-      //   utils.setAppToken(token)
-      // }
     } else {
       if (!utils.getToken()) {
         Toast.show({
@@ -237,6 +232,14 @@ const utils = {
       MM,
       ss
     }
+  }
+}
+window.isLoginResult = function (token) {
+  alert('window.isLoginResult: ' + token)
+  if (!token) {
+    utils.goLogin()
+  } else {
+    utils.setAppToken(token)
   }
 }
 export default utils
