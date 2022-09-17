@@ -92,6 +92,9 @@ function Poster () {
         console.log('codeImg.src1', codeImg.src)
         ctx.drawImage(codeImg, qr.x, qr.y, qr.width, qr.width)
       }
+      codeImg.onerror = function (e) {
+        alert('codeImg error')
+      }
 
       // 设置图片地址
       image.src = data.poster_url + '?v=' + Math.random()
