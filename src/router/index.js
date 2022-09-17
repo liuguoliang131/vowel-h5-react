@@ -88,12 +88,11 @@ const routes = [
 ]
 const white = ['/layout/home', '/login']
 const GetRoutes = () => {
-  // console.log('GetRoutes')
-  const params = utils.getHashQuery()
-  console.log('route', params)
-  if (!utils.getToken() && !white.includes(params.path)) {
-    utils.goLogin()
-  }
+  // const params = utils.getHashQuery()
+  // console.log('route', params)
+  // if (!utils.getToken() && !white.includes(params.path)) {
+  //   utils.goLogin()
+  // }
   return useRoutes(routes)
 }
 const SetRoutes = () => {
