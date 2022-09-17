@@ -43,12 +43,10 @@ const Home = (props) => {
   const getDetail = async () => {
     // eslint-disable-next-line no-useless-catch
     try {
-      Toast.show({
-        content: 'getDetail'
-      })
       console.log('location', window.location)
       const urlParams = utils.getUrlParams()
       console.log('urlParams', urlParams)
+      alert(`getDetail urlParams:${JSON.stringify(urlParams)}`)
       // 如果url有参数 那么跳转到login进行登录 share_sign
       if (urlParams.id) {
         return utils.hashPush('/login', {
