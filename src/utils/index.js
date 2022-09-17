@@ -45,10 +45,10 @@ const utils = {
       type: 'goLogin',
       params: {}
     }))
+    window.history.go(0)
   },
 
   isLogin: () => {
-    alert('isLogin')
     utils.ownApp(() => {
       App.postMessage(JSON.stringify({
         type: 'isLogin',
@@ -235,7 +235,6 @@ const utils = {
   }
 }
 window.isLoginResult = function (token) {
-  alert('window.isLoginResult: ' + token)
   if (!token) {
     utils.goLogin()
   } else {
