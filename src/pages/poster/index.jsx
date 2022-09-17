@@ -6,6 +6,7 @@ import utils from '../../utils/index'
 import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
+
 function Poster () {
   const [data, setData] = useState({
     user_name: '',
@@ -34,7 +35,6 @@ function Poster () {
     }
     setData(res.data)
   }
-
   const initCanvas = () => {
     console.log('viewRef', viewRef)
     if (fullRef.current && viewRef.current) {
@@ -115,8 +115,6 @@ function Poster () {
         const avaImg = new Image()
         avaImg.crossOrigin = 'anonymous'
         avaImg.setAttribute('crossOrigin', 'anonymous')
-        avaImg.src = data.user_avatar + '?v=' + Math.random()
-        console.log('avaImg src', avaImg.src)
         avaImg.onload = function () {
           console.log('ava.x, ava.y, ava.width, ava.height', ava.x, ava.y, ava.width, ava.height)
           // 创建圆形裁剪路径
@@ -125,6 +123,8 @@ function Poster () {
           // 创建完后绘制
           ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
         }
+        avaImg.src = data.user_avatar + '?v=' + Math.random()
+        console.log('avaImg src', avaImg.src)
       }
     }
   }

@@ -58,6 +58,9 @@ const utils = {
   },
 
   isLogin: () => {
+    Toast.show({
+      content: 'isLogin'
+    })
     utils.ownApp(() => {
       const is = App.postMessage(JSON.stringify({
         type: 'isLogin',
