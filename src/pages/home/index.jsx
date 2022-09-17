@@ -48,7 +48,7 @@ const Home = (props) => {
       console.log('urlParams', urlParams)
       alert(`getDetail urlParams:${JSON.stringify(urlParams)}`)
       // 如果url有参数 那么跳转到login进行登录 share_sign
-      if (urlParams.id) {
+      if (urlParams.share_sign) {
         return utils.hashPush('/login', {
           ...urlParams,
           back: '/layout/home'
@@ -56,7 +56,7 @@ const Home = (props) => {
       }
       // 没有参数 正常登录
       const params = {}
-      params.id = location.state.id
+      params.id = urlParams.id || location.state.id
       params.share_sign = location.state.share_sign || ''
       const res = await promotionActivityDetailApi(params)
       if (res.code !== 0) {
