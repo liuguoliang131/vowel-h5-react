@@ -50,11 +50,32 @@ const utils = {
     // Toast.show({
     //   content: 'isLogin'
     // })
-    utils.ownApp(() => {
+    // utils.ownApp(() => {
+    //   const token = App.postMessage(JSON.stringify({
+    //     type: 'isLogin',
+    //     params: {},
+    //     callback: 'isLoginResult'
+    //   }))
+    //   alert(`app-token:${token}`)
+    //   // if (!token) {
+    //   //   utils.goLogin()
+    //   // } else {
+    //   //   utils.setAppToken(token)
+    //   // }
+    // }, () => {
+    //   if (!utils.getToken()) {
+    //     Toast.show({
+    //       content: '重新登录'
+    //     })
+    //     window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
+    //   }
+    // })
+
+    if (utils.isApp()) {
       const token = App.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
-        callback: 'isLoginResult'
+        callback: utils.isLoginResult
       }))
       alert(`app-token:${token}`)
       // if (!token) {
@@ -62,14 +83,14 @@ const utils = {
       // } else {
       //   utils.setAppToken(token)
       // }
-    }, () => {
+    } else {
       if (!utils.getToken()) {
         Toast.show({
           content: '重新登录'
         })
         window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
       }
-    })
+    }
   },
 
   isLoginResult: (value) => {
