@@ -93,10 +93,20 @@ const Home = (props) => {
   // 去往我的奖品
   const handleGoMyPrize = () => {
     utils.ownApp(() => {
-      navigate('/layout/myPrize', {
-        state: {},
-        replace: false
-      })
+      const urlParams = utils.getUrlParams()
+      if (urlParams.id) {
+        navigate('/layout/myPrize', {
+          state: { id: Number(urlParams.id) },
+          replace: false
+        })
+      } else {
+        if (data.id) {
+          navigate('/layout/myPrize', {
+            state: { id: Number(data.id) },
+            replace: false
+          })
+        }
+      }
     })
   }
   // 抽奖次数-1
