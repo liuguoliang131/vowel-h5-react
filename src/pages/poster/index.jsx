@@ -35,6 +35,20 @@ function Poster () {
     }
     setData(res.data)
   }
+  // 转换成blob
+  const getBlob = (base64) => {
+    const mimeString = base64.split(',')[0].split(':')[1].split(';')[0] // mime类型
+    const byteString = atob(base64.split(',')[1]) // base64 解码
+    const arrayBuffer = new ArrayBuffer(byteString.length) // 创建缓冲数组
+    const intArray = new Uint8Array(arrayBuffer) // 创建视图
+    for (let i = 0; i < byteString.length; i += 1) {
+      intArray[i] = byteString.charCodeAt(i)
+    }
+    return new Blob([intArray], {
+      type: mimeString
+    })
+  }
+
   const initCanvas = () => {
     console.log('viewRef', viewRef)
     if (fullRef.current && viewRef.current) {
@@ -86,6 +100,9 @@ function Poster () {
       qrCanvas.width = qr.width
       const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
       const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
+      const codeCanvas = qrcodeObj._el.querySelector('canvas')
+      const base64Text = codeCanvas.toDataURL('image/png')
+      const blob = getBlob(base64Text) // 将base64转换成blob对象
       console.log('qrcodeObj src', qrcodeObj._el.children[1])
       codeImg.onload = function () {
         console.log('codeImg.src1', codeImg.src)
@@ -110,20 +127,22 @@ function Poster () {
         ctx.fillText(data.user_name, title.x, title.y)
 
         // 赋值二维码图片 出发加载事件
-        if (qrcodeObj._el.children[1].src.includes('data:')) {
-          Toast.show({
-            content: '1'
-          })
-          codeImg.src = qrcodeObj._el.children[1].src
-        } else {
-          Toast.show({
-            content: '2'
-          })
-          // const before = 'data:image/jpeg;base64,'
-          // codeImg.src = before + qrcodeObj._el.children[1].src
-          codeImg.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEkAAABJCAYAAABxcwvcAAAAAXNSR0IArs4c6QAABAFJREFUeF7tnO12gzAMQ+H9H7o76wYtAXGlhH3W+1kgEMWWZBM2T9N0m8K/2217yTzP9xHa39Wwy/nLcTVee/1yXns/dX91Xjjd6X12t3Ry7cO2kyUQ2odU56dgKFCX33sXs0A6CasF1A1I7YqqCEnTQ62ku7JppFEaq0xQ8y2QDiKpBXEIJHeFicBTTiTiVeO5RF4gPamwSy9DkaRUinKe1DBVqdQC0PNdGkkvCRLlOvkWWlE1vjKJtAjkt1x1Js68xCfRJFXup5Mgy+ByTCoUd5AognrLgzTyvuv8dL4FkoHYbBduxmDEEZSW6fWUrpSe7pQKJAMpK93IV6Sc5fqklGDTms1tvRRI0zShYLxzUq90pn2jthtAK08Rl0YanS99XoH0IAsLJMpRt6ai83pVTEVeb4S66nhXN8zJzx42TZ7Sluw/pdePgeQ4bsplt8ZKF4NUNe2QUm0p+1AF0l7ddov+DBJ19Nx0oLQgDuntIKZvcVT67yK0QNpDtQNppHYjn+S2SFxC/2pfJXv2BdLeJ+1o5chMuqph57SwEK5Poe6BG7Guuu563AXSYw+DAvG0fUvv1VJzSRGhVI/uQ9dRJUGqXiCd7IZZguQQJIogd2XI7/RGFjlxFXnEXYojC6QD9Rkiblp5t6ecRmqqguToXV+2zjdRt5cGqUWeOIfUhpy42zWgiKCqniKQ5r0ef3bcrtkqkA62pigHTv6CrkvVjxx+usjUJ1stQBJJKjzd9OmdBEk30QO1UIjINy8n00mowVW1rsCk6t4VDLovgS3BSiIpvYkbzr8epLOmG/me0chLnTMJRm/ao4oWSA9oT5tu7qsg1ykT91BtlaomdQGUX6LfNz6pQPrYx6Zw2LycdNWq19+QSpEUk+8iB01CojKgQDqJjI2ZHFWpVMJH/YxrDiniKXMOOYmcKw1K6eAWvuTHvh2ko+/dKLLc8oQ4xlUXNQ6BRV0CCor1eIFk7HRzvpxM/ZGbVqlDVpFHzn30uPVFQIH09A0u1WrEMeSDUq6jWo3UizjHVdnDT7l6TddLgDRac9HK944/WpuRdaHnjt7gUmFKN/uzIF2x9cbNfQJZmVFSNYo06iogNxVIj6WTYDobS9MIGE0rut4VFlJTcuRrhBZI+/+x0vpCy0y6tVqvbyH/RTUecSJxEnFhgXSwP+k0kqiNSzlOtRiVN6RixCFUo/X6paF/nkBlTJp+/xqkq0wklTXEjdR9oExQxy+JpALpZJcJpRM5WZcjiIvUfeg6UsWNTyLCo8Hc611QSABUGUI9dpWutNhDFsBdKffh6DxKa/cFgrtYy3gF0gliG5BcZMn50krTfXrVh7iPIh6f64raTd3ELUQpzYgTvxqkN+KubjF5hYo3AAAAAElFTkSuQmCC'
-          alert(codeImg.src)
-        }
+        // if (qrcodeObj._el.children[1].src.includes('data:')) {
+        //   Toast.show({
+        //     content: '1'
+        //   })
+        //   codeImg.src = qrcodeObj._el.children[1].src
+        // } else {
+        //   Toast.show({
+        //     content: '2'
+        //   })
+        //   // const before = 'data:image/jpeg;base64,'
+        //   // codeImg.src = before + qrcodeObj._el.children[1].src
+        //   codeImg.src = blob
+        //   alert(codeImg.src)
+        // }
+        codeImg.src = window.URL.createObjectURL(blob)
+        alert(codeImg.src)
 
         // 层级之上
         const avaImg = new Image()
