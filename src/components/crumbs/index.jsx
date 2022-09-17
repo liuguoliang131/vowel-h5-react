@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import './index.scss'
 import utils from '../../utils'
 const backIMG = require('../../assets/back.png')
