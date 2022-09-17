@@ -189,7 +189,7 @@ const Home = (props) => {
     }
     timer = setInterval(() => {
       const now = new Date().getTime()
-      const newData = { ...data }
+      const newData = data
       if (now < data.draw_start_time) {
         newData.drawStatus = 0 // 抽奖未开始
       } else if (now >= data.draw_start_time && now < data.draw_end_time) {
@@ -219,10 +219,16 @@ const Home = (props) => {
     }, 1000)
   }
   useEffect(() => {
+    console.log('home1')
+  })
+  useEffect(() => {
     getDetail()
   }, [])
   useEffect(() => {
     handleSetStatus()
+    return () => {
+
+    }
   }, [data])
   return (
     <div className='home'>
