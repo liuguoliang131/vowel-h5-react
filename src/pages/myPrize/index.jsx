@@ -42,6 +42,7 @@ function MyPrize () {
 
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
+    alert(JSON.stringify(location.state))
     // setData([
     //   { type: 1, id: 1 },
     //   { type: 2, id: 2 },
@@ -70,6 +71,9 @@ function MyPrize () {
         setHasMore(res.data.list.length > 0)
       }
     } catch (error) {
+      Toast.show({
+        content: error.message
+      })
       setHasMore(false)
       throw error
     }
@@ -93,6 +97,9 @@ function MyPrize () {
         setHasMore(true)
       }
     } catch (error) {
+      Toast.show({
+        content: error.message
+      })
       setHasMore(false)
       throw error
     }
