@@ -56,11 +56,14 @@ const utils = {
         params: {},
         callback: 'isLoginResult'
       }))
-      if (!token) {
-        utils.goLogin()
-      } else {
-        utils.setAppToken(token)
-      }
+      Toast.show({
+        content: `app-token:${token}`
+      })
+      // if (!token) {
+      //   utils.goLogin()
+      // } else {
+      //   utils.setAppToken(token)
+      // }
     }, () => {
       if (!utils.getToken()) {
         Toast.show({
