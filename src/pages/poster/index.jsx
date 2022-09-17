@@ -164,18 +164,18 @@ function Poster () {
 
   // 保存海报到本地
   const handleSavePoster = () => {
-    onSave()
-    // try {
-    //   const btn = document.createElement('a')
-    //   btn.download = '分享海报'
-    //   btn.href = viewRef.current.toDataURL('image/png;base64')
-    //   btn.click()
-    // } catch (error) {
-    //   console.log(error)
-    //   Toast.show({
-    //     content: `${JSON.stringify(error)}`
-    //   })
-    // }
+    // onSave()
+    try {
+      const btn = document.createElement('a')
+      btn.download = '分享海报'
+      btn.href = viewRef.current.toDataURL('image/png;base64')
+      btn.click()
+    } catch (error) {
+      console.log(error)
+      Toast.show({
+        content: `${JSON.stringify(error)}`
+      })
+    }
   }
   const onSave = () => {
     viewRef.current.toBlob((blob) => {
