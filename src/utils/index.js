@@ -23,20 +23,11 @@ const utils = {
   ownApp: (success, fail) => {
     try {
       if (App) {
+        Toast.show('App')
         return success()
-      } else {
-        if (fail) {
-          return fail()
-        } else {
-          Toast.show({
-            content: '即将跳转到元音符App下载页面'
-          })
-          setTimeout(() => {
-            window.location.href = 'https://h5.yuanyinfu.com/h5/app'
-          }, 2000)
-        }
       }
     } catch (error) {
+      Toast.show('h5')
       if (fail) {
         fail()
       } else {
