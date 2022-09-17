@@ -142,7 +142,7 @@ function Poster () {
         //   alert(codeImg.src)
         // }
         codeImg.src = window.URL.createObjectURL(blob)
-        alert(codeImg.src)
+        // alert(codeImg.src)
 
         // 层级之上
         const avaImg = new Image()
