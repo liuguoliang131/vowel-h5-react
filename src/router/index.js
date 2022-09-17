@@ -86,11 +86,14 @@ const routes = [
     element: <Navigate to={'/login'} />
   }
 ]
-
+const white = ['/layout/home', '/login']
 const GetRoutes = () => {
   // console.log('GetRoutes')
   const params = utils.getHashQuery()
-  // console.log(params)
+  console.log('route', params)
+  if (!utils.getToken() && !white.includes(params.path)) {
+    utils.goLogin()
+  }
   return useRoutes(routes)
 }
 const SetRoutes = () => {

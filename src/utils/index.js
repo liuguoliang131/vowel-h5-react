@@ -47,7 +47,12 @@ const utils = {
         params: {}
       }))
     }, () => {
-
+      const urlParams = utils.getUrlParams()
+      // 如果url有参数 那么跳转到login进行登录 share_sign
+      utils.hashPush('/login', {
+        ...urlParams,
+        back: '/layout/home'
+      })
     })
   },
 
@@ -59,14 +64,14 @@ const utils = {
         callback: 'isLoginResult'
       }))
     }, () => {
-      if (!utils.getToken()) {
-        const urlParams = utils.getUrlParams()
-        // 如果url有参数 那么跳转到login进行登录 share_sign
-        utils.hashPush('/login', {
-          ...urlParams,
-          back: '/layout/home'
-        })
-      }
+      // if (!utils.getToken()) {
+      //   const urlParams = utils.getUrlParams()
+      //   // 如果url有参数 那么跳转到login进行登录 share_sign
+      //   utils.hashPush('/login', {
+      //     ...urlParams,
+      //     back: '/layout/home'
+      //   })
+      // }
     })
 
     // if (utils.isApp()) {
