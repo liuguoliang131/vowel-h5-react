@@ -23,11 +23,9 @@ const utils = {
   ownApp: (success, fail) => {
     try {
       if (App) {
-        Toast.show('App')
         return success()
       }
     } catch (error) {
-      Toast.show('h5')
       if (fail) {
         fail()
       } else {
@@ -53,16 +51,23 @@ const utils = {
     //   content: 'isLogin'
     // })
     utils.ownApp(() => {
-      const is = App.postMessage(JSON.stringify({
+      const token = App.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
         callback: 'isLoginResult'
       }))
-      if (!is) {
-        this.goLogin()
+      if (!token) {
+        utils.goLogin()
+      } else {
+        utils.setAppToken(token)
       }
     }, () => {
-      window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
+      if (!utils.getToken()) {
+        Toast.show({
+          content: '重新登录'
+        })
+        window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
+      }
     })
   },
 
@@ -116,6 +121,16 @@ const utils = {
   },
   delToken: () => {
     localStorage.removeItem(TOKEN)
+  },
+  // 如果是app环境下使用session
+  setAppToken: (token) => {
+    Toast.show({
+      content: 'setAppToken'
+    })
+    window.sessionStorage.setItem(TOKEN, token)
+  },
+  getAppToken: () => {
+    return window.sessionStorage.getItem(TOKEN) || ''
   },
   // 跳转页面
   hashPush: (hash = '/', params = {}) => {
