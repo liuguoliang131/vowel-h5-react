@@ -56,9 +56,7 @@ const utils = {
         params: {},
         callback: 'isLoginResult'
       }))
-      Toast.show({
-        content: `app-token:${token}`
-      })
+      alert(`app-token:${token}`)
       // if (!token) {
       //   utils.goLogin()
       // } else {
