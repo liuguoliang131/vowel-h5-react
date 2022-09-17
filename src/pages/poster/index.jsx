@@ -111,8 +111,14 @@ function Poster () {
 
         // 赋值二维码图片 出发加载事件
         if (qrcodeObj._el.children[1].src.includes('data:image/jpeg;base64,') || qrcodeObj._el.children[1].src.includes('data:image/jpg;base64,') || qrcodeObj._el.children[1].src.includes('data:image/png;base64,')) {
+          Toast.show({
+            content: '1'
+          })
           codeImg.src = qrcodeObj._el.children[1].src
         } else {
+          Toast.show({
+            content: '2'
+          })
           const before = 'data:image/png;base64,'
           codeImg.src = before + qrcodeObj._el.children[1].src
         }
