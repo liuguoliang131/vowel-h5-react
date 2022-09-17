@@ -88,9 +88,6 @@ const utils = {
     // }
   },
 
-  isLoginResult: (value) => {
-    alert('isLoginResult: ' + value)
-  },
   // 分享到微信和朋友圈
   // shareTitle：分享标题 shareDesc：分享描述  shareUrl：分享的链接 shareCover：封面图链接
   shareWebToWX: (shareTitle, shareDesc, shareUrl, shareCover) => {
@@ -141,9 +138,6 @@ const utils = {
   },
   // 如果是app环境下使用session
   setAppToken: (token) => {
-    Toast.show({
-      content: 'setAppToken'
-    })
     window.sessionStorage.setItem(TOKEN, token)
   },
   getAppToken: () => {

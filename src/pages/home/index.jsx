@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './index.scss'
-import { Empty } from 'antd-mobile'
+import { Empty, Toast } from 'antd-mobile'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
 import CountDown from './components/countDown'
@@ -43,6 +43,9 @@ const Home = (props) => {
   const getDetail = async () => {
     // eslint-disable-next-line no-useless-catch
     try {
+      Toast.show({
+        content: 'getDetail'
+      })
       console.log('location', window.location)
       const urlParams = utils.getUrlParams()
       console.log('urlParams', urlParams)
