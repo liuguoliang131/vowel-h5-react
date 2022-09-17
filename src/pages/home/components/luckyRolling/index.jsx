@@ -80,9 +80,10 @@ class LuckyRolling extends React.Component {
 
   render () {
     return (
-      <div className="LuckyRolling">
-        {this.state.prizeList.length
-          ? (
+      this.state.prizeList.length
+        ? (
+        <div className="LuckyRolling">
+          (
           <div className="bg-box">
             <div className="LuckyRolling-box">
             {this.props.drawStatus === 2
@@ -197,9 +198,9 @@ class LuckyRolling extends React.Component {
               }
             </div>
           </div>
-            )
-          : null}
       </div>
+          )
+        : null
     )
   }
 
