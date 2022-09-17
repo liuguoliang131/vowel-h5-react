@@ -205,7 +205,14 @@ const Home = (props) => {
       if (now > data.start_time && now > data.draw_end_time) {
         clearTimeout(timer)
       }
-      setData(newData)
+
+      if (newData.status !== data.status || newData.drawStatus !== data.drawStatus) {
+        // eslint-disable-next-line no-prototype-builtins
+        // if (newData.status !== data.status && data.hasOwnProperty('status')) {
+        //   window.location.go(0)
+        // }
+        setData(newData)
+      }
     }, 1000)
   }
   useEffect(() => {
@@ -223,7 +230,7 @@ const Home = (props) => {
           ? (
           <>
           <TopWord mainImg={data.main_img}></TopWord>
-          <CountDown draw_start_time={data.draw_start_time}></CountDown>
+          <CountDown id={data.id} draw_start_time={data.draw_start_time}></CountDown>
           <div className="mb14"></div>
           <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
           <div className="mb16"></div>

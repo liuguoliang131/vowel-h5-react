@@ -22,12 +22,12 @@ class Panel extends Component {
 
   // 轮播动画
   startScroll = async () => {
-    console.log('viewRef', this.viewRef)
+    // console.log('viewRef', this.viewRef)
     const theScroll = this.viewRef.current.children[0]
     const clientHeight = this.viewRef.current.clientHeight
     const scrollHeight = this.viewRef.current.scrollHeight
     const scrollTop = this.viewRef.current.scrollTop
-    console.log('视口高度clientHeight', this.viewRef.current.clientHeight, '滚动块高度scrollHeight:', this.viewRef.current.scrollHeight, 'scrollTop:', this.viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
+    // console.log('视口高度clientHeight', this.viewRef.current.clientHeight, '滚动块高度scrollHeight:', this.viewRef.current.scrollHeight, 'scrollTop:', this.viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
     clearInterval(timer)
     timer = setInterval(() => {
       // console.log('父盒子上距离', this.viewRef.current)

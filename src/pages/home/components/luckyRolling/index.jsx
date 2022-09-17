@@ -39,7 +39,7 @@ class LuckyRolling extends React.Component {
     this.setState({
       prizeList: JSON.parse(JSON.stringify(prizeList))
     })
-    console.log('prizeList', prizeList)
+    // console.log('prizeList', prizeList)
   }
 
   // // 定时器 抽奖时间控制按钮是否可点

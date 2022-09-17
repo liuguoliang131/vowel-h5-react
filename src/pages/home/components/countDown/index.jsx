@@ -71,7 +71,7 @@ class CountDown extends React.Component {
 
   renderCountDown () {
     if (this.state.panelShow) {
-      return (<Panel></Panel>)
+      return (<Panel id={this.props.id}></Panel>)
     } else {
       return (
         <div className='CountDown'>
