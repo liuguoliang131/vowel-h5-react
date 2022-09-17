@@ -46,7 +46,6 @@ const Home = (props) => {
       console.log('location', window.location)
       const urlParams = utils.getUrlParams()
       console.log('urlParams', urlParams)
-      alert(`getDetail urlParams:${JSON.stringify(urlParams)}`)
       // 如果url有参数 那么跳转到login进行登录 share_sign
       if (urlParams.share_sign) {
         return utils.hashPush('/login', {
