@@ -55,7 +55,7 @@ const Home = (props) => {
       }
       // 没有参数 正常登录
       const params = {}
-      params.id = urlParams.id || location.state.id
+      params.id = Number(urlParams.id || location.state.id)
       params.share_sign = location.state.share_sign || ''
       const res = await promotionActivityDetailApi(params)
       if (res.code !== 0) {
@@ -68,6 +68,10 @@ const Home = (props) => {
       res.data.start_time *= 1000
       setData(res.data)
     } catch (error) {
+      Toast.show({
+        content: error.message,
+        icon: 'error'
+      })
       throw error
     }
   }
