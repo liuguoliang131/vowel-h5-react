@@ -7,13 +7,13 @@ const row2IMG = require('../../../../assets/Frame 1000006078-1.png')
 const row3IMG = require('../../../../assets/Rectangle 40961.png')
 function TaskList (props) {
   const location = useLocation()
-  // console.log('location', location)
+
   const handleGoPay = () => {
     utils.ownApp(() => {
       utils.openAppPage({
         page: 'musicDetailPage',
         isNeedLogin: false,
-        params: { music_info_id: props.music_info.id }
+        params: { music_info_id: props.music_info.music_info_id }
       })
     })
   }
