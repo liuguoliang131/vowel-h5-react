@@ -110,7 +110,7 @@ function Poster () {
         ctx.fillText(data.user_name, title.x, title.y)
 
         // 赋值二维码图片 出发加载事件
-        if (qrcodeObj._el.children[1].src.includes('"data:image/jpeg;base64,"')) {
+        if (qrcodeObj._el.children[1].src.includes('data:image/jpeg;base64,') || qrcodeObj._el.children[1].src.includes('data:image/jpg;base64,') || qrcodeObj._el.children[1].src.includes('data:image/png;base64,')) {
           codeImg.src = qrcodeObj._el.children[1].src
         } else {
           const before = 'data:image/png;base64,'
