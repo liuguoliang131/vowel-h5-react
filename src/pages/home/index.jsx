@@ -83,7 +83,7 @@ const Home = (props) => {
       res.data.draw_start_time *= 1000
       res.data.end_time *= 1000
       res.data.start_time *= 1000
-      setData(res.data)
+      setData(JSON.parse(JSON.stringify(res.data)))
     } catch (error) {
       Toast.show({
         content: error.message,
@@ -212,7 +212,7 @@ const Home = (props) => {
         console.log(newData.status, data.status)
         // eslint-disable-next-line no-prototype-builtins
         if (newData.status !== data.status && JSON.stringify(data) !== '{}') {
-          // window.location.go(0)
+          // window.history.go(0)
         }
         setData(newData)
       }

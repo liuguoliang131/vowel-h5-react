@@ -4,7 +4,11 @@ import './index.scss'
 const coverIMG = require('../../../../assets/Frame 77.png')
 const playIMG = require('../../../../assets/Frame 1000006041.png')
 const suspendIMG = require('../../../../assets/Frame 1000006074.png')
-const audio = new Audio()
+let audio = new Audio()
+audio.autoplay = true
+audio.onplay = (e) => {
+  console.log('play...')
+}
 const song = require('../../../../assets/stone.mp3')
 let timer = null
 class AudioPlayer extends Component {
@@ -64,6 +68,16 @@ class AudioPlayer extends Component {
       } else {
         audio.pause()
       }
+    }
+  }
+
+  componentWillUnmount () {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    if (audio) {
+      audio.pause()
+      audio = null
     }
   }
 }

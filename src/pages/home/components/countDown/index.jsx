@@ -58,7 +58,7 @@ class CountDown extends React.Component {
   }
 
   componentDidMount () {
-
+    this.initTimeCount()
   }
 
   componentDidUpdate (prevProps) {

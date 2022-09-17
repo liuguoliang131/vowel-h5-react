@@ -65,6 +65,7 @@ class LuckyRolling extends React.Component {
   // }
 
   componentDidMount () {
+    this.getPrizes()
     // console.log('luckyRolling mount', window.location)
   }
 
