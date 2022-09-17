@@ -53,19 +53,19 @@ const Home = (props) => {
     // eslint-disable-next-line no-useless-catch
     try {
       console.log('location', window.location)
-      const urlParams = utils.getUrlParams()
-      console.log('urlParams', urlParams)
-      // 如果url有参数 那么跳转到login进行登录 share_sign
-      if (urlParams.share_sign) {
-        return utils.hashPush('/login', {
-          ...urlParams,
-          back: '/layout/home'
-        })
-      }
       // 没有参数 正常登录
       const params = {}
-      params.id = Number(urlParams.id || location.state.id)
-      params.share_sign = location.state ? location.state.share_sign : ''
+      if (utils.getUrlParams().id) {
+        params.id = utils.getUrlParams().id
+      } else {
+        if (location.state.id) {
+          params.id = Number(location.state.id)
+        }
+        if (location.state.share_sign) {
+          params.share_sign = location.state.share_sign
+        }
+      }
+
       const res = await promotionActivityDetailApi(params)
       if (res.code !== 0) {
         setEmptyMsg(res.msg)

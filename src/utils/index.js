@@ -60,11 +60,12 @@ const utils = {
         Toast.show({
           content: '重新登录'
         })
-        let back = window.location.hash.replace('#', '')
-        if (window.location.hash.includes('/login')) {
-          back = '/layout/myEvent'
-        }
-        window.location.href = window.location.origin + `/#/login?back=${back}`
+        const urlParams = utils.getUrlParams()
+        // 如果url有参数 那么跳转到login进行登录 share_sign
+        utils.hashPush('/login', {
+          ...urlParams,
+          back: '/layout/home'
+        })
       }
     })
 
@@ -163,8 +164,13 @@ const utils = {
       if (strArr.length > 1) {
         const strArr1 = strArr[1].split('&')
         strArr1.forEach(item => {
-          const strArr2 = item.split('=')
-          params[strArr2[0]] = strArr2[1]
+          if (item.includes('share_sign=')) {
+            const strArr2 = item.split('share_sign=')
+            params.share_sign = strArr2[1]
+          } else {
+            const strArr2 = item.split('=')
+            params[strArr2[0]] = strArr2[1]
+          }
         })
         return params
       } else {
