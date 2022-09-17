@@ -56,6 +56,10 @@ const Home = (props) => {
       if (res.code !== 0) {
         return false
       }
+      res.data.draw_end_time *= 1000
+      res.data.draw_start_time *= 1000
+      res.data.end_time *= 1000
+      res.data.start_time *= 1000
       setData(res.data)
     } catch (error) {
       throw error
