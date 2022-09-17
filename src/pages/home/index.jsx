@@ -207,7 +207,7 @@ const Home = (props) => {
   }, [data])
   return (
     <div className='home'>
-      <Crumbs to={() => handleGoPoster()}></Crumbs>
+      <Crumbs to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         data.id
           ? (
