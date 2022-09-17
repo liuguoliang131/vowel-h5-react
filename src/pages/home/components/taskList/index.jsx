@@ -7,7 +7,7 @@ const row2IMG = require('../../../../assets/Frame 1000006078-1.png')
 const row3IMG = require('../../../../assets/Rectangle 40961.png')
 function TaskList (props) {
   const location = useLocation()
-  console.log('location', location)
+  // console.log('location', location)
   const handleGoPay = () => {
     utils.ownApp(() => {
       utils.openAppPage({

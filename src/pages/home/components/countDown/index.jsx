@@ -14,10 +14,9 @@ class CountDown extends React.Component {
   }
 
   initTimeCount = () => {
-    console.log('countDown props', this.props)
     // const startTime = new Date('2022-09-14 22:53:00').getTime()
     const nowTime = new Date().getTime()
-    console.log('count-down', this.props.draw_start_time - nowTime)
+
     if (!this.props.draw_start_time) return false
     let count = this.props.draw_start_time - nowTime
     // if (count <= 0) {
@@ -63,7 +62,6 @@ class CountDown extends React.Component {
   }
 
   componentDidUpdate (prevProps) {
-    console.log('countDown update', this.props)
     if (prevProps !== this.props) {
       this.initTimeCount()
     }

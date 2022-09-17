@@ -47,7 +47,7 @@ class AudioPlayer extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    console.log('audioPlayer update', this.props)
+    // console.log('audioPlayer update', this.props)
     if (prevProps !== this.props) {
       audio.src = this.props.music_url
     }

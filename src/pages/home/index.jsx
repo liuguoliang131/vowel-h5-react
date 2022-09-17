@@ -19,7 +19,9 @@ let timer = null
 const Home = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
-  const [data, setData] = useState({})
+  const [data, setData] = useState({
+
+  })
   const [emptyMsg, setEmptyMsg] = useState('暂无内容')
   const btn1Fn = () => {
     setRollingDialogOption({
@@ -52,7 +54,7 @@ const Home = (props) => {
   const getDetail = async () => {
     // eslint-disable-next-line no-useless-catch
     try {
-      console.log('location', window.location)
+      // console.log('location', window.location)
       // 没有参数 正常登录
       const params = {}
       const urlParams = utils.getUrlParams()
@@ -121,7 +123,7 @@ const Home = (props) => {
   }
   // 抽奖callback
   const rollingSuccess = (prize) => {
-    console.log('success', prize)
+    // console.log('success', prize)
     if (prize === 0) {
       setRollingDialogOption({
         ...rollingDialogOption,
@@ -207,16 +209,16 @@ const Home = (props) => {
       }
 
       if (newData.status !== data.status || newData.drawStatus !== data.drawStatus) {
+        console.log(newData.status, data.status)
         // eslint-disable-next-line no-prototype-builtins
-        // if (newData.status !== data.status && data.hasOwnProperty('status')) {
-        //   window.location.go(0)
-        // }
+        if (newData.status !== data.status && JSON.stringify(data) !== '{}') {
+          // window.location.go(0)
+        }
         setData(newData)
       }
     }, 1000)
   }
   useEffect(() => {
-    console.log('home ', location)
     getDetail()
   }, [])
   useEffect(() => {

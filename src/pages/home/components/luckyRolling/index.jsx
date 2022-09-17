@@ -65,11 +65,10 @@ class LuckyRolling extends React.Component {
   // }
 
   componentDidMount () {
-    console.log('luckyRolling mount', window.location)
+    // console.log('luckyRolling mount', window.location)
   }
 
   componentDidUpdate (prevProps, prevState) {
-    console.log('luckyrolling update', this.props)
     if (prevProps !== this.props) {
       if (this.props.prize_list) {
         this.getPrizes()
@@ -213,7 +212,7 @@ class LuckyRolling extends React.Component {
         if (res.code !== 0) {
           resolve(false)
         } else {
-          this.prizeList.forEach((item, index) => {
+          this.state.prizeList.forEach((item, index) => {
             if (item.id === res.data.id) {
               resolve(index)
             }

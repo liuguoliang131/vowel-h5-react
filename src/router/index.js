@@ -88,9 +88,9 @@ const routes = [
 ]
 
 const GetRoutes = () => {
-  console.log('GetRoutes')
+  // console.log('GetRoutes')
   const params = utils.getHashQuery()
-  console.log(params)
+  // console.log(params)
   return useRoutes(routes)
 }
 const SetRoutes = () => {

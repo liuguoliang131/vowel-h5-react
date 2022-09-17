@@ -1,3 +1,4 @@
+import { data } from 'browserslist'
 import React, { Component, createRef } from 'react'
 import { promotionDrawCycleListApi } from '../../../../axios/api'
 import './index.scss'
@@ -26,7 +27,7 @@ class Panel extends Component {
     const theScroll = this.viewRef.current.children[0]
     const clientHeight = this.viewRef.current.clientHeight
     const scrollHeight = this.viewRef.current.scrollHeight
-    const scrollTop = this.viewRef.current.scrollTop
+    // const scrollTop = this.viewRef.current.scrollTop
     // console.log('视口高度clientHeight', this.viewRef.current.clientHeight, '滚动块高度scrollHeight:', this.viewRef.current.scrollHeight, 'scrollTop:', this.viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
     clearInterval(timer)
     timer = setInterval(() => {
@@ -50,8 +51,10 @@ class Panel extends Component {
     this.getData()
   }
 
-  componentDidUpdate () {
-    this.startScroll()
+  componentDidUpdate (prevProps, prevState) {
+    if (this.state.data !== prevState.data) {
+      this.startScroll()
+    }
   }
 
   componentWillUnmount () {

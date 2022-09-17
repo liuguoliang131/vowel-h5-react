@@ -47,16 +47,13 @@ class FirstPop extends Component {
   }
 
   handleClose = () => {
-    console.log('props', this.props)
     this.props.close()
   }
 
   componentDidMount () {
-    console.log('mount')
   }
 
   componentDidUpdate () {
-    console.log('update')
   }
 }
 
