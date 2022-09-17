@@ -12,6 +12,7 @@ import TaskList from './components/taskList/index.jsx'
 import DetailedPicture from './components/detailedPicture/index.jsx'
 import AudioPlayer from './components/audioPlayer/index.jsx'
 import Dialog from '../../components/dialog/index.jsx'
+import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
 let timer = null
@@ -31,6 +32,14 @@ const Home = (props) => {
     setRollingDialogOption({
       ...rollingDialogOption,
       visible: false
+    })
+  }
+  // 关闭 第一次进入的弹窗
+
+  const closeFirstPop = () => {
+    setData({
+      ...data,
+      is_first: 0
     })
   }
   const [rollingDialogOption, setRollingDialogOption] = useState({
@@ -204,6 +213,7 @@ const Home = (props) => {
 
       <div className="footer"></div>
       <Dialog {...rollingDialogOption}></Dialog>
+      <FirstPop visible={data.is_first} shareInfo={data.share_info} close={() => closeFirstPop()}></FirstPop>
     </div>
   )
 }
