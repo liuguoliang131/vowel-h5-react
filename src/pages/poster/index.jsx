@@ -119,7 +119,7 @@ function Poster () {
           Toast.show({
             content: '2'
           })
-          const before = 'data:image/png;base64,'
+          const before = 'data:image/jpeg;base64,'
           codeImg.src = before + qrcodeObj._el.children[1].src
         }
 
