@@ -9,13 +9,11 @@ import { courseLessonListApi } from '../../axios/api'
 function MyCourse () {
   const [currentPage, setCurrentPage] = useState(1)
   const [list] = useState([
-    { name: '第一课', id: 1 },
-    { name: '第二课', id: 2 },
-    { name: '第三课', id: 3 }
+
   ])
   const [dataTime, setDataTime] = useState({
-    expiration_time: '2022.09.08 11:05:30',
-    push_award_time: '2022.09.08 11:05:30'
+    expiration_time: '',
+    push_award_time: ''
   })
 
   // 播放按钮
@@ -34,35 +32,36 @@ function MyCourse () {
   const [data, setData] = useState([])
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
-    // try {
-    //   const res = await courseLessonListApi({
-    //     course_id: '1' || location.state.id,
-    // page:currentPage
-    //   })
-    // setCurrentPage(val => val + 1)
-    //   if (res.code !== 0) {
-    //     setHasMore(false)
-    //   }
-    //   if (!res.data || !res.data.list || !res.data.list.length) {
-    //     setHasMore(false)
-    //   } else {
-    //     setData(val => [...val, ...res.data.list])
-    // setDataTime({
-    //   expiration_time:res.data.expiration_time,
-    //   push_award_time:res.data.push_award_time
-    // })
-    //   }
-    // } catch (error) {
-    //   setHasMore(false)
-    //   throw error
-    // }
-    const append = await mockRequest([
-      { name: '第一课', id: 1 },
-      { name: '第二课', id: 2 },
-      { name: '第三课', id: 3 }
-    ])
-    setData(val => [...val, ...append])
-    setHasMore(append.length > 0)
+    try {
+      const res = await courseLessonListApi({
+        course_id: '1' || location.state.id,
+        page: currentPage
+      })
+      setCurrentPage(val => val + 1)
+      if (res.code !== 0) {
+        setHasMore(false)
+      }
+      if (!res.data || !res.data.list || !res.data.list.length) {
+        setHasMore(false)
+      } else {
+        setData(val => [...val, ...res.data.list])
+        setDataTime({
+          expiration_time: res.data.expiration_time,
+          push_award_time: res.data.push_award_time
+        })
+        setHasMore(res.data.list.length > 0)
+      }
+    } catch (error) {
+      setHasMore(false)
+      throw error
+    }
+    // const append = await mockRequest([
+    //   { name: '第一课', id: 1 },
+    //   { name: '第二课', id: 2 },
+    //   { name: '第三课', id: 3 }
+    // ])
+    // setData(val => [...val, ...append])
+    // setHasMore(append.length > 0)
   }
 
   // 下拉刷新
@@ -70,7 +69,7 @@ function MyCourse () {
     try {
       setCurrentPage(1)
       const res = await courseLessonListApi({
-        course_id: '1' || location.state.id,
+        course_id: location.state.id,
         page: currentPage
       })
       setCurrentPage(val => val + 1)
@@ -83,8 +82,8 @@ function MyCourse () {
           expiration_time: res.data.expiration_time,
           push_award_time: res.data.push_award_time
         })
-        setData(val => [...val, ...res.data])
-        setHasMore(true)
+        setData(val => [...res.data])
+        setHasMore(res.data.list.length > 0)
       }
     } catch (error) {
       setHasMore(false)
@@ -118,7 +117,7 @@ function MyCourse () {
           <div className="footer">
             <div className="footer-content">
               <div>提示：本次课程的有效期为</div>
-              <div>2022.09.08 11:05:30-2022.09.08 11:05:30</div>
+              <div>{dataTime.expiration_time}-{dataTime.push_award_time}</div>
             </div>
           </div>
           <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './index.scss'
+import { Empty } from 'antd-mobile'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
 import CountDown from './components/countDown'
@@ -18,7 +19,7 @@ const Home = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
   const [data, setData] = useState({})
-
+  const [emptyMsg, setEmptyMsg] = useState('暂无内容')
   const btn1Fn = () => {
     setRollingDialogOption({
       ...rollingDialogOption,
@@ -45,15 +46,20 @@ const Home = (props) => {
       console.log('location', window.location)
       const urlParams = utils.getUrlParams()
       console.log('urlParams', urlParams)
-      const params = {}
+      // 如果url有参数 那么跳转到login进行登录 share_sign
       if (urlParams.id) {
-        params.id = Number(urlParams.id)
-        params.share_sign = urlParams.share_sign || ''
-      } else {
-        params.id = location.state.id
+        return utils.hashPush('/login', {
+          ...urlParams,
+          back: '/layout/home'
+        })
       }
+      // 没有参数 正常登录
+      const params = {}
+      params.id = location.state.id
+      params.share_sign = location.state.share_sign || ''
       const res = await promotionActivityDetailApi(params)
       if (res.code !== 0) {
+        setEmptyMsg(res.msg)
         return false
       }
       res.data.draw_end_time *= 1000
@@ -173,15 +179,25 @@ const Home = (props) => {
   return (
     <div className='home'>
       <Crumbs to={() => handleGoPoster()}></Crumbs>
-      <TopWord mainImg={data.main_img}></TopWord>
-      <CountDown draw_start_time={data.draw_start_time}></CountDown>
-      <div className="mb14"></div>
-      <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
-      <div className="mb16"></div>
-      <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
-      <div className="mb16"></div>
-      <DetailedPicture picList={data.pic_list}></DetailedPicture>
-      <AudioPlayer {...data.music_info}></AudioPlayer>
+      {
+        data.id
+          ? (
+          <>
+          <TopWord mainImg={data.main_img}></TopWord>
+          <CountDown draw_start_time={data.draw_start_time}></CountDown>
+          <div className="mb14"></div>
+          <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
+          <div className="mb16"></div>
+          <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
+          <div className="mb16"></div>
+          <DetailedPicture picList={data.pic_list}></DetailedPicture>
+          <AudioPlayer {...data.music_info}></AudioPlayer>
+          </>
+            )
+          : (<Empty description={emptyMsg} />)
+
+      }
+
       <div className="footer"></div>
       <Dialog {...rollingDialogOption}></Dialog>
     </div>

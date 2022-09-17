@@ -67,7 +67,7 @@ function MyPrize () {
       } else {
         setData(val => [...val, ...res.data.list])
         setQrcode(res.data.customer_service || '')
-        setHasMore(true)
+        setHasMore(res.data.list.length > 0)
       }
     } catch (error) {
       setHasMore(false)
@@ -89,7 +89,7 @@ function MyPrize () {
         setHasMore(false)
       } else {
         setQrcode(res.data.customer_service || '')
-        setData(val => [...val, ...res.data])
+        setData(val => [...res.data])
         setHasMore(true)
       }
     } catch (error) {

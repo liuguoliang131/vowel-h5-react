@@ -13,7 +13,7 @@ const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()
   const [data, setData] = useState({
-    phone: '13611037366',
+    phone: '',
     captcha: ''
   })
   const [visible, setVisible] = useState(false) // 弹窗开关
@@ -95,7 +95,14 @@ const Login = (props) => {
     setVisible(true)
   }
   const handLogin = async () => {
-    const res = await login(data)
+    const hashParams = utils.getUrlParams()
+    const loginForm = {
+      ...data
+    }
+    if (hashParams.share_sign) {
+      loginForm.share_sign = hashParams.share_sign
+    }
+    const res = await login(loginForm)
     // 登陆成功
     // props.setToken({
     //   type: 'login/token',
@@ -117,8 +124,8 @@ const Login = (props) => {
       icon: 'success',
       content: '登陆成功'
     })
-    const back = utils.getUrlParams().back || '/layout/myEvent'
-    navigate(back, { state: { ...utils.getUrlParams() }, replace: false })
+    const back = hashParams.back || '/layout/myEvent'
+    navigate(back, { state: { ...hashParams }, replace: false })
   }
 
   return (

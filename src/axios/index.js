@@ -25,12 +25,12 @@ instance.interceptors.request.use(function (config) {
 
   })
   config.headers.ts = Date.now()
-  // config.headers['x-token'] = utils.isApp() ? utils.getAppToken() : utils.getToken()
-  utils.ownApp(() => {
-    config.headers['x-token'] = utils.getAppToken()
-  }, () => {
-    config.headers['x-token'] = utils.getToken()
-  })
+  // utils.ownApp(() => {
+  //   config.headers['x-token'] = utils.getAppToken()
+  // }, () => {
+  //   config.headers['x-token'] = utils.getToken()
+  // })
+  config.headers['x-token'] = utils.getToken()
   return config
 }, function (error) {
   // 对请求错误做些什么

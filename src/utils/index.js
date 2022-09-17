@@ -62,7 +62,7 @@ const utils = {
         })
         let back = window.location.hash.replace('#', '')
         if (window.location.hash.includes('/login')) {
-          back = '/'
+          back = '/layout/myEvent'
         }
         window.location.href = window.location.origin + `/#/login?back=${back}`
       }
@@ -119,25 +119,25 @@ const utils = {
 
   // 获取用户登陆后的信息
   getUserInfo: () => {
-    const info = localStorage.getItem(USER_INFO)
+    const info = sessionStorage.getItem(USER_INFO)
     return info ? JSON.parse(info) : null
   },
   setUserInfo: (obj) => {
-    localStorage.setItem(USER_INFO, JSON.stringify(obj))
+    sessionStorage.setItem(USER_INFO, JSON.stringify(obj))
   },
   delUserInfo: () => {
-    localStorage.removeItem(USER_INFO)
+    sessionStorage.removeItem(USER_INFO)
   },
   // 获取token
   getToken: () => {
-    const token = localStorage.getItem(TOKEN)
+    const token = sessionStorage.getItem(TOKEN)
     return token || ''
   },
   setToken: (data) => {
-    localStorage.setItem(TOKEN, data)
+    sessionStorage.setItem(TOKEN, data)
   },
   delToken: () => {
-    localStorage.removeItem(TOKEN)
+    sessionStorage.removeItem(TOKEN)
   },
   // 如果是app环境下使用session
   setAppToken: (token) => {

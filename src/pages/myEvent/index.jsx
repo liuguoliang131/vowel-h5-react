@@ -53,7 +53,7 @@ function MyEvent () {
   const onRefresh = async () => {
     setCurrentPage(1)
     const res = await promotionListApi({
-      page: currentPage
+      page: 1
     })
     setCurrentPage(val => val + 1)
     console.log('res', res)
@@ -61,7 +61,7 @@ function MyEvent () {
       setData([])
       setHasMore(false)
     } else {
-      setData(val => [...val, ...res.data])
+      setData(val => [...res.data])
       setHasMore(true)
     }
   }
