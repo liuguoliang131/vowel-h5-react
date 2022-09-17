@@ -102,6 +102,15 @@ const Login = (props) => {
     if (hashParams.query.share_sign) {
       loginForm.share_sign = hashParams.query.share_sign
     }
+    let back = ''
+    if (hashParams.query.back === '/layout/home') {
+      if (hashParams.query.share_sign || hashParams.query.id) {
+        back = hashParams.query.back
+      } else {
+        back = '/layout/myEvent'
+      }
+    }
+
     const res = await login(loginForm)
     // 登陆成功
     // props.setToken({
@@ -124,7 +133,6 @@ const Login = (props) => {
       icon: 'success',
       content: '登陆成功'
     })
-    const back = hashParams.query.back || '/layout/myEvent'
     navigate(back, { state: { ...hashParams.query }, replace: false })
   }
 
