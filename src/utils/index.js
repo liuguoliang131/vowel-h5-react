@@ -48,44 +48,38 @@ const utils = {
   },
 
   isLogin: () => {
-    // Toast.show({
-    //   content: 'isLogin'
-    // })
-    // utils.ownApp(() => {
-    //   const token = App.postMessage(JSON.stringify({
-    //     type: 'isLogin',
-    //     params: {},
-    //     callback: 'isLoginResult'
-    //   }))
-    //   alert(`app-token:${token}`)
-    //   // if (!token) {
-    //   //   utils.goLogin()
-    //   // } else {
-    //   //   utils.setAppToken(token)
-    //   // }
-    // }, () => {
-    //   if (!utils.getToken()) {
-    //     Toast.show({
-    //       content: '重新登录'
-    //     })
-    //     window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
-    //   }
-    // })
-
-    if (utils.isApp()) {
+    Toast.show({
+      content: 'isLogin'
+    })
+    utils.ownApp(() => {
       App.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
         callback: 'isLoginResult'
       }))
-    } else {
+    }, () => {
       if (!utils.getToken()) {
         Toast.show({
           content: '重新登录'
         })
         window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
       }
-    }
+    })
+
+    // if (utils.isApp()) {
+    //   App.postMessage(JSON.stringify({
+    //     type: 'isLogin',
+    //     params: {},
+    //     callback: 'isLoginResult'
+    //   }))
+    // } else {
+    //   if (!utils.getToken()) {
+    //     Toast.show({
+    //       content: '重新登录'
+    //     })
+    //     window.location.href = window.location.origin + `/#/login?back=${window.location.hash.replace('#', '')}`
+    //   }
+    // }
   },
 
   isLoginResult: (value) => {
