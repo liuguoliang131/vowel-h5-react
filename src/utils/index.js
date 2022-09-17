@@ -198,8 +198,13 @@ const utils = {
       if (strArr.length > 1) {
         const strArr1 = strArr[1].split('&')
         strArr1.forEach(item => {
-          const strArr2 = item.split('=')
-          params.query[strArr2[0]] = strArr2[1]
+          if (item.includes('share_sign=')) {
+            const strArr2 = item.split('share_sign=')
+            params.query.share_sign = strArr2[1]
+          } else {
+            const strArr2 = item.split('=')
+            params.query[strArr2[0]] = strArr2[1]
+          }
         })
         return params
       } else {

@@ -55,8 +55,14 @@ const Home = (props) => {
       console.log('location', window.location)
       // 没有参数 正常登录
       const params = {}
-      if (utils.getUrlParams().id) {
-        params.id = utils.getUrlParams().id
+      const urlParams = utils.getUrlParams()
+      if (Object.keys(urlParams).length) {
+        if (urlParams.id) {
+          params.id = Number(urlParams.id)
+        }
+        if (urlParams.share_sign) {
+          params.share_sign = urlParams.share_sign
+        }
       } else {
         if (location.state.id) {
           params.id = Number(location.state.id)

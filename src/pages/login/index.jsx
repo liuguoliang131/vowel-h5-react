@@ -95,12 +95,12 @@ const Login = (props) => {
     setVisible(true)
   }
   const handLogin = async () => {
-    const hashParams = utils.getUrlParams()
+    const hashParams = utils.getHashQuery()
     const loginForm = {
       ...data
     }
-    if (hashParams.share_sign) {
-      loginForm.share_sign = hashParams.share_sign
+    if (hashParams.query.share_sign) {
+      loginForm.share_sign = hashParams.query.share_sign
     }
     const res = await login(loginForm)
     // 登陆成功
@@ -124,8 +124,8 @@ const Login = (props) => {
       icon: 'success',
       content: '登陆成功'
     })
-    const back = hashParams.back || '/layout/myEvent'
-    navigate(back, { state: { ...hashParams }, replace: false })
+    const back = hashParams.query.back || '/layout/myEvent'
+    navigate(back, { state: { ...hashParams.query }, replace: false })
   }
 
   return (
