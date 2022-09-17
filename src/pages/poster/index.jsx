@@ -158,6 +158,40 @@ function Poster () {
       a.remove()
     })
   }
+  const handleShareWebToWX = () => {
+    const title = location.state.title
+    const desc = location.state.desc
+    const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+    const coverurl = ''
+    utils.shareWebToWX(title, desc, url, coverurl)
+  }
+  const bottomRender = () => {
+    let bottomComponent = null
+    utils.ownApp(() => {
+      bottomComponent = (
+      <div className="bottom-box-share">
+        <div className="line">
+          <div className="line-1"></div>
+          <div className="line-1"></div>
+        </div>
+        <div className="share-title">分享至微信或朋友圈</div>
+        <div className="share-btns">
+          <div className="share-btns-friends">
+            <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-wx.png')} alt="" />
+            <span>微信</span>
+          </div>
+          <div className="share-btns-friends">
+          <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-friends.png')} alt="" />
+            <span>朋友圈</span>
+          </div>
+        </div>
+      </div>
+      )
+    }, () => {
+
+    })
+    return bottomComponent
+  }
   useEffect(() => {
     getData()
   }, [])
@@ -180,23 +214,9 @@ function Poster () {
           <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
             点击保存海报
           </a>
-          <div className="bottom-box-share">
-            <div className="line">
-              <div className="line-1"></div>
-              <div className="line-1"></div>
-            </div>
-            <div className="share-title">分享至微信或朋友圈</div>
-            <div className="share-btns">
-              <div className="share-btns-friends">
-                <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-wx.png')} alt="" />
-                <span>微信</span>
-              </div>
-              <div className="share-btns-friends">
-              <img onClick={() => utils.shareWebToWX('title', 'desc', 'https://www.baidu.com', 'coverurl')} src={require('../../assets/share-friends.png')} alt="" />
-                <span>朋友圈</span>
-              </div>
-            </div>
-          </div>
+          {
+            bottomRender()
+          }
         </div>
             </>
 

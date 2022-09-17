@@ -162,10 +162,20 @@ const Home = (props) => {
   }
   // 去往海报
   const handleGoPoster = () => {
-    navigate('/layout/poster', {
-      state: { id: data.id },
-      replace: false
-    })
+    if (data.id) {
+      navigate('/layout/poster', {
+        state: {
+          id: data.id,
+          title: data.title,
+          dec: data.sub_title
+        },
+        replace: false
+      })
+    } else {
+      Toast.show({
+        content: emptyMsg
+      })
+    }
   }
   // 设置定时器 改变活动状态
   const handleSetStatus = () => {
