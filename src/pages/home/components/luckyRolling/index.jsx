@@ -37,7 +37,7 @@ class LuckyRolling extends React.Component {
       item.active = false
     })
     this.setState({
-      prizeList
+      prizeList: JSON.parse(JSON.stringify(prizeList))
     })
     console.log('prizeList', prizeList)
   }
