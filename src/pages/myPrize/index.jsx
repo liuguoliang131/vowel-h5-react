@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
 import copy from 'copy-to-clipboard'
 import utils from '../../utils'
@@ -42,7 +42,6 @@ function MyPrize () {
 
   const [hasMore, setHasMore] = useState(true)
   async function loadMore () {
-    alert(JSON.stringify(location.state))
     // setData([
     //   { type: 1, id: 1 },
     //   { type: 2, id: 2 },

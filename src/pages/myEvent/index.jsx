@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import utils from '../../utils/index'
-import { useNavigate } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
 import { sleep } from 'antd-mobile/es/utils/sleep'
