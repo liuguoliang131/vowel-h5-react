@@ -110,7 +110,12 @@ function Poster () {
         ctx.fillText(data.user_name, title.x, title.y)
 
         // 赋值二维码图片 出发加载事件
-        codeImg.src = qrcodeObj._el.children[1].src
+        if (qrcodeObj._el.children[1].src.includes('"data:image/jpeg;base64,"')) {
+          codeImg.src = qrcodeObj._el.children[1].src
+        } else {
+          const before = 'data:image/png;base64,'
+          codeImg.src = before + qrcodeObj._el.children[1].src
+        }
 
         // 层级之上
         const avaImg = new Image()
