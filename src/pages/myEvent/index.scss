@@ -26,6 +26,9 @@
         padding-top: 12px;
         margin-left: -4px;
         line-height: 22px;
+        overflow: hidden; // 溢出隐藏
+        white-space: nowrap; // 强制一行
+        text-overflow: ellipsis; // 文字溢出显示省略号
       }
       .item-row2 {
         font-weight: 600;
@@ -34,6 +37,9 @@
         padding: 4px 0;
         line-height: 17px;
         text-indent: 4px;
+        overflow: hidden; // 溢出隐藏
+        white-space: nowrap; // 强制一行
+        text-overflow: ellipsis; // 文字溢出显示省略号
       }
       .item-row3 {
         font-weight: 400;
@@ -42,6 +48,9 @@
         color: #666666;
         text-indent: 4px;
         padding: 4px 0 8px 0;
+        overflow: hidden; // 溢出隐藏
+        white-space: nowrap; // 强制一行
+        text-overflow: ellipsis; // 文字溢出显示省略号
         border-bottom: 0.5px solid rgba(246, 211, 249, 1)
       }
       .item-row4 {

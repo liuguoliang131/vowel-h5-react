@@ -164,18 +164,21 @@ function Poster () {
 
   // 保存海报到本地
   const handleSavePoster = () => {
-    // onSave()
-    try {
-      const btn = document.createElement('a')
-      btn.download = '分享海报'
-      btn.href = viewRef.current.toDataURL('image/png;base64')
-      btn.click()
-    } catch (error) {
-      console.log(error)
-      alert(error.message)
-    }
+    onSave()
+    // try {
+    //   const btn = document.createElement('a')
+    //   btn.download = '分享海报'
+    //   btn.href = viewRef.current.toDataURL('image/png;base64')
+    //   btn.click()
+    // } catch (error) {
+    //   console.log(error)
+    //   alert(error.message)
+    // }
   }
   const onSave = () => {
+    viewRef.current.onerror = function (e) {
+      alert(e)
+    }
     viewRef.current.toBlob((blob) => {
       const timestamp = Date.now().toString()
       const a = document.createElement('a')
@@ -193,32 +196,41 @@ function Poster () {
     // const coverurl = ''
     // utils.shareWebToWX(title, desc, url, coverurl)
   }
-  const bottomRender = () => {
-    let bottomComponent = null
-    utils.ownApp(() => {
-      bottomComponent = (
-      <div className="bottom-box-share">
-        <div className="line">
-          <div className="line-1"></div>
-          <div className="line-1"></div>
-        </div>
-        <div className="share-title">分享至微信或朋友圈</div>
-        <div className="share-btns">
-          <div className="share-btns-friends">
-            <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-wx.png')} alt="" />
-            <span>微信</span>
-          </div>
-          <div className="share-btns-friends">
-          <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-friends.png')} alt="" />
-            <span>朋友圈</span>
-          </div>
-        </div>
-      </div>
-      )
-    }, () => {
+  // const bottomRender = () => {
+  //   let bottomComponent = null
+  //   utils.ownApp(() => {
+  //     bottomComponent = (
+  //     <div className="bottom-box-share">
+  //       <div className="line">
+  //         <div className="line-1"></div>
+  //         <div className="line-1"></div>
+  //       </div>
+  //       <div className="share-title">分享至微信或朋友圈</div>
+  //       <div className="share-btns">
+  //         <div className="share-btns-friends">
+  //           <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-wx.png')} alt="" />
+  //           <span>微信</span>
+  //         </div>
+  //         <div className="share-btns-friends">
+  //         <img onClick={() => handleShareWebToWX()} src={require('../../assets/share-friends.png')} alt="" />
+  //           <span>朋友圈</span>
+  //         </div>
+  //       </div>
+  //     </div>
+  //     )
+  //   }, () => {
 
-    })
-    return bottomComponent
+  //   })
+  //   return bottomComponent
+  // }
+  const bottomRender = () => {
+    return (
+      <div className="bottom-box-share">
+        <div className="share-1">可分享至微信或朋友圈</div>
+        <img src={require('../../assets/share-wx.png')} alt="" className="share-2" />
+        <img src={require('../../assets/share-friends.png')} alt="" className="share-3" />
+      </div>
+    )
   }
   useEffect(() => {
     getData()

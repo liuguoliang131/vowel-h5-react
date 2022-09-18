@@ -45,7 +45,8 @@ instance.interceptors.response.use(function (response) {
   if (response.data.code !== 0) {
     Toast.show({
       icon: 'fail',
-      content: response.data.code + ':' + response.data.msg
+      duration: 2000,
+      content: response.data.msg
     })
     if (response.data.code === 700 || response.data.code === 701 || response.data.code === 702) {
       utils.delUserInfo()
