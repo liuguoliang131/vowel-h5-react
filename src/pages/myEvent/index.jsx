@@ -7,7 +7,7 @@ import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { promotionListApi } from '../../axios/api'
-
+import { Helmet } from 'react-helmet'
 function MyEvent () {
   console.log('myevent')
   const [currentPage, setCurrentPage] = useState(1)
@@ -67,6 +67,9 @@ function MyEvent () {
   }
   return (
     <div className="myEvent">
+      <Helmet>
+        <title>我的活动</title>
+      </Helmet>
       <Crumbs1 text='我的活动'></Crumbs1>
       <PullToRefresh
         onRefresh={async () => onRefresh()}

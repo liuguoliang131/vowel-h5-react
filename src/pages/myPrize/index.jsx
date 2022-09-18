@@ -8,7 +8,7 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 import { promotionPrizeListApi } from '../../axios/api'
-
+import { Helmet } from 'react-helmet'
 function MyPrize () {
   const location = useLocation()
   const navigate = useNavigate()
@@ -106,6 +106,9 @@ function MyPrize () {
 
   return (
     <div className="myPrize">
+      <Helmet>
+        <title>我的奖品</title>
+      </Helmet>
       <Crumbs1 text="我的奖品"></Crumbs1>
       <PullToRefresh
         onRefresh={async () => onRefresh()}

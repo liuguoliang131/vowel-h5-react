@@ -7,7 +7,7 @@ import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
-
+import { Helmet } from 'react-helmet'
 function Poster () {
   const [data, setData] = useState({
     user_name: '',
@@ -274,6 +274,9 @@ function Poster () {
   }, [viewRef, fullRef, data])
   return (
     <div className="poster">
+      <Helmet>
+        <title>活动海报</title>
+      </Helmet>
       <Crumbs1 text="抽奖海报"></Crumbs1>
       {
         data.share_sign

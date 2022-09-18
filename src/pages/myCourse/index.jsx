@@ -7,7 +7,7 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
 import utils from '../../utils'
-
+import { Helmet } from 'react-helmet'
 function MyCourse () {
   const location = useLocation()
   const [currentPage, setCurrentPage] = useState(1)
@@ -99,6 +99,9 @@ function MyCourse () {
   }
   return (
     <div className='MyCourse'>
+      <Helmet>
+        <title>我的课程</title>
+      </Helmet>
       <Crumbs1 text="我的课程"></Crumbs1>
       <PullToRefresh
         onRefresh={() => onRefresh()}

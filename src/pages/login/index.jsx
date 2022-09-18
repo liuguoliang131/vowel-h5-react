@@ -8,7 +8,7 @@ import Model from '../../components/model'
 import { Vertify } from '@alex_xu/react-slider-vertify'
 import { Toast } from 'antd-mobile'
 import { captcha, login } from '../../axios/api'
-
+import { Helmet } from 'react-helmet'
 const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()
@@ -141,6 +141,9 @@ const Login = (props) => {
 
   return (
     <div className='login'>
+      <Helmet>
+        <title>登录</title>
+      </Helmet>
       <Crumbs1 text="登录"></Crumbs1>
       <div className="pt30"></div>
       <div className="phone">

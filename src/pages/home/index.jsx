@@ -15,6 +15,7 @@ import Dialog from '../../components/dialog/index.jsx'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
+import { Helmet } from 'react-helmet'
 let timer = null
 const Home = (props) => {
   const location = useLocation()
@@ -247,6 +248,9 @@ const Home = (props) => {
   }, [resData])
   return (
     <div className='home'>
+      <Helmet>
+        <title>幸运大转盘</title>
+      </Helmet>
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         data.id
