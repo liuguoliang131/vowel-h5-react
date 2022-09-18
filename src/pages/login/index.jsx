@@ -160,7 +160,7 @@ const Login = (props) => {
           <Vertify
             width={getWidth()}
             height={getWidth()}
-            imgUrl={require('../../assets/分享-分享图.png')}
+            imgUrl={require('../../assets/20220918125925.jpg')}
             visible={visible}
             onSuccess={() => handLogin()}
             onFail={() => onFail()}

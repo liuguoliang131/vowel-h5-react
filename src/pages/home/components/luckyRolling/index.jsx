@@ -261,17 +261,19 @@ class LuckyRolling extends React.Component {
       this.props.success(1)
       return false
     }
-    // 获取结果  然后开始动画
-    console.log('start')
-    if (this.state.start) return false
     if (this.props.user_info.remain_award_num === 0) {
       this.props.success(0)
       return false
     }
+    // 获取结果  然后开始动画
+    console.log('start')
+    if (this.state.start) return false
+
     this.setState({
       start: true
     })
-    const finishIdx = await this.getPrizeDraw()
+    // const finishIdx = await this.getPrizeDraw()
+    const finishIdx = 0
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) return false
     console.log('结果是', this.state.prizeList[finishIdx].text)
