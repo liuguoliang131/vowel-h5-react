@@ -83,7 +83,7 @@ function MyPrize () {
       setCurrentPage(1)
       const res = await promotionPrizeListApi({
         promotion_id: location.state.id,
-        page: currentPage
+        page: 1
       })
       setCurrentPage(val => val + 1)
       console.log('res', res)
@@ -92,7 +92,7 @@ function MyPrize () {
         setHasMore(false)
       } else {
         setQrcode(res.data.customer_service || '')
-        setData(val => [...res.data])
+        setData(val => [...res.data.list])
         setHasMore(true)
       }
     } catch (error) {

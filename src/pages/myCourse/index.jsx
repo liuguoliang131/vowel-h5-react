@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
 import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { useLocation } from 'react-router-dom'
 // import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
 import utils from '../../utils'
 function MyCourse () {
+  const location = useLocation()
   const [currentPage, setCurrentPage] = useState(1)
   const [list] = useState([
 
@@ -70,7 +72,7 @@ function MyCourse () {
       setCurrentPage(1)
       const res = await courseLessonListApi({
         course_id: location.state.course_id || hashParams.query.course_id,
-        page: currentPage
+        page: 1
       })
       setCurrentPage(val => val + 1)
       console.log('res', res)
@@ -82,7 +84,7 @@ function MyCourse () {
           expiration_time: res.data.expiration_time,
           push_award_time: res.data.push_award_time
         })
-        setData(val => [...res.data])
+        setData(val => [...res.data.list])
         setHasMore(res.data.list.length > 0)
       }
     } catch (error) {
@@ -92,7 +94,7 @@ function MyCourse () {
   }
   return (
     <div className='MyCourse'>
-      <Crumbs1 text="我的奖品"></Crumbs1>
+      <Crumbs1 text="我的课程"></Crumbs1>
       <PullToRefresh
         onRefresh={() => onRefresh()}
       >
