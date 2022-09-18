@@ -172,9 +172,7 @@ function Poster () {
       btn.click()
     } catch (error) {
       console.log(error)
-      Toast.show({
-        content: `${JSON.stringify(error)}`
-      })
+      alert(error.message)
     }
   }
   const onSave = () => {
@@ -189,11 +187,11 @@ function Poster () {
     })
   }
   const handleShareWebToWX = () => {
-    const title = location.state.title
-    const desc = '苹果手表S7/Airpods pro/免单奖励等超值大礼等你拿'
-    const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
-    const coverurl = ''
-    utils.shareWebToWX(title, desc, url, coverurl)
+    // const title = location.state.title
+    // const desc = '苹果手表S7/Airpods pro/免单奖励等超值大礼等你拿'
+    // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+    // const coverurl = ''
+    // utils.shareWebToWX(title, desc, url, coverurl)
   }
   const bottomRender = () => {
     let bottomComponent = null
