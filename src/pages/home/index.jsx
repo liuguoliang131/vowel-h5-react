@@ -232,7 +232,7 @@ const Home = (props) => {
   }, [data])
   return (
     <div className='home'>
-      <Crumbs to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
+      <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         data.id
           ? (

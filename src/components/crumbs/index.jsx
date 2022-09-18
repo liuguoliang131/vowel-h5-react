@@ -21,10 +21,19 @@ function Crumbs (props) {
       <div className="crumbs-slot"></div>
       <div className='crumbs'>
         <div className="crumbs-l"><img src={backIMG} alt="" onClick={() => onBack()} /></div>
-        <div className="crumbs-r">
+        {
+          props.buttonHide
+            ? (
+            <div className="crumbs-r"></div>
+              )
+            : (
+            <div className="crumbs-r">
           <div className="crumbs-r-btn1" onClick={() => props.handleGoMyPrize()}>我的奖品</div>
           <div className="crumbs-r-btn2"><img src={shareIMG} alt="" onClick={() => handleGoPoster()} /></div>
         </div>
+              )
+        }
+
       </div>
     </>
   )
