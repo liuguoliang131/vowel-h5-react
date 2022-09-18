@@ -19,6 +19,7 @@ let timer = null
 const Home = (props) => {
   const location = useLocation()
   const navigate = useNavigate()
+  const [resData, setResData] = useState({})
   const [data, setData] = useState({
   })
 
@@ -83,18 +84,19 @@ const Home = (props) => {
       res.data.draw_start_time *= 1000
       res.data.end_time *= 1000
       res.data.start_time *= 1000
-      const newData = res.data
+      setResData(res.data)
+      const newData = JSON.parse(JSON.stringify(res.data))
       const now = new Date().getTime()
-      if (now < newData.draw_start_time) {
+      if (now < res.data.draw_start_time) {
         newData.drawStatus = 0 // 抽奖未开始
-      } else if (now >= newData.draw_start_time && now < newData.draw_end_time) {
+      } else if (now >= res.data.draw_start_time && now < res.data.draw_end_time) {
         newData.drawStatus = 1 // 抽奖开始
       } else {
         newData.drawStatus = 2 // 抽奖结束
       }
-      if (now < newData.start_time) {
+      if (now < res.data.start_time) {
         newData.status = 0
-      } else if (now >= newData.start_time && now < newData.end_time) {
+      } else if (now >= res.data.start_time && now < res.data.end_time) {
         newData.status = 1
       } else {
         newData.status = 2
@@ -104,28 +106,33 @@ const Home = (props) => {
         return false
       }
       timer = setInterval(() => {
+        const newData = JSON.parse(JSON.stringify(data))
         const now = new Date().getTime()
-        if (now < newData.draw_start_time) {
+        if (now < resData.draw_start_time) {
           newData.drawStatus = 0 // 抽奖未开始
-        } else if (now >= newData.draw_start_time && now < newData.draw_end_time) {
+        } else if (now >= resData.draw_start_time && now < resData.draw_end_time) {
           newData.drawStatus = 1 // 抽奖开始
         } else {
           newData.drawStatus = 2 // 抽奖结束
         }
-        if (now < newData.start_time) {
+        if (now < resData.start_time) {
           newData.status = 0
-        } else if (now >= newData.start_time && now < newData.end_time) {
+        } else if (now >= resData.start_time && now < resData.end_time) {
           newData.status = 1
         } else {
           newData.status = 2
         }
-        if (now > newData.start_time && now > newData.draw_end_time) {
+        if (now > resData.start_time && now > resData.draw_end_time) {
           newData.status = 2
           newData.drawStatus = 2
           clearTimeout(timer)
         }
-        setData(newData)
-        if ((newData.status !== data.status && data.status !== undefined) || (newData.drawStatus !== data.drawStatus && data.drawStatus !== undefined)) {
+        setData({
+          ...data,
+          status: newData.status,
+          drawStatus: newData.drawStatus
+        })
+        if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
           window.history.go(0)
         }
       }, 1000)
