@@ -10,11 +10,15 @@ function TaskList (props) {
 
   const handleGoPay = () => {
     utils.ownApp(() => {
-      utils.openAppPage({
-        page: 'musicDetailPage',
-        isNeedLogin: false,
-        params: { music_info_id: props.music_info.music_info_id }
-      })
+      if (utils.isApp()) {
+        utils.openAppPage({
+          page: 'musicDetailPage',
+          isNeedLogin: false,
+          params: { music_info_id: props.music_info.music_info_id }
+        })
+      } else {
+        utils.goLogin()
+      }
     })
   }
   useEffect(() => {
