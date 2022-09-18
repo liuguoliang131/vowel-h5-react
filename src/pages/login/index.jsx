@@ -8,7 +8,7 @@ import Model from '../../components/model'
 import { Vertify } from '@alex_xu/react-slider-vertify'
 import { Toast } from 'antd-mobile'
 import { captcha, login } from '../../axios/api'
-
+document.title = '登录'
 const Login = (props) => {
   console.log('login')
   const navigate = useNavigate()

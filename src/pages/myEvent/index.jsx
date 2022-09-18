@@ -7,7 +7,8 @@ import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { promotionListApi } from '../../axios/api'
-const currentPage = 1
+
+document.title = '我的活动'
 function MyEvent () {
   console.log('myevent')
   const [currentPage, setCurrentPage] = useState(1)

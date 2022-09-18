@@ -7,6 +7,7 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
 import utils from '../../utils'
+document.title = '我的课程'
 function MyCourse () {
   const location = useLocation()
   const [currentPage, setCurrentPage] = useState(1)
@@ -47,9 +48,13 @@ function MyCourse () {
         setHasMore(false)
       } else {
         setData(val => [...val, ...res.data.list])
+        const startTime = utils.getTimeData(res.data.expiration_time * 1000)
+        const endTime = utils.getTimeData(res.data.push_award_time * 1000)
+        const expiration_time = `${startTime.y}.${startTime.mon}.${startTime.dd} ${startTime.hh}:${startTime.MM}:${startTime.ss}`
+        const push_award_time = `${endTime.y}.${endTime.mon}.${endTime.dd} ${endTime.hh}:${endTime.MM}:${endTime.ss}`
         setDataTime({
-          expiration_time: res.data.expiration_time,
-          push_award_time: res.data.push_award_time
+          expiration_time,
+          push_award_time
         })
         setHasMore(res.data.list.length > 0)
       }

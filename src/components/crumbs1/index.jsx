@@ -12,27 +12,28 @@ function Crumbs1 (props) {
       navigate(-1)
     }
   }
-  const BackBtnRender = () => {
+  const CrumbsRender = () => {
     let com = null
     utils.ownApp(() => {
 
     }, () => {
       com = (
-        <img src={backIMG} alt="" className="back" onClick={() => onBack()} />
+        <>
+        <div className="crumbs1-slot"></div>
+        <div className="crumbs1">
+          <div className="content">
+          <img src={backIMG} alt="" className="back" onClick={() => onBack()} />
+            <span>{props.text}</span>
+          </div>
+        </div>
+        </>
       )
     })
     return com
   }
   return (
-    <>
-    <div className="crumbs1-slot"></div>
-    <div className="crumbs1">
-      <div className="content">
-        <BackBtnRender></BackBtnRender>
-        <span>{props.text}</span>
-      </div>
-    </div>
-    </>
+    CrumbsRender()
+
   )
 }
 

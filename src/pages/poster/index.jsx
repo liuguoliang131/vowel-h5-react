@@ -7,6 +7,7 @@ import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+document.title = '活动海报'
 function Poster () {
   const [data, setData] = useState({
     user_name: '',
@@ -273,7 +274,7 @@ function Poster () {
   }, [viewRef, fullRef, data])
   return (
     <div className="poster">
-      {/* <Crumbs1 text="抽奖海报"></Crumbs1> */}
+      <Crumbs1 text="抽奖海报"></Crumbs1>
       {
         data.share_sign
           ? (

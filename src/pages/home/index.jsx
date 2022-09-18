@@ -15,6 +15,7 @@ import Dialog from '../../components/dialog/index.jsx'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
+document.title = '幸运大转盘'
 let timer = null
 const Home = (props) => {
   const location = useLocation()
