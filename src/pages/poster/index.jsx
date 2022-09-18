@@ -6,7 +6,7 @@ import utils from '../../utils/index'
 import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
-
+import axios from 'axios'
 function Poster () {
   const [data, setData] = useState({
     user_name: '',
@@ -26,15 +26,6 @@ function Poster () {
       correctLevel: 1
     })
   }
-  const getData = async () => {
-    const res = await promotionSharePosterListApi({
-      promotion_id: location.state.id || 1
-    })
-    if (res.code !== 0) {
-      return false
-    }
-    setData(res.data)
-  }
   // 转换成blob
   const getBlob = (base64) => {
     const mimeString = base64.split(',')[0].split(':')[1].split(';')[0] // mime类型
@@ -47,6 +38,37 @@ function Poster () {
     return new Blob([intArray], {
       type: mimeString
     })
+  }
+  const blobToBase64 = (blob) => {
+    return new Promise((resolve) => {
+      const fileReader = new FileReader()
+      fileReader.onload = (e) => {
+        resolve(e.target.result)
+      }
+      fileReader.readAsDataURL(blob)
+    })
+  }
+  // 获取二进制流 转base 转blob
+  const getImageToBlob = async (url) => {
+    const res = await axios.get(url)
+    const baseData = await blobToBase64(res.data)
+    const blob = getBlob(baseData)
+    return blob
+  }
+  const getData = async () => {
+    const res = await promotionSharePosterListApi({
+      promotion_id: location.state.id || 1
+    })
+    if (res.code !== 0) {
+      return false
+    }
+    const resData = {
+      posterUrl: '',
+      userAvatar: ''
+    }
+    resData.posterUrl = getImageToBlob(res.data.poster_url)
+    resData.userAvatar = getImageToBlob(res.data.user_avatar)
+    setData({ ...res.data, ...resData })
   }
 
   const initCanvas = () => {
