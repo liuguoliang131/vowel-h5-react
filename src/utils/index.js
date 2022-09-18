@@ -4,6 +4,7 @@ import {
   TOKEN
 } from './uniField'
 import { Toast } from 'antd-mobile'
+import App from '../App'
 
 // let webUrl = ''
 // if(process.env.NODE_ENV==='development') {
@@ -250,6 +251,13 @@ const utils = {
       MM,
       ss
     }
+  },
+  // 保存图片到本地
+  saveBase64Image: (base64Img) => {
+    App.postMessage(JSON.stringify({
+      type: 'saveBase64Image',
+      params: { img: base64Img }
+    }))
   }
 }
 window.isLoginResult = function (token) {

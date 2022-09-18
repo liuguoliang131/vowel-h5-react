@@ -197,10 +197,15 @@ function Poster () {
   const handleSavePoster = () => {
     // onSave()
     try {
-      const btn = document.createElement('a')
-      btn.download = '分享海报'
-      btn.href = viewRef.current.toDataURL('image/png;base64')
-      btn.click()
+      const posterBase = viewRef.current.toDataURL('image/png;base64')
+      utils.ownApp(() => {
+        utils.saveBase64Image(posterBase)
+      }, () => {
+        const btn = document.createElement('a')
+        btn.download = '分享海报'
+        btn.href = posterBase
+        btn.click()
+      })
     } catch (error) {
       console.log(error)
       alert(error.message)
