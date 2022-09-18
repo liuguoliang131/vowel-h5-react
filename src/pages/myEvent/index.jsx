@@ -8,8 +8,8 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { promotionListApi } from '../../axios/api'
 
-document.title = '我的活动'
 function MyEvent () {
+  document.title = '我的活动'
   console.log('myevent')
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([])

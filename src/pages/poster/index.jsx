@@ -7,8 +7,9 @@ import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
-document.title = '活动海报'
+
 function Poster () {
+  document.title = '活动海报'
   const [data, setData] = useState({
     user_name: '',
     user_avatar: '',
