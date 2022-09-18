@@ -273,7 +273,7 @@ function Poster () {
   }, [viewRef, fullRef, data])
   return (
     <div className="poster">
-      <Crumbs1 text="抽奖海报"></Crumbs1>
+      {/* <Crumbs1 text="抽奖海报"></Crumbs1> */}
       {
         data.share_sign
           ? (
