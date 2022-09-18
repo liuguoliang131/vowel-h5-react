@@ -4,7 +4,6 @@ import {
   TOKEN
 } from './uniField'
 import { Toast } from 'antd-mobile'
-import App from '../App'
 
 // let webUrl = ''
 // if(process.env.NODE_ENV==='development') {
