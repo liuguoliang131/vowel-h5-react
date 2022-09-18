@@ -85,221 +85,10 @@ const Home = (props) => {
       res.data.end_time *= 1000
       res.data.start_time *= 1000
       setResData(res.data)
-      const newData = JSON.parse(JSON.stringify(res.data))
-      const now = new Date().getTime()
-      if (now < res.data.draw_start_time) {
-        newData.drawStatus = 0 // 抽奖未开始
-      } else if (now >= res.data.draw_start_time && now < res.data.draw_end_time) {
-        newData.drawStatus = 1 // 抽奖开始
-      } else {
-        newData.drawStatus = 2 // 抽奖结束
-      }
-      if (now < res.data.start_time) {
-        newData.status = 0
-      } else if (now >= res.data.start_time && now < res.data.end_time) {
-        newData.status = 1
-      } else {
-        newData.status = 2
-      }
-      setData(newData)
-      if (newData.status === 2) {
-        return false
-      }
-      timer = setInterval(() => {
-        const newData = JSON.parse(JSON.stringify(data))
-        const now = new Date().getTime()
-        if (now < resData.draw_start_time) {
-          newData.drawStatus = 0 // 抽奖未开始
-        } else if (now >= resData.draw_start_time && now < resData.draw_end_time) {
-          newData.drawStatus = 1 // 抽奖开始
-        } else {
-          newData.drawStatus = 2 // 抽奖结束
-        }
-        if (now < resData.start_time) {
-          newData.status = 0
-        } else if (now >= resData.start_time && now < resData.end_time) {
-          newData.status = 1
-        } else {
-          newData.status = 2
-        }
-        if (now > resData.start_time && now > resData.draw_end_time) {
-          newData.status = 2
-          newData.drawStatus = 2
-          clearTimeout(timer)
-        }
-        setData({
-          ...data,
-          status: newData.status,
-          drawStatus: newData.drawStatus
-        })
-        if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
-          window.history.go(0)
-        }
-      }, 1000)
+      setData(res.data)
     } catch (error) {
-      Toast.show({
-        content: error.message,
-        icon: 'error'
-      })
       throw error
     }
-
-    // const newData = {
-    //   id: 14,
-    //   type: 1,
-    //   title: '幸运大抽奖',
-    //   sub_title: '0918-测试活动，预热+正在进行1',
-    //   rule_note: '活动规则',
-    //   status: 1,
-    //   start_time: 1663478208,
-    //   end_time: 1663636611,
-    //   draw_start_time: 1663478711000,
-    //   draw_end_time: 1663498711701,
-    //   prize_list: [
-    //     {
-    //       id: 4,
-    //       title: '测试课程奖品',
-    //       note: '测试课程奖品',
-    //       pic_url: 'https://media.shenglangnft.com/16474136647.jpg',
-    //       type: 4
-    //     },
-    //     {
-    //       id: 5,
-    //       title: '苹果手表S7',
-    //       note: '苹果手表S7',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/手表2.png',
-    //       type: 1
-    //     },
-    //     {
-    //       id: 6,
-    //       title: '苹果耳机pro版',
-    //       note: '苹果耳机pro版',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/耳机2.png',
-    //       type: 1
-    //     },
-    //     {
-    //       id: 7,
-    //       title: '免单奖励',
-    //       note: '免单奖励',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/免单卡.png',
-    //       type: 1
-    //     },
-    //     {
-    //       id: 8,
-    //       title: '索尼运动耳机',
-    //       note: '索尼运动耳机',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/耳机1.png',
-    //       type: 1
-    //     },
-    //     {
-    //       id: 9,
-    //       title: '300奇点积分包',
-    //       note: '300奇点积分包',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006207.png',
-    //       type: 2
-    //     },
-    //     {
-    //       id: 10,
-    //       title: '500奇点积分包',
-    //       note: '500奇点积分包',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006083.png',
-    //       type: 2
-    //     },
-    //     {
-    //       id: 11,
-    //       title: '800奇点积分包',
-    //       note: '800奇点积分包',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006208.png',
-    //       type: 2
-    //     },
-    //     {
-    //       id: 12,
-    //       title: '1000奇点积分包',
-    //       note: '1000奇点积分包',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006209.png',
-    //       type: 2
-    //     },
-    //     {
-    //       id: 13,
-    //       title: '一路听天下读书年卡',
-    //       note: '一路听天下读书年卡',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006202.png',
-    //       type: 3
-    //     },
-    //     {
-    //       id: 14,
-    //       title: '元音符VIP专属尤克里里课程',
-    //       note: '元音符VIP专属尤克里里课程',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006210.png',
-    //       type: 4
-    //     },
-    //     {
-    //       id: 15,
-    //       title: '元音符VIP专属乐理课程',
-    //       note: '元音符VIP专属乐理课程',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006083-1.png',
-    //       type: 4
-    //     },
-    //     {
-    //       id: 16,
-    //       title: '谢谢惠顾',
-    //       note: '谢谢惠顾',
-    //       pic_url: 'https://file.yuanyinfu.com/operate/prize/1000006085.png',
-    //       type: 5
-    //     }
-    //   ],
-    //   task_list: [
-    //     {
-    //       type: 1,
-    //       reach_num: 0,
-    //       give_num: 2
-    //     },
-    //     {
-    //       type: 3,
-    //       reach_num: 3,
-    //       give_num: 2
-    //     },
-    //     {
-    //       type: 2,
-    //       reach_num: 0,
-    //       give_num: 4
-    //     }
-    //   ],
-    //   pic_list: [
-    //     'https://file.yuanyinfu.com/operate/promotion/voice-promotion-1663464599349.png',
-    //     'https://file.yuanyinfu.com/operate/promotion/voice-promotion-1663464602280.png'
-    //   ],
-    //   main_img: 'https://file.yuanyinfu.com/operate/promotion/voice-promotion-1663464588417.png',
-    //   user_info: {
-    //     user_id: 100446,
-    //     remain_award_num: 3,
-    //     share_award_num: 0,
-    //     share_user_num: 0
-    //   },
-    //   music_info: {
-    //     id: 0,
-    //     music_time: '233',
-    //     music_pic: 'https://media.shenglangnft.com/poster/1663464177230397.jpg?imageView2/2/w/300/h/300',
-    //     music_pic_shear: '',
-    //     music_url: 'https://media.shenglangnft.com/music/1663464167314327.wav',
-    //     visit_num: '',
-    //     music_name: '0918，预售歌曲参加活动预约+开售001',
-    //     play_num: 0,
-    //     like_num: 0,
-    //     is_like: 0,
-    //     share_h5_url: '',
-    //     avatar: 'https://media.shenglangnft.com/avatar/165821988149739.jpeg',
-    //     author_name: '域名资源-艺人姓名',
-    //     music_info_id: 328,
-    //     music_status: 0,
-    //     lyrics: ''
-    //   },
-    //   share_info: {
-    //     user_name: '',
-    //     user_avatar: ''
-    //   },
-    //   is_first: 0
-    // }
   }
   // 去往我的奖品
   const handleGoMyPrize = () => {
@@ -388,62 +177,59 @@ const Home = (props) => {
           content: emptyMsg
         })
       }
-    }, () => {
-      if (data.id) {
-        navigate('/layout/poster', {
-          state: {
-            id: data.id,
-            title: data.title,
-            dec: data.sub_title
-          },
-          replace: false
-        })
-      } else {
-        Toast.show({
-          content: emptyMsg
-        })
-      }
     })
   }
   // 设置定时器 改变活动状态
   const handleSetStatus = () => {
-    if (JSON.stringify(data) === '{}') {
-      return false
+    const newData = JSON.parse(JSON.stringify(data))
+    const now = new Date().getTime()
+    if (now < resData.draw_start_time) {
+      newData.drawStatus = 0 // 抽奖未开始
+    } else if (now >= resData.draw_start_time && now < resData.draw_end_time) {
+      newData.drawStatus = 1 // 抽奖开始
+    } else {
+      newData.drawStatus = 2 // 抽奖结束
     }
-    if (timer) {
+    if (now < resData.start_time) {
+      newData.status = 0
+    } else if (now >= resData.start_time && now < resData.end_time) {
+      newData.status = 1
+    } else {
+      newData.status = 2
+    }
+    setData(newData)
+    if (newData.status === 2) {
       return false
     }
     timer = setInterval(() => {
+      const newData = JSON.parse(JSON.stringify(data))
       const now = new Date().getTime()
-      const newData = data
-      if (now < data.draw_start_time) {
+      if (now < resData.draw_start_time) {
         newData.drawStatus = 0 // 抽奖未开始
-      } else if (now >= data.draw_start_time && now < data.draw_end_time) {
-        console.log('drawStatus', 1)
+      } else if (now >= resData.draw_start_time && now < resData.draw_end_time) {
         newData.drawStatus = 1 // 抽奖开始
       } else {
-        console.log('drawStatus', 2)
         newData.drawStatus = 2 // 抽奖结束
       }
-      if (now < data.start_time) {
+      if (now < resData.start_time) {
         newData.status = 0
-      } else if (now >= data.start_time && now < data.end_time) {
+      } else if (now >= resData.start_time && now < resData.end_time) {
         newData.status = 1
       } else {
         newData.status = 2
       }
-      if (now > data.start_time && now > data.draw_end_time) {
-        console.log('结束了')
+      if (now > resData.start_time && now > resData.draw_end_time) {
+        newData.status = 2
+        newData.drawStatus = 2
         clearTimeout(timer)
       }
-
-      if (newData.status !== data.status || newData.drawStatus !== data.drawStatus) {
-        console.log(newData.status, data.status)
-        // eslint-disable-next-line no-prototype-builtins
-        if (newData.status !== data.status && JSON.stringify(data) !== '{}') {
-          // window.history.go(0)
-        }
-        setData(newData)
+      setData({
+        ...data,
+        status: newData.status,
+        drawStatus: newData.drawStatus
+      })
+      if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
+        window.history.go(0)
       }
     }, 1000)
   }
@@ -454,11 +240,11 @@ const Home = (props) => {
     getDetail()
   }, [])
   useEffect(() => {
-    // handleSetStatus()
+    handleSetStatus()
     return () => {
 
     }
-  }, [data])
+  }, [resData])
   return (
     <div className='home'>
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
