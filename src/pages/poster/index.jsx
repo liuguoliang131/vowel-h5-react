@@ -195,16 +195,16 @@ function Poster () {
 
   // 保存海报到本地
   const handleSavePoster = () => {
-    onSave()
-    // try {
-    //   const btn = document.createElement('a')
-    //   btn.download = '分享海报'
-    //   btn.href = viewRef.current.toDataURL('image/png;base64')
-    //   btn.click()
-    // } catch (error) {
-    //   console.log(error)
-    //   alert(error.message)
-    // }
+    // onSave()
+    try {
+      const btn = document.createElement('a')
+      btn.download = '分享海报'
+      btn.href = viewRef.current.toDataURL('image/png;base64')
+      btn.click()
+    } catch (error) {
+      console.log(error)
+      alert(error.message)
+    }
   }
   const onSave = () => {
     viewRef.current.toBlob((blob) => {
