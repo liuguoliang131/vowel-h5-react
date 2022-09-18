@@ -40,24 +40,25 @@ function Poster () {
     })
   }
   const blobToBase64 = (blob) => {
+    console.log('blobToBase64 1', blob)
+    const fileReader = new FileReader()
+    fileReader.readAsDataURL(blob)
     return new Promise((resolve) => {
-      const fileReader = new FileReader()
       fileReader.onload = (e) => {
         resolve(e.target.result)
       }
-      fileReader.readAsDataURL(blob)
     })
   }
   // 获取二进制流 转base 转blob
   const getImageToBlob = async (url) => {
-    const res = await axios.get(url)
-    const baseData = await blobToBase64(res.data)
-    const blob = getBlob(baseData)
-    return blob
+    const res = await axios.get(url, { responseType: 'blob' })
+    const baseData = await blobToBase64(new Blob([res.data], { type: res.headers['content-type'] }))
+    // const blob = getBlob(baseData)
+    return baseData
   }
   const getData = async () => {
     const res = await promotionSharePosterListApi({
-      promotion_id: location.state.id || 1
+      promotion_id: location.state.id
     })
     if (res.code !== 0) {
       return false
@@ -66,8 +67,9 @@ function Poster () {
       posterUrl: '',
       userAvatar: ''
     }
-    resData.posterUrl = getImageToBlob(res.data.poster_url)
-    resData.userAvatar = getImageToBlob(res.data.user_avatar)
+    resData.posterUrl = await getImageToBlob(res.data.poster_url)
+    resData.userAvatar = await getImageToBlob(res.data.user_avatar)
+    console.log('resData', resData)
     setData({ ...res.data, ...resData })
   }
 
@@ -124,7 +126,7 @@ function Poster () {
       const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
       const codeCanvas = qrcodeObj._el.querySelector('canvas')
       const base64Text = codeCanvas.toDataURL('image/png')
-      const blob = getBlob(base64Text) // 将base64转换成blob对象
+      // const blob = getBlob(base64Text) // 将base64转换成blob对象
       console.log('qrcodeObj src', qrcodeObj._el.children[1])
       codeImg.onload = function () {
         console.log('codeImg.src1', codeImg.src)
@@ -134,9 +136,14 @@ function Poster () {
       }
 
       // 设置图片地址
-      image.src = data.poster_url + '?v=' + Math.random()
+      // image.src = data.poster_url + '?v=' + Math.random()
+      // image.src = data.posterUrl
       // 必须要在onLoad之后再进行绘制图片，否则不会渲染
+      image.onerror = function (e) {
+        console.log('image error', e)
+      }
       image.onload = function () {
+        console.log('image')
         // 4各参数 图片的起始坐标和宽高
         ctx.drawImage(image, 0, 0, full.offsetWidth, full.offsetHeight)
 
@@ -163,7 +170,7 @@ function Poster () {
         //   codeImg.src = blob
         //   alert(codeImg.src)
         // }
-        codeImg.src = window.URL.createObjectURL(blob)
+        codeImg.src = base64Text
         // alert(codeImg.src)
 
         // 层级之上
@@ -178,9 +185,11 @@ function Poster () {
           // 创建完后绘制
           ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
         }
-        avaImg.src = data.user_avatar + '?v=' + Math.random()
+        avaImg.src = data.userAvatar
         console.log('avaImg src', avaImg.src)
       }
+      image.src = data.posterUrl
+      console.log('image.src', image)
     }
   }
 
@@ -198,9 +207,6 @@ function Poster () {
     // }
   }
   const onSave = () => {
-    viewRef.current.onerror = function (e) {
-      alert(e)
-    }
     viewRef.current.toBlob((blob) => {
       const timestamp = Date.now().toString()
       const a = document.createElement('a')
