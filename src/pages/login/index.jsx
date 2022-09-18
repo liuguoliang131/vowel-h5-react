@@ -10,7 +10,6 @@ import { Toast } from 'antd-mobile'
 import { captcha, login } from '../../axios/api'
 
 const Login = (props) => {
-  document.title = '登录'
   console.log('login')
   const navigate = useNavigate()
   const [data, setData] = useState({

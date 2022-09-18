@@ -9,7 +9,6 @@ import { courseLessonListApi } from '../../axios/api'
 import utils from '../../utils'
 
 function MyCourse () {
-  document.title = '我的课程'
   const location = useLocation()
   const [currentPage, setCurrentPage] = useState(1)
   const [list] = useState([

@@ -10,7 +10,6 @@ import Crumbs1 from '../../components/crumbs1'
 import { promotionPrizeListApi } from '../../axios/api'
 
 function MyPrize () {
-  document.title = '我的奖品'
   const location = useLocation()
   const navigate = useNavigate()
   console.log('location', location)

@@ -9,7 +9,6 @@ import './index.scss'
 import { promotionListApi } from '../../axios/api'
 
 function MyEvent () {
-  document.title = '我的活动'
   console.log('myevent')
   const [currentPage, setCurrentPage] = useState(1)
   const [data, setData] = useState([])

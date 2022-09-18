@@ -17,7 +17,6 @@ import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
 let timer = null
 const Home = (props) => {
-  document.title = '幸运大转盘'
   const location = useLocation()
   const navigate = useNavigate()
   const [resData, setResData] = useState({})

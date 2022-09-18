@@ -9,7 +9,6 @@ import { useLocation } from 'react-router-dom'
 import axios from 'axios'
 
 function Poster () {
-  document.title = '活动海报'
   const [data, setData] = useState({
     user_name: '',
     user_avatar: '',

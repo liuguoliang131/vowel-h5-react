@@ -16,7 +16,8 @@ const routes = [
     path: '/login',
     element: <Login />,
     meta: {
-      auth: false
+      auth: false,
+      title: '登录'
     }
   },
   {
@@ -30,49 +31,56 @@ const routes = [
         path: '/layout/home',
         element: <Home />,
         meta: {
-          auth: true
+          auth: true,
+          title: '幸运大转盘'
         }
       },
       {
         path: '/layout/preheat',
         element: <Preheat />,
         meta: {
-          auth: true
+          auth: true,
+          title: '幸运大转盘'
         }
       },
       {
         path: '/layout/myEvent',
         element: <MyEvent />,
         meta: {
-          auth: true
+          auth: true,
+          title: '我的活动'
         }
       },
       {
         path: '/layout/myPrize',
         element: <MyPrize />,
         meta: {
-          auth: true
+          auth: true,
+          title: '我的奖品'
         }
       },
       {
         path: '/layout/myCourse',
         element: <MyCourse />,
         meta: {
-          auth: true
+          auth: true,
+          title: '我的课程'
         }
       },
       {
         path: '/layout/test',
         element: <Test />,
         meta: {
-          auth: true
+          auth: true,
+          title: 'test'
         }
       },
       {
         path: '/layout/poster',
         element: <Poster />,
         meta: {
-          auth: true
+          auth: true,
+          title: '活动海报'
         }
       },
       {
@@ -86,10 +94,41 @@ const routes = [
     element: <Navigate to={'/login'} />
   }
 ]
+// 查找是否有此路由
+function deepSearch (list, path) {
+  let flag = false
+  list.forEach(item => {
+    if (item.path === path) {
+      flag = true
+    } else {
+      if (item.children && item.children instanceof Array) {
+        flag = deepSearch(item.children, path)
+      }
+    }
+  })
+  return flag
+}
+// search并且return路由
+function deepGetRoute (list, path) {
+  let theRoute = null
+  list.forEach(item => {
+    if (item.path === path) {
+      theRoute = item
+    } else {
+      if (item.children && item.children instanceof Array) {
+        theRoute = deepGetRoute(item.children, path)
+      }
+    }
+  })
+  return theRoute
+}
 const white = ['/layout/home', '/login']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
   console.log('route', params)
+
+  document.title = deepGetRoute(routes, params.path).meta.title
+
   const children = useRoutes(routes)
   const is = utils.isApp()
   if (!white.includes(params.path)) {
