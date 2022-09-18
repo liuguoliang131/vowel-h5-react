@@ -88,12 +88,21 @@ const routes = [
 ]
 const white = ['/layout/home', '/login']
 const GetRoutes = () => {
-  // const params = utils.getHashQuery()
-  // console.log('route', params)
-  // if (!utils.getToken() && !white.includes(params.path)) {
-  //   utils.goLogin()
-  // }
-  return useRoutes(routes)
+  const params = utils.getHashQuery()
+  console.log('route', params)
+  const children = useRoutes(routes)
+  const is = utils.isApp()
+  if (!white.includes(params.path)) {
+    if (!utils.getToken()) {
+      if (is) {
+        utils.goLogin()
+      } else {
+        return (<Navigate to={`/login?${Object.keys(params.query)}&back=${params.path}`} replace />)
+      }
+    }
+  }
+
+  return children
 }
 const SetRoutes = () => {
   return (

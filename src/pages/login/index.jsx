@@ -109,6 +109,8 @@ const Login = (props) => {
       } else {
         back = '/layout/myEvent'
       }
+    } else {
+      back = '/layout/myEvent'
     }
 
     const res = await login(loginForm)
@@ -131,8 +133,9 @@ const Login = (props) => {
     utils.setToken(res.data.token)
     Toast.show({
       icon: 'success',
-      content: '登陆成功'
+      content: '登录成功'
     })
+    console.log('back', back)
     navigate(back, { state: { ...hashParams.query }, replace: false })
   }
 

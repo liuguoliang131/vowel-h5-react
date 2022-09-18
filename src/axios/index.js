@@ -46,7 +46,7 @@ instance.interceptors.response.use(function (response) {
       icon: 'fail',
       content: response.data.msg || 'error'
     })
-    if (response.data.code === 700 || response.data.code === 701 || response.data.code === 702 || response.data.code === 7) {
+    if (response.data.code === 700 || response.data.code === 701 || response.data.code === 702) {
       utils.delUserInfo()
       utils.delToken()
       // 首先判断是不是APP内 如果是APP调APP登录，不是跳H5登录

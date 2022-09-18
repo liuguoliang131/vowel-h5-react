@@ -18,7 +18,13 @@ console.log('utils')
 let timer = null
 const utils = {
   isApp: () => {
-    return !!App
+    try {
+      if (App) {
+        return true
+      }
+    } catch (error) {
+      return false
+    }
   }, // 是否在app内
   // 是否有App全局变量 判断是否在app内
   ownApp: (success, fail) => {
