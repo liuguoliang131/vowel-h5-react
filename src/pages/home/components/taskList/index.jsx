@@ -10,7 +10,7 @@ function TaskList (props) {
 
   const handleGoPay = () => {
     utils.ownApp(() => {
-      if (utils.isApp()) {
+      if (utils.getToken()) {
         utils.openAppPage({
           page: 'musicDetailPage',
           isNeedLogin: false,
