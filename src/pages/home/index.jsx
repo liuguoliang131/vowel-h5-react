@@ -276,7 +276,7 @@ const Home = (props) => {
               <div className="mb14"></div>
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
               <div className="mb16"></div>
-              <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
+              <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} to={() => handleGoPoster()}></TaskList>
               <div className="mb16"></div>
               <DetailedPicture picList={data.pic_list}></DetailedPicture>
               <AudioPlayer {...data.music_info}></AudioPlayer>

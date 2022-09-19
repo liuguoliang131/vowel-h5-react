@@ -9,11 +9,11 @@ export async function mockRequest () {
       title: '幸运大抽奖11',
       sub_title: '0918-测试活动，预热+正在进行2',
       rule_note: '活动规则0918-测试活动，预热+正在进行2',
-      status: 1,
-      start_time: 1663564986,
-      end_time: 1669565986,
-      draw_start_time: 1663564999,
-      draw_end_time: 1669565986,
+      status: 0,
+      start_time: 1965564986,
+      end_time: 1969565986,
+      draw_start_time: 1965564986,
+      draw_end_time: 1969565986,
       prize_list: [
         {
           id: 5,
@@ -150,7 +150,7 @@ export async function mockRequest () {
         user_name: '',
         user_avatar: ''
       },
-      is_first: 1
+      is_first: 0
     }
   }
 }

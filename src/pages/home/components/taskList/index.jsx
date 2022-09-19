@@ -22,7 +22,7 @@ function TaskList (props) {
     })
   }
   useEffect(() => {
-
+    console.log('taskList status', props.status)
   }, [props])
   return (
     <div className="TaskList">
@@ -42,7 +42,7 @@ function TaskList (props) {
                   <div className="col3">
                     <div className="col3-1" onClick={() => handleGoPay()}>
                       <img src={row3IMG} alt="" />
-                      <div>{props.status === 0 ? '立即预购' : '立即购买'}</div>
+                      <div>{props.drawStatus === 0 ? '立即预购' : '立即购买'}</div>
                     </div>
                     {/* <div className="col3-2">已获得<span style={{ color: 'rgba(252, 23, 188, 1)' }}>1</span>次抽奖机会</div> */}
                   </div>
