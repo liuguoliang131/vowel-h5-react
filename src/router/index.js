@@ -127,8 +127,9 @@ const white = inApp ? ['/layout/home'] : ['/layout/home', '/login']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
   console.log('route', params)
-
-  document.title = deepGetRoute(routes, params.path).meta.title
+  const theRoute = deepGetRoute(routes, params.path)
+  console.log('theRoute', theRoute)
+  document.title = theRoute.meta.title || '幸运大转盘'
 
   const children = useRoutes(routes)
   if (!white.includes(params.path)) {
