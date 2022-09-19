@@ -1,6 +1,8 @@
 import React from 'react'
 import './index.scss'
 import { promotionPrizeDrawApi } from '../../../../axios/api'
+import { Mask } from 'antd-mobile'
+import utils from '../../../../utils'
 const prizeBoxBG = require('../../../../assets/Cube_Rounded0011 10.png')
 const emptyIMG = require('../../../../assets/OhGodPleaseNo.png')
 // let timer = null
@@ -63,6 +65,33 @@ class LuckyRolling extends React.Component {
   //     }
   //   }, 1000)
   // }
+  buttonRender = () => {
+    const Button = null
+    if (utils.getToken()) {
+      if (this.props.drawStatus === 2) {
+        return (
+          <div className={'start-btn gray'}>
+          <div className="start-btn-row1">已结束</div>
+          <div className="start-btn-row2">今日剩余抽奖机会{this.props.remain_award_num}次</div>
+        </div>
+        )
+      } else {
+        return (
+          <div className={'start-btn'} onClick={() => this.playStart()}>
+                <div className="start-btn-row1">点击抽奖</div>
+                <div className="start-btn-row2">剩余抽奖机会{this.props.remain_award_num}次</div>
+              </div>
+        )
+      }
+    } else {
+      return (
+        <div className={'start-btn'} onClick={() => utils.goLogin()}>
+              <div className="start-btn-row1">点击抽奖</div>
+              <div className="start-btn-row2">登录后获取抽奖次数</div>
+            </div>
+      )
+    }
+  }
 
   componentDidMount () {
     this.getPrizes()
@@ -83,22 +112,13 @@ class LuckyRolling extends React.Component {
       this.state.prizeList.length
         ? (
         <div className="LuckyRolling">
-          (
+          <Mask
+            visible={this.state.start}
+            opacity={0}
+          />
           <div className="bg-box">
             <div className="LuckyRolling-box">
-            {this.props.drawStatus === 2
-              ? (
-                <div className={'start-btn gray'}>
-                <div className="start-btn-row1">已结束</div>
-                <div className="start-btn-row2">今日剩余抽奖机会{this.props.remain_award_num}次</div>
-              </div>
-                )
-              : (
-                <div className={'start-btn'} onClick={() => this.playStart()}>
-                      <div className="start-btn-row1">点击抽奖</div>
-                      <div className="start-btn-row2">剩余抽奖机会{this.props.remain_award_num}次</div>
-                    </div>
-                )}
+              {this.buttonRender()}
               {
                 this.state.prizeList.map((item, index) => {
                   switch (index) {
@@ -269,13 +289,15 @@ class LuckyRolling extends React.Component {
     console.log('start')
     if (this.state.start) return false
 
-    this.setState({
-      start: true
-    })
     const finishIdx = await this.getPrizeDraw()
     // const finishIdx = 0
     // 知道了结果，设置动画让其轮动多少次
-    if (finishIdx === false) return false
+    if (finishIdx === false) {
+      return false
+    }
+    this.setState({
+      start: true
+    })
     console.log('结果是', this.state.prizeList[finishIdx].text)
     this.animationJ(finishIdx)
   }
