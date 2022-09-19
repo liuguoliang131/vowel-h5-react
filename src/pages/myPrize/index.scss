@@ -190,24 +190,41 @@
     .footer {
       height: 234px;
       text-align: center;
-      a {
-        display: flex;
-        .qrcode {
-          margin: auto;
-          width: 128px;
-          height: 128px;
-          padding-top: 32px;
-        }
-      }
-      
       .footer-tip {
-        padding-top: 5px;
+        padding-top: 20px;
         font-size: 14px;
-        line-height: 21px;
         text-align: center;
         color: #FFFFFF;
         opacity: 0.8;
       }
+
+      .qrcode {
+        margin: auto;
+        width: 128px;
+        height: 128px;
+        margin-top: 4px;
+        margin-bottom: 13px;
+      }
+      .save-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 141px;
+        height: 36px;
+        text-decoration:none;
+        background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%),
+        linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+        border: 0.5px solid;
+        border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+        box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+        border-radius: 4px;
+        font-family: 'PingFang SC';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        color: #FFFFFF;
+      }
+      
     }
   }
 }
@@ -215,4 +232,34 @@
 .myPrize .adm-pull-to-refresh {
   height: calc( 100% - 44px );
   overflow-y: scroll;
+}
+.myPrize .empty-content {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  .empty-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    span {
+      padding-top: 22px;
+      font-family: 'PingFang SC';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+
+      text-align: center;
+
+      color: #CDCDCD;
+    }
+  }
 }

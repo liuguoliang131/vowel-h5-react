@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, DotLoading, Toast } from 'antd-mobile'
 import copy from 'copy-to-clipboard'
 import utils from '../../utils'
 import { sleep } from 'antd-mobile/es/utils/sleep'
@@ -222,20 +222,39 @@ function MyPrize () {
           })
 
         }
-        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
         {
           qrcode
             ? (<div className="footer">
-              <a download={'元音符客服二维码'} href={qrcode}>
+                <div className="footer-tip">
+                  微信扫码添加客服
+                </div>
                 <img src={qrcode} alt="" className='qrcode' />
-              </a>
-          <div className="footer-tip">
-            微信扫码添加客服
-          </div>
-        </div>)
+                <a className='save-button' download={true} href={qrcode}>保存客服微信二维码</a>
+              </div>
+              )
             : null
         }
-
+        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} >
+        {hasMore
+          ? (
+          <>
+            <span>加载中</span>
+            <DotLoading />
+          </>
+            )
+          : data.length
+            ? (
+              <span>没有更多了</span>
+              )
+            : (
+                <div className="empty-content">
+                  <div className="empty-center">
+                    <img src={require('../../assets/empty-icon.png')} alt="" />
+                    <span>没有抽到奖品，再接再厉！</span>
+                  </div>
+                </div>
+              )}
+        </InfiniteScroll>
       </div>
       </PullToRefresh>
     </div>

@@ -23,3 +23,34 @@
     height: 76px;
   }
 }
+
+.home .empty-content {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  .empty-center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    span {
+      padding-top: 22px;
+      font-family: 'PingFang SC';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+
+      text-align: center;
+
+      color: #CDCDCD;
+    }
+  }
+}

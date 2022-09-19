@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import utils from '../../utils/index'
 import { useNavigate } from 'react-router-dom'
 import Crumbs1 from '../../components/crumbs1'
-import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, DotLoading, Toast } from 'antd-mobile'
 // import { sleep } from 'antd-mobile/es/utils/sleep'
 // import { mockRequest } from './mock-request.jsx'
 import './index.scss'
@@ -58,10 +58,10 @@ function MyEvent () {
     console.log('res', res)
     if (!res.data) {
       setData([])
-      setHasMore(false)
+      setHasMore(val => false)
     } else {
       setData(val => [...res.data])
-      setHasMore(true)
+      setHasMore(val => true)
     }
   }
   useEffect(() => {
@@ -106,7 +106,27 @@ function MyEvent () {
             </div>
           ))
         }
-        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
+        <InfiniteScroll loadMore={loadMore} hasMore={hasMore} >
+          {hasMore
+            ? (
+          <>
+            <span>加载中</span>
+            <DotLoading />
+          </>
+              )
+            : data.length
+              ? (
+              <span>没有更多了</span>
+                )
+              : (
+                <div className="empty-content">
+                  <div className="empty-center">
+                    <img src={require('../../assets/empty-icon.png')} alt="" />
+                    <span>~ 您还没有参与活动 ~</span>
+                  </div>
+                </div>
+                )}
+        </InfiniteScroll>
       </div>
       </PullToRefresh>
     </div>

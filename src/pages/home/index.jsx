@@ -261,7 +261,14 @@ const Home = (props) => {
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         emptyMsg
-          ? (<Empty description={emptyMsg} />)
+          ? (
+            <div className="empty-content">
+              <div className="empty-center">
+                <img src={require('../../assets/empty-icon.png')} alt="" />
+                <span>{emptyMsg}</span>
+              </div>
+            </div>
+            )
           : (
           <>
           {data.id

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Crumbs1 from '../../components/crumbs1'
-import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
+import { PullToRefresh, InfiniteScroll, DotLoading } from 'antd-mobile'
 import { useLocation } from 'react-router-dom'
 // import { sleep } from 'antd-mobile/es/utils/sleep'
 import { mockRequest } from './mock-request.jsx'
@@ -133,7 +133,27 @@ function MyCourse () {
               : null
           }
 
-          <InfiniteScroll loadMore={loadMore} hasMore={hasMore} />
+          <InfiniteScroll loadMore={loadMore} hasMore={hasMore} >
+          {hasMore
+            ? (
+          <>
+            <span>加载中</span>
+            <DotLoading />
+          </>
+              )
+            : data.length
+              ? (
+              <span>没有更多了</span>
+                )
+              : (
+                <div className="empty-content">
+                  <div className="empty-center">
+                    <img src={require('../../assets/empty-icon.png')} alt="" />
+                    <span>暂无课程</span>
+                  </div>
+                </div>
+                )}
+          </InfiniteScroll>
         </div>
         </PullToRefresh>
     </div>
