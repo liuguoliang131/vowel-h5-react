@@ -42,7 +42,7 @@ const Home = (props) => {
 
   const closeFirstPop = () => {
     setData({
-      ...data,
+      ...resData,
       is_first: 0
     })
   }
@@ -273,7 +273,7 @@ const Home = (props) => {
 
       <div className="footer"></div>
       <Dialog {...rollingDialogOption}></Dialog>
-      <FirstPop visible={data.is_first} shareInfo={data.share_info} close={() => closeFirstPop()}></FirstPop>
+      <FirstPop visible={resData.is_first} shareInfo={resData.share_info} close={() => closeFirstPop()}></FirstPop>
     </div>
   )
 }
