@@ -261,7 +261,10 @@ const utils = {
 }
 window.isLoginResult = function (token) {
   if (!token) {
-    utils.goLogin()
+    // 假如是home页 不需要去登陆
+    if (utils.getHashQuery().path !== '/layout/home') {
+      utils.goLogin()
+    }
   } else {
     utils.setAppToken(token)
   }
