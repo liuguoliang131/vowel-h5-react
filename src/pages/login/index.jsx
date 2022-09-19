@@ -53,6 +53,9 @@ const Login = (props) => {
     await setCaptchaBtnText(59)
   }
   useEffect(() => {
+    document.title = '登录'
+  }, [])
+  useEffect(() => {
     if (captchaBtnText > 0) {
       setTimeout(() => {
         setCaptchaBtnText(val => val - 1)
@@ -141,9 +144,9 @@ const Login = (props) => {
 
   return (
     <div className='login'>
-      <Helmet>
+      {/* <Helmet>
         <title>登录</title>
-      </Helmet>
+      </Helmet> */}
       <Crumbs1 text="登录"></Crumbs1>
       <div className="pt30"></div>
       <div className="phone">

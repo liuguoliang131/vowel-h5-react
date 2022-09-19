@@ -248,6 +248,7 @@ const Home = (props) => {
     console.log('data', data)
   }, [data])
   useEffect(() => {
+    document.title = '幸运大转盘'
     getDetail()
   }, [])
   useEffect(() => {
@@ -259,9 +260,9 @@ const Home = (props) => {
   }, [resData])
   return (
     <div className='home'>
-      <Helmet>
+      {/* <Helmet>
         <title>幸运大转盘</title>
-      </Helmet>
+      </Helmet> */}
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         emptyMsg

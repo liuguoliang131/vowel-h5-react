@@ -267,6 +267,7 @@ function Poster () {
     )
   }
   useEffect(() => {
+    document.title = '活动海报'
     getData()
   }, [])
   useEffect(() => {
@@ -274,10 +275,10 @@ function Poster () {
   }, [viewRef, fullRef, data])
   return (
     <div className="poster">
-      <Helmet>
+      {/* <Helmet>
         <title>活动海报</title>
-      </Helmet>
-      <Crumbs1 text="抽奖海报"></Crumbs1>
+      </Helmet> */}
+      <Crumbs1 text="活动海报"></Crumbs1>
       {
         data.share_sign
           ? (

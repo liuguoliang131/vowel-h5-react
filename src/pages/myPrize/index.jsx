@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { PullToRefresh, InfiniteScroll, Toast } from 'antd-mobile'
 import copy from 'copy-to-clipboard'
@@ -9,6 +9,7 @@ import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 import { promotionPrizeListApi } from '../../axios/api'
 import { Helmet } from 'react-helmet'
+
 function MyPrize () {
   const location = useLocation()
   const navigate = useNavigate()
@@ -108,12 +109,14 @@ function MyPrize () {
     const timeStr = `${y}.${mon}.${dd} ${hh}:${MM}:${ss}`
     return timeStr
   }
-
+  useEffect(() => {
+    document.title = '我的奖品'
+  }, [])
   return (
     <div className="myPrize">
-      <Helmet>
+      {/* <Helmet>
         <title>我的奖品</title>
-      </Helmet>
+      </Helmet> */}
       <Crumbs1 text="我的奖品"></Crumbs1>
       <PullToRefresh
         onRefresh={async () => onRefresh()}

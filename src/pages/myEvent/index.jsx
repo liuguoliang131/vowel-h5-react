@@ -65,11 +65,14 @@ function MyEvent () {
       setHasMore(true)
     }
   }
+  useEffect(() => {
+    document.title = '我的活动'
+  }, [])
   return (
     <div className="myEvent">
-      <Helmet>
+      {/* <Helmet>
         <title>我的活动</title>
-      </Helmet>
+      </Helmet> */}
       <Crumbs1 text='我的活动'></Crumbs1>
       <PullToRefresh
         onRefresh={async () => onRefresh()}

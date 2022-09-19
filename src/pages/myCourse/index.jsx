@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll } from 'antd-mobile'
 import { useLocation } from 'react-router-dom'
@@ -97,11 +97,14 @@ function MyCourse () {
       throw error
     }
   }
+  useEffect(() => {
+    document.title = '我的课程'
+  }, [])
   return (
     <div className='MyCourse'>
-      <Helmet>
+      {/* <Helmet>
         <title>我的课程</title>
-      </Helmet>
+      </Helmet> */}
       <Crumbs1 text="我的课程"></Crumbs1>
       <PullToRefresh
         onRefresh={() => onRefresh()}
