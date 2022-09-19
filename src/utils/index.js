@@ -21,6 +21,8 @@ const utils = {
     try {
       if (App) {
         return true
+      } else {
+        return false
       }
     } catch (error) {
       return false
@@ -63,13 +65,13 @@ const utils = {
   },
 
   isLogin: () => {
-    utils.ownApp(() => {
+    if (utils.isApp()) {
       App.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
         callback: 'isLoginResult'
       }))
-    }, () => {
+    } else {
       if (!utils.getToken()) {
         const urlParams = utils.getUrlParams()
         // 如果url有参数 那么跳转到login进行登录 share_sign
@@ -78,7 +80,23 @@ const utils = {
           back: '/layout/home'
         })
       }
-    })
+    }
+    // utils.ownApp(() => {
+    //   App.postMessage(JSON.stringify({
+    //     type: 'isLogin',
+    //     params: {},
+    //     callback: 'isLoginResult'
+    //   }))
+    // }, () => {
+    //   if (!utils.getToken()) {
+    //     const urlParams = utils.getUrlParams()
+    //     // 如果url有参数 那么跳转到login进行登录 share_sign
+    //     utils.hashPush('/login', {
+    //       ...urlParams,
+    //       back: '/layout/home'
+    //     })
+    //   }
+    // })
   },
 
   // 分享到微信和朋友圈
@@ -242,10 +260,7 @@ const utils = {
 }
 window.isLoginResult = function (token) {
   if (!token) {
-    // 假如是home页 不需要去登陆
-    if (utils.getHashQuery().path !== '/layout/home') {
-      utils.goLogin()
-    }
+    utils.goLogin()
   } else {
     utils.setAppToken(token)
   }

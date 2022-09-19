@@ -122,8 +122,8 @@ function deepGetRoute (list, path) {
   })
   return theRoute
 }
-
-const white = ['/layout/home', '/login']
+const inApp = utils.isApp()
+const white = inApp ? ['/layout/home'] : ['/layout/home', '/login']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
   console.log('route', params)
@@ -131,10 +131,9 @@ const GetRoutes = () => {
   // document.title = deepGetRoute(routes, params.path).meta.title
 
   const children = useRoutes(routes)
-  const is = utils.isApp()
   if (!white.includes(params.path)) {
     if (!utils.getToken()) {
-      if (is) {
+      if (inApp) {
         utils.goLogin()
         window.history.go(-1)
       } else {
