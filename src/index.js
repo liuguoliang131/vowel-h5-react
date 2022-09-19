@@ -25,7 +25,7 @@ import { Toast } from 'antd-mobile'
 // Toast.show({
 //   content: 'index'
 // })
-utils.isLogin()
+// utils.isLogin()
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(

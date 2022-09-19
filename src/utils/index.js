@@ -261,7 +261,7 @@ const utils = {
 }
 window.isLoginResult = function (token) {
   if (!token) {
-    // utils.goLogin()
+    utils.goLogin()
   } else {
     utils.setAppToken(token)
   }
