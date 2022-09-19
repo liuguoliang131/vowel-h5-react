@@ -130,7 +130,7 @@ function MyCourse () {
               <div className="footer">
             <div className="footer-content">
               <div>提示：本次课程的有效期为</div>
-              <div>{dataTime.expiration_time}-{dataTime.push_award_time}</div>
+              <div>{dataTime.push_award_time}-{dataTime.expiration_time}</div>
             </div>
           </div>
                 )

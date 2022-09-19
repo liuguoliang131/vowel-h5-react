@@ -103,6 +103,11 @@ function MyPrize () {
       throw error
     }
   }
+  const formateTime = (date) => {
+    const { y, mon, dd, hh, MM, ss } = utils.getTimeData(date)
+    const timeStr = `${y}.${mon}.${dd} ${hh}:${MM}:${ss}`
+    return timeStr
+  }
 
   return (
     <div className="myPrize">
@@ -195,7 +200,7 @@ function MyPrize () {
                   </div>
                   <div className="type5-row4">
                     {
-                      item.expiration_time ? (`有效期为：获得奖品日起${item.expiration_time}天内随意观看！`) : '奖品永久有效'
+                      '有效期为：' + formateTime(item.push_award_time) + '-' + formateTime(item.expiration_time)
                     }
                   </div>
                 </div>
