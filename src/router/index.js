@@ -122,8 +122,7 @@ function deepGetRoute (list, path) {
   })
   return theRoute
 }
-// 设置token
-utils.isLogin()
+
 const white = ['/layout/home', '/login']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
