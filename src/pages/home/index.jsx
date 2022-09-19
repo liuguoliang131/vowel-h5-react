@@ -15,7 +15,6 @@ import Dialog from '../../components/dialog/index.jsx'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-import { Helmet } from 'react-helmet'
 // import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
@@ -248,7 +247,6 @@ const Home = (props) => {
     console.log('data', data)
   }, [data])
   useEffect(() => {
-    document.title = '幸运大转盘'
     getDetail()
   }, [])
   useEffect(() => {
@@ -260,9 +258,6 @@ const Home = (props) => {
   }, [resData])
   return (
     <div className='home'>
-      {/* <Helmet>
-        <title>幸运大转盘</title>
-      </Helmet> */}
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
         emptyMsg

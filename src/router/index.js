@@ -128,7 +128,7 @@ const GetRoutes = () => {
   const params = utils.getHashQuery()
   console.log('route', params)
 
-  // document.title = deepGetRoute(routes, params.path).meta.title
+  document.title = deepGetRoute(routes, params.path).meta.title
 
   const children = useRoutes(routes)
   if (!white.includes(params.path)) {

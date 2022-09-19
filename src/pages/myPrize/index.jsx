@@ -8,7 +8,6 @@ import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import Crumbs1 from '../../components/crumbs1'
 import { promotionPrizeListApi } from '../../axios/api'
-import { Helmet } from 'react-helmet'
 
 function MyPrize () {
   const location = useLocation()
@@ -109,14 +108,8 @@ function MyPrize () {
     const timeStr = `${y}.${mon}.${dd} ${hh}:${MM}:${ss}`
     return timeStr
   }
-  useEffect(() => {
-    document.title = '我的奖品'
-  }, [])
   return (
     <div className="myPrize">
-      {/* <Helmet>
-        <title>我的奖品</title>
-      </Helmet> */}
       <Crumbs1 text="我的奖品"></Crumbs1>
       <PullToRefresh
         onRefresh={async () => onRefresh()}
