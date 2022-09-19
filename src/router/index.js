@@ -110,26 +110,27 @@ function deepSearch (list, path) {
 }
 // search并且return路由
 function deepGetRoute (list, path) {
-  let theRoute = null
-  list.forEach(item => {
+  for (let i = 0; i < list.length; i++) {
+    const item = list[i]
     if (item.path === path) {
-      theRoute = item
+      return item
     } else {
       if (item.children && item.children instanceof Array) {
-        theRoute = deepGetRoute(item.children, path)
+        return deepGetRoute(item.children, path)
       }
     }
-  })
-  return theRoute
+  }
 }
 const inApp = utils.isApp()
 const white = inApp ? ['/layout/home'] : ['/layout/home', '/login']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
-  console.log('route', params)
+  // console.log('route', params)
   const theRoute = deepGetRoute(routes, params.path)
-  console.log('theRoute', theRoute)
-  document.title = theRoute.meta.title || '幸运大转盘'
+  // console.log('theRoute', theRoute)
+  if (theRoute) {
+    document.title = theRoute.meta.title || '幸运大转盘'
+  }
 
   const children = useRoutes(routes)
   if (!white.includes(params.path)) {
