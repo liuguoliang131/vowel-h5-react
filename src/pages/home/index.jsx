@@ -1,5 +1,5 @@
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
 import { useLocation, useNavigate } from 'react-router-dom'
 import './index.scss'
@@ -16,15 +16,17 @@ import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
 import { Helmet } from 'react-helmet'
+// import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
+  // const saveCallBack = useRef()
   const location = useLocation()
   const navigate = useNavigate()
   const [resData, setResData] = useState({})
   const [data, setData] = useState({
   })
 
-  const [emptyMsg, setEmptyMsg] = useState('暂无内容')
+  const [emptyMsg, setEmptyMsg] = useState('')
   const btn1Fn = () => {
     setRollingDialogOption({
       ...rollingDialogOption,
@@ -42,7 +44,7 @@ const Home = (props) => {
 
   const closeFirstPop = () => {
     setData({
-      ...resData,
+      ...data,
       is_first: 0
     })
   }
@@ -81,6 +83,7 @@ const Home = (props) => {
         setEmptyMsg(res.msg)
         return false
       }
+      // const res = await mockRequest()
       res.data.draw_end_time *= 1000
       res.data.draw_start_time *= 1000
       res.data.end_time *= 1000
@@ -224,26 +227,33 @@ const Home = (props) => {
         newData.drawStatus = 2
         clearTimeout(timer)
       }
-      setData({
-        ...data,
-        status: newData.status,
-        drawStatus: newData.drawStatus
+      setData(val => {
+        return {
+          ...val,
+          status: newData.status,
+          drawStatus: newData.drawStatus
+        }
       })
       if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
         window.history.go(0)
       }
     }, 1000)
   }
+
   useEffect(() => {
-    console.log('home1')
+    // saveCallBack.current = handleSetStatus
   })
+  useEffect(() => {
+    console.log('data', data)
+  }, [data])
   useEffect(() => {
     getDetail()
   }, [])
   useEffect(() => {
+    // saveCallBack.current()
     handleSetStatus()
     return () => {
-
+      clearTimeout(timer)
     }
   }, [resData])
   return (
@@ -253,27 +263,35 @@ const Home = (props) => {
       </Helmet>
       <Crumbs buttonHide={!data.id} to={() => handleGoPoster()} handleGoMyPrize={() => handleGoMyPrize()}></Crumbs>
       {
-        data.id
-          ? (
+        emptyMsg
+          ? (<Empty description={emptyMsg} />)
+          : (
           <>
-          <TopWord mainImg={data.main_img}></TopWord>
-          <CountDown id={data.id} draw_start_time={data.draw_start_time}></CountDown>
-          <div className="mb14"></div>
-          <LuckyRolling {...data} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
-          <div className="mb16"></div>
-          <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
-          <div className="mb16"></div>
-          <DetailedPicture picList={data.pic_list}></DetailedPicture>
-          <AudioPlayer {...data.music_info}></AudioPlayer>
+          {data.id
+            ? (
+            <>
+              <TopWord mainImg={data.main_img}></TopWord>
+              <CountDown id={data.id} draw_start_time={data.draw_start_time}></CountDown>
+              <div className="mb14"></div>
+              <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
+              <div className="mb16"></div>
+              <TaskList {...data} to={() => handleGoPoster()} userInfo={data.user_info}></TaskList>
+              <div className="mb16"></div>
+              <DetailedPicture picList={data.pic_list}></DetailedPicture>
+              <AudioPlayer {...data.music_info}></AudioPlayer>
+            </>
+
+              )
+            : null
+          }
           </>
             )
-          : (<Empty description={emptyMsg} />)
 
       }
 
       <div className="footer"></div>
       <Dialog {...rollingDialogOption}></Dialog>
-      <FirstPop visible={resData.is_first} shareInfo={resData.share_info} close={() => closeFirstPop()}></FirstPop>
+      <FirstPop visible={data.is_first} shareInfo={data.share_info} close={() => closeFirstPop()}></FirstPop>
     </div>
   )
 }

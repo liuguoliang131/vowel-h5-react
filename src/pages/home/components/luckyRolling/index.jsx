@@ -90,13 +90,13 @@ class LuckyRolling extends React.Component {
               ? (
                 <div className={'start-btn gray'}>
                 <div className="start-btn-row1">已结束</div>
-                <div className="start-btn-row2">今日剩余抽奖机会{this.props.user_info.remain_award_num}次</div>
+                <div className="start-btn-row2">今日剩余抽奖机会{this.props.remain_award_num}次</div>
               </div>
                 )
               : (
                 <div className={'start-btn'} onClick={() => this.playStart()}>
                       <div className="start-btn-row1">点击抽奖</div>
-                      <div className="start-btn-row2">剩余抽奖机会{this.props.user_info.remain_award_num}次</div>
+                      <div className="start-btn-row2">剩余抽奖机会{this.props.remain_award_num}次</div>
                     </div>
                 )}
               {
@@ -261,7 +261,7 @@ class LuckyRolling extends React.Component {
       this.props.success(1)
       return false
     }
-    if (this.props.user_info.remain_award_num === 0) {
+    if (this.props.remain_award_num === 0) {
       this.props.success(0)
       return false
     }
@@ -273,6 +273,7 @@ class LuckyRolling extends React.Component {
       start: true
     })
     const finishIdx = await this.getPrizeDraw()
+    // const finishIdx = 0
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) return false
     console.log('结果是', this.state.prizeList[finishIdx].text)
