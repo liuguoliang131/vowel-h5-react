@@ -63,7 +63,14 @@ function TaskList (props) {
                       <img src={row3IMG} alt="" />
                       <div>立即分享</div>
                     </div>
-                    <div className="col3-2">已获得<span style={{ color: 'rgba(252, 23, 188, 1)' }}>{props.userInfo.share_award_num}</span>次抽奖机会</div>
+                    {
+                      props.userInfo.share_award_num
+                        ? (
+                        <div className="col3-2">已获得<span style={{ color: 'rgba(252, 23, 188, 1)' }}>{props.userInfo.share_award_num}</span>次抽奖机会</div>
+                          )
+                        : null
+
+                    }
                   </div>
                 </div>
               )
