@@ -98,7 +98,7 @@ function MyCourse () {
   }
   return (
     <div className='MyCourse'>
-      <Crumbs1 text="我的课程"></Crumbs1>
+      {/* <Crumbs1 text="我的课程"></Crumbs1> */}
       <PullToRefresh
         onRefresh={() => onRefresh()}
       >

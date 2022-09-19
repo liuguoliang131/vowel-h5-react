@@ -140,7 +140,7 @@ const Login = (props) => {
 
   return (
     <div className='login'>
-      <Crumbs1 text="登录"></Crumbs1>
+      {/* <Crumbs1 text="登录"></Crumbs1> */}
       <div className="pt30"></div>
       <div className="phone">
         <label htmlFor="phone">手机号</label>

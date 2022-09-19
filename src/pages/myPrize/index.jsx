@@ -110,7 +110,7 @@ function MyPrize () {
   }
   return (
     <div className="myPrize">
-      <Crumbs1 text="我的奖品"></Crumbs1>
+      {/* <Crumbs1 text="我的奖品"></Crumbs1> */}
       <PullToRefresh
         onRefresh={async () => onRefresh()}
       >

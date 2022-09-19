@@ -69,7 +69,7 @@ function MyEvent () {
   }, [])
   return (
     <div className="myEvent">
-      <Crumbs1 text='我的活动'></Crumbs1>
+      {/* <Crumbs1 text='我的活动'></Crumbs1> */}
       <PullToRefresh
         onRefresh={async () => onRefresh()}
       >
