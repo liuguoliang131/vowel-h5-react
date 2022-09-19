@@ -16,10 +16,11 @@ import { Toast } from 'antd-mobile'
 console.log('utils')
 
 let timer = null
+// 微信内自带浏览器顶级对象叫App  不要和它重名
 const utils = {
   isApp: () => {
     try {
-      if (App) {
+      if (HSApp) {
         return true
       } else {
         return false
@@ -31,7 +32,7 @@ const utils = {
   // 是否有App全局变量 判断是否在app内
   ownApp: (success, fail) => {
     try {
-      if (App) {
+      if (HSApp) {
         return success()
       }
     } catch (error) {
@@ -50,7 +51,7 @@ const utils = {
   },
   goLogin: () => {
     utils.ownApp(() => {
-      App.postMessage(JSON.stringify({
+      HSApp.postMessage(JSON.stringify({
         type: 'goLogin',
         params: {}
       }))
@@ -66,7 +67,7 @@ const utils = {
 
   isLogin: () => {
     if (utils.isApp()) {
-      App.postMessage(JSON.stringify({
+      HSApp.postMessage(JSON.stringify({
         type: 'isLogin',
         params: {},
         callback: 'isLoginResult'
@@ -102,14 +103,14 @@ const utils = {
   // 分享到微信和朋友圈
   // shareTitle：分享标题 shareDesc：分享描述  shareUrl：分享的链接 shareCover：封面图链接
   shareWebToWX: (shareTitle, shareDesc, shareUrl, shareCover) => {
-    App.postMessage(JSON.stringify({
+    HSApp.postMessage(JSON.stringify({
       type: 'shareWebToWX',
       params: { shareTitle, shareDesc, shareUrl, shareCover }
     }))
   },
 
   openMiniProgram: (username, path) => {
-    App.postMessage(JSON.stringify({
+    HSApp.postMessage(JSON.stringify({
       type: 'openMiniProgram',
       params: { username, path }
     }))
@@ -120,7 +121,7 @@ const utils = {
     // 跳转到支付
     // {"page":"musicDetailPage","isNeedLogin":false,"params":{"music_info_id":0}}
     utils.ownApp(() => {
-      App.postMessage(JSON.stringify({
+      HSApp.postMessage(JSON.stringify({
         type: 'openAppPage',
         params: pageJSON
       }))
@@ -252,7 +253,7 @@ const utils = {
   },
   // 保存图片到本地
   saveBase64Image: (base64Img) => {
-    App.postMessage(JSON.stringify({
+    HSApp.postMessage(JSON.stringify({
       type: 'saveBase64Image',
       params: { img: base64Img }
     }))
