@@ -47,6 +47,7 @@ const Home = (props) => {
       ...data,
       is_first: 0
     })
+    window.history.go(0)
   }
   const [rollingDialogOption, setRollingDialogOption] = useState({
     visible: false,
