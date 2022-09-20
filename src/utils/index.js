@@ -40,7 +40,7 @@ const utils = {
         fail()
       } else {
         Toast.show({
-          content: '请下载元音符APP进行操作！'
+          content: '即将跳转到元音符App下载页面'
         })
         if (timer) clearTimeout(timer)
         timer = setTimeout(() => {
