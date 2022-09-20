@@ -235,11 +235,18 @@ const utils = {
       ss
     }
   },
-  // 保存图片到本地
+  // 保存内存图片到本地 base64
   saveBase64Image: (base64Img) => {
     HSApp.postMessage(JSON.stringify({
       type: 'saveBase64Image',
       params: { img: base64Img }
+    }))
+  },
+  // 保存url图片到本地
+  saveUrlImage: (img) => {
+    HSApp.postMessage(JSON.stringify({
+      type: 'saveUrlImage',
+      params: { img }
     }))
   }
 }

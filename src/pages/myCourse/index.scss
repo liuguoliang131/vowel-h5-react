@@ -97,7 +97,7 @@
 }
 // 样式穿透
 .MyCourse .adm-pull-to-refresh {
-  height: calc( 100% - 44px );
+  height: 100%;
   overflow-y: scroll;
 }
 .MyCourse .empty-content {

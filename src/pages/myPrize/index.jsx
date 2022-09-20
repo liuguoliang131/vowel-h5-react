@@ -108,6 +108,9 @@ function MyPrize () {
     const timeStr = `${y}.${mon}.${dd} ${hh}:${MM}:${ss}`
     return timeStr
   }
+  const handleSaveImg = () => {
+    utils.saveUrlImage(qrcode)
+  }
   return (
     <div className="myPrize">
       {/* <Crumbs1 text="我的奖品"></Crumbs1> */}
@@ -196,7 +199,7 @@ function MyPrize () {
                   </div>
                   <div className="type5-row4">
                     {
-                      '有效期为：' + formateTime(item.push_award_time) + '-' + formateTime(item.expiration_time)
+                      '有效期为：' + formateTime(item.push_award_time * 1000) + '-' + formateTime(item.expiration_time * 1000)
                     }
                   </div>
                 </div>
@@ -229,7 +232,7 @@ function MyPrize () {
                   微信扫码添加客服
                 </div>
                 <img src={qrcode} alt="" className='qrcode' />
-                <a className='save-button' download={true} href={qrcode}>保存客服微信二维码</a>
+                <div className='save-button' onClick={() => handleSaveImg()}>保存客服微信二维码</div>
               </div>
               )
             : null

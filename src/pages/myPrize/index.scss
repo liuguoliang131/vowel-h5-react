@@ -194,12 +194,12 @@
         margin-bottom: 13px;
       }
       .save-button {
+        margin: auto;
         display: flex;
         align-items: center;
         justify-content: center;
         width: 141px;
         height: 36px;
-        text-decoration:none;
         background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%),
         linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
         border: 0.5px solid;
@@ -218,7 +218,7 @@
 }
 // 样式穿透
 .myPrize .adm-pull-to-refresh {
-  height: calc( 100% - 44px );
+  height: 100%;
   overflow-y: scroll;
 }
 .myPrize .empty-content {
