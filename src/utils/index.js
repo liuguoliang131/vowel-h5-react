@@ -44,7 +44,7 @@ const utils = {
         })
         if (timer) clearTimeout(timer)
         timer = setTimeout(() => {
-          window.location.href = 'https://share.yuanyinfu.com/h5/app'
+          window.location.href = 'https://h5.yuanyinfu.com/h5/app'
         }, 2000)
       }
     }
