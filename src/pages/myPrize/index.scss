@@ -61,16 +61,18 @@
     }
     .type2 {
       .item-row3 {
-        padding: 20px 0 13px 0;
+        padding: 1px 0 0 0;
         overflow: hidden; // 溢出隐藏
         white-space: nowrap; // 强制一行
         text-overflow: ellipsis; // 文字溢出显示省略
         img {
           width: 100px;
-          height: 60px;
+          height: 100px;
         }
       }
       .item-row4 {
+        position: relative;
+        top: -6px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -101,25 +103,11 @@
         }
       }
     }
-    .type3 {
-      
-    }
     .type4 {
-      .type4-row3 {
-        text-align: center;
-        padding-top: 22px;
-        overflow: hidden; // 溢出隐藏
-        white-space: nowrap; // 强制一行
-        text-overflow: ellipsis; // 文字溢出显示省略
-        img {
-          width: 30px;
-          height: 30px;
-        }
-      }
       .type4-row4 {
         display: flex;
         justify-content: center;
-        padding-top: 8px;
+        padding-top: 44px;
         overflow: hidden; // 溢出隐藏
         white-space: nowrap; // 强制一行
         text-overflow: ellipsis; // 文字溢出显示省略

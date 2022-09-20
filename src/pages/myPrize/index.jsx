@@ -168,9 +168,9 @@ function MyPrize () {
                   <div className="item-row2">
                   {item.note}
                   </div>
-                  <div className='type4-row3'>
+                  {/* <div className='type4-row3'>
                     <img src={item.img_url} alt="" />
-                  </div>
+                  </div> */}
                   <div className="type4-row4">
                     <span onClick={() => handleGo(item)}>立即查看</span>
                   </div>
