@@ -208,21 +208,6 @@ const Home = (props) => {
           content: emptyMsg
         })
       }
-    }, () => {
-      if (data.id) {
-        navigate('/layout/poster', {
-          state: {
-            id: data.id,
-            title: data.title,
-            dec: data.sub_title
-          },
-          replace: false
-        })
-      } else {
-        Toast.show({
-          content: emptyMsg
-        })
-      }
     })
   }
   // 设置定时器 改变活动状态
