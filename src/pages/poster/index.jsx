@@ -171,10 +171,10 @@ function Poster () {
           // 创建完后绘制
           ctx.drawImage(avaImg, ava.x, ava.y, ava.width, ava.height)
         }
-        avaImg.src = data.userAvatar
+        avaImg.src = data.user_avatar
         console.log('avaImg src', avaImg.src)
       }
-      image.src = data.posterUrl
+      image.src = data.poster_url
       console.log('image.src', image)
     }
   }

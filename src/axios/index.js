@@ -3,7 +3,6 @@ import axios from 'axios'
 import utils from '../utils/index'
 import { Toast } from 'antd-mobile'
 import md5 from 'js-md5'
-const NODE_ENV = process.env.NODE_ENV
 // console.log('NODE_ENV', NODE_ENV, process.env.REACT_APP_BASE_API)
 let toast = null
 const onlykey = 'U6LMVF9aNxg7Jgw5TMqL0CHiw4aT8ipuqlNCkdA9H50=' // key
