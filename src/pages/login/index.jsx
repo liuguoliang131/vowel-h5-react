@@ -33,21 +33,29 @@ const Login = (props) => {
       })
     }
   }
-  // 获取验证码
-  const handleGetCaptcha = async () => {
-    if (captchaBtnText) return false
+  // 显示model
+  const handleShowModel = () => {
     if (!/^[1]{1}[0-9]{10}$/.test(data.phone)) {
       return Toast.show({
         icon: 'fail',
         content: '手机号不符合规则'
       })
     }
+    setVisible(true)
+  }
+  // 获取验证码
+  const handleGetCaptcha = async () => {
+    if (captchaBtnText) return false
     const res = await captcha({
       phone: data.phone,
       use_type: 1
     })
     console.log('res', res)
-    // if (res.code !== 200) return
+    if (res.code !== 0) {
+      return
+    } else {
+      setVisible(false)
+    }
     // 开启定时器
     await setCaptchaBtnText(59)
   }
@@ -76,22 +84,6 @@ const Login = (props) => {
   }
   const onRefresh = () => {
 
-  }
-  // 登录
-  const loginNow = () => {
-    if (!/^[1]{1}[0-9]{10}$/.test(data.phone)) {
-      return Toast.show({
-        icon: 'fail',
-        content: '手机号不符合规则'
-      })
-    }
-    if (!/^\S{1,}$/.test(data.captcha)) {
-      return Toast.show({
-        icon: 'fail',
-        content: '验证码不符合规则'
-      })
-    }
-    setVisible(true)
   }
   const handLogin = async () => {
     const hashParams = utils.getHashQuery()
@@ -137,6 +129,22 @@ const Login = (props) => {
     console.log('back', back)
     navigate(back, { state: { ...hashParams.query }, replace: false })
   }
+  // 登录
+  const loginNow = () => {
+    if (!/^[1]{1}[0-9]{10}$/.test(data.phone)) {
+      return Toast.show({
+        icon: 'fail',
+        content: '手机号不符合规则'
+      })
+    }
+    if (!/^\S{1,}$/.test(data.captcha)) {
+      return Toast.show({
+        icon: 'fail',
+        content: '验证码不符合规则'
+      })
+    }
+    handLogin()
+  }
 
   return (
     <div className='login'>
@@ -149,7 +157,7 @@ const Login = (props) => {
       <div className="code">
         <label htmlFor="code">验证码</label>
         <input type="number" name="captcha" id="" onChange={(e) => handleSetState(e)} value={data.captcha} />
-        <span className='get' onClick={() => handleGetCaptcha()}>{captchaBtnText || '获取验证码' }</span>
+        <span className='get' onClick={() => handleShowModel()}>{captchaBtnText || '获取验证码' }</span>
       </div>
       <div className="submit">
         <div className="submit-btn" onClick={() => loginNow()}>立即登录</div>
@@ -161,7 +169,7 @@ const Login = (props) => {
             height={getWidth()}
             imgUrl={require('../../assets/20220918125925.jpg')}
             visible={visible}
-            onSuccess={() => handLogin()}
+            onSuccess={() => handleGetCaptcha()}
             onFail={() => onFail()}
             onRefresh={() => onRefresh()}
           />
