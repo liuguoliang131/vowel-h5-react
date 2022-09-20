@@ -22,7 +22,10 @@ function MyEvent () {
     console.log('handleViewDetail', item)
     if (item.status === 1) {
       // utils.hashPush('/layout/home', item)
-      navigate('/layout/home', { state: { ...item }, replace: false })
+      // navigate('/layout/home', { state: { ...item }, replace: false })
+      utils.hashPush('/layout/home', {
+        ...item
+      })
     } else {
       Toast.show({
         content: '活动结束了'

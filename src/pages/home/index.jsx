@@ -39,6 +39,19 @@ const Home = (props) => {
       visible: false
     })
   }
+  // 刷新页面方法
+  const handleRefreshPage = () => {
+    const { path, params } = utils.getHashQuery()
+    params.time = (new Date()).getTime()
+    let newUrl = window.location.origin + '/#/layout/home'
+    const arr = []
+    Object.keys(params).forEach((key, idx) => {
+      arr[idx] = key + '=' + params[key]
+    })
+    newUrl = newUrl + '?' + arr.join('&')
+    // eslint-disable-next-line no-self-assign
+    window.location.href = newUrl
+  }
   // 关闭 第一次进入的弹窗
 
   const closeFirstPop = () => {
@@ -47,11 +60,7 @@ const Home = (props) => {
         ...data,
         is_first: 0
       })
-      // setTimeout(() => {
-      //   window.history.go(0)
-      // }, 50)
-      // eslint-disable-next-line no-self-assign
-      window.location.href = window.location.href
+      handleRefreshPage()
     } catch (error) {
       alert(error.message)
     }
@@ -243,7 +252,7 @@ const Home = (props) => {
         }
       })
       if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
-        window.history.go(0)
+        handleRefreshPage()
       }
     }, 1000)
   }
