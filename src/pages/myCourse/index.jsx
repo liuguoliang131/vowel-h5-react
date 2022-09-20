@@ -3,7 +3,7 @@ import Crumbs1 from '../../components/crumbs1'
 import { PullToRefresh, InfiniteScroll, DotLoading } from 'antd-mobile'
 import { useLocation } from 'react-router-dom'
 // import { sleep } from 'antd-mobile/es/utils/sleep'
-import { mockRequest } from './mock-request.jsx'
+// import { mockRequest } from './mock-request.jsx'
 import './index.scss'
 import { courseLessonListApi } from '../../axios/api'
 import utils from '../../utils'
@@ -39,6 +39,7 @@ function MyCourse () {
         course_id: location.state.course_id || hashParams.query.course_id,
         page: currentPage
       })
+      // const res = await mockRequest()
       setCurrentPage(val => val + 1)
       if (res.code !== 0) {
         setHasMore(false)

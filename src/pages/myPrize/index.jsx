@@ -171,7 +171,7 @@ function MyPrize () {
                 <div className="item type4" key={index}>
                   <div className="item-row1">
                   {item.title}
-                  <span>×{item.integral_num}份</span>
+                  <span>×1份</span>
                   </div>
                   <div className="item-row2">
                   {item.note}

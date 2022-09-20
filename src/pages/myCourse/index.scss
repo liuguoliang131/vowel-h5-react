@@ -29,7 +29,7 @@
       padding: 0 9px;
       margin-bottom: 20px;
       background: url('../../../static/mycourse1.png') no-repeat center;
-      background-size: 355px 255px;
+      background-size: 360px 255px;
       background-position: 0 -8px;
       text-align: left;
       .item-title {
@@ -45,6 +45,8 @@
         video {
           width: 336px;
           height: 189px;
+          border-radius: 8px;
+          background: #262626;
         }
         // 音量按钮
         video::-webkit-media-controls-volume-control-container {

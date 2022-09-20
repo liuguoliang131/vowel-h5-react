@@ -150,7 +150,7 @@ export async function mockRequest () {
         user_name: '',
         user_avatar: ''
       },
-      is_first: 0
+      is_first: 1
     }
   }
 }
