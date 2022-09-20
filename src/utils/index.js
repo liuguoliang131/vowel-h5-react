@@ -4,14 +4,6 @@ import options, {
   TOKEN
 } from './uniField'
 import { Toast } from 'antd-mobile'
-// let webUrl = ''
-// if(process.env.NODE_ENV==='development') {
-//   webUrl = 'localhost'
-// }else if(process.env.NODE_ENV==='test') {
-
-// }else {
-
-// }
 console.log('utils')
 
 let timer = null
