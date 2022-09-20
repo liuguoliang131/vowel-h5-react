@@ -28,7 +28,7 @@ instance.interceptors.request.use(function (config) {
     icon: 'loading'
 
   })
-  const ts = parseInt(Date.now() / 1000)
+  const ts = Date.now()
   config.headers.ts = ts
   config.headers['x-token'] = utils.getToken()
   if (config.method === 'get') {
@@ -41,8 +41,9 @@ instance.interceptors.request.use(function (config) {
     })
     const afterUrl = attrList.join('&') // 参数串
     // console.log('sort', afterUrl)
-    // console.log('sign----', afterUrl + onlykey + ts)
-    const sign = md5(afterUrl + onlykey + ts)
+    // console.log(afterUrl + '&ak=' + onlykey + '&ts=' + ts)
+    const sign = md5(afterUrl + '&ak=' + onlykey + '&ts=' + ts)
+    // console.log('sign:', sign)
     // console.log('sign:', sign)
     config.headers.sign = sign
   }
