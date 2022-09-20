@@ -42,8 +42,7 @@ instance.interceptors.request.use(function (config) {
     const afterUrl = attrList.join('&') // 参数串
     // console.log('sort', afterUrl)
     // console.log(afterUrl + '&ak=' + onlykey + '&ts=' + ts)
-    const sign = md5(afterUrl + '&ak=' + onlykey + '&ts=' + ts)
-    // console.log('sign:', sign)
+    const sign = md5(afterUrl + '&ak=' + 'hanhou-app' + '&ts=' + ts + onlykey)
     // console.log('sign:', sign)
     config.headers.sign = sign
   }
