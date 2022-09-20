@@ -79,8 +79,9 @@ function Poster () {
       // 获取父盒子宽度
       const full = fullRef.current
       const canvas = viewRef.current
-      canvas.width = full.offsetWidth
-      canvas.height = full.offsetHeight
+      const scaleNumber = 3 // 展示的是几倍图  越大越清晰
+      canvas.width = full.offsetWidth * scaleNumber
+      canvas.height = full.offsetHeight * scaleNumber
       // 参照比例
       const scaleWidth = 375
       const scaleHeight = 517
@@ -90,22 +91,22 @@ function Poster () {
         width: 0,
         height: 0
       }// 头像
-      ava.x = full.offsetWidth * 14 / scaleWidth
-      ava.y = full.offsetHeight * 17 / scaleHeight
-      ava.width = full.offsetWidth * 30 / scaleWidth
-      ava.height = full.offsetWidth * 30 / scaleWidth
+      ava.x = scaleNumber * full.offsetWidth * 14 / scaleWidth
+      ava.y = scaleNumber * full.offsetHeight * 17 / scaleHeight
+      ava.width = scaleNumber * full.offsetWidth * 30 / scaleWidth
+      ava.height = scaleNumber * full.offsetWidth * 30 / scaleWidth
       // 文本
       const title = {
-        x: full.offsetWidth * 50 / scaleWidth,
-        y: full.offsetHeight * 37 / scaleHeight,
-        fontSize: full.offsetHeight * 15 / scaleHeight
+        x: scaleNumber * full.offsetWidth * 50 / scaleWidth,
+        y: scaleNumber * full.offsetHeight * 37 / scaleHeight,
+        fontSize: scaleNumber * full.offsetHeight * 15 / scaleHeight
       }
       // 二维码
       const qr = {
-        x: full.offsetWidth * 147 / scaleWidth,
-        y: full.offsetHeight * 405 / scaleHeight,
-        width: full.offsetWidth * 82 / scaleWidth,
-        height: full.offsetWidth * 82 / scaleWidth
+        x: scaleNumber * full.offsetWidth * 147 / scaleWidth,
+        y: scaleNumber * full.offsetHeight * 405 / scaleHeight,
+        width: scaleNumber * full.offsetWidth * 82 / scaleWidth,
+        height: scaleNumber * full.offsetWidth * 82 / scaleWidth
       }
       const ctx = canvas.getContext('2d')
       // 创建图片 背景图
@@ -120,8 +121,8 @@ function Poster () {
       codeImg.crossOrigin = 'anonymous'
       // 生成二维码
       const qrCanvas = document.createElement('div')
-      qrCanvas.height = qr.height
-      qrCanvas.width = qr.width
+      qrCanvas.height = scaleNumber * qr.height
+      qrCanvas.width = scaleNumber * qr.width
       const shareUrl = window.location.protocol + '//' + window.location.host + `/#/layout/home?id=${location.state.id}&share_sign=${data.share_sign}`
       const qrcodeObj = getQrcode(qr.width, qr.height, shareUrl, 'canvas', qrCanvas)
       const codeCanvas = qrcodeObj._el.querySelector('canvas')
@@ -145,7 +146,7 @@ function Poster () {
       image.onload = function () {
         console.log('image')
         // 4各参数 图片的起始坐标和宽高
-        ctx.drawImage(image, 0, 0, full.offsetWidth, full.offsetHeight)
+        ctx.drawImage(image, 0, 0, scaleNumber * full.offsetWidth, scaleNumber * full.offsetHeight)
 
         // 绘制文本
         ctx.font = `${title.fontSize}px PingFang SC` // 设置文案大小和字体
@@ -155,23 +156,8 @@ function Poster () {
         console.log('title.x, title.y', title.x, title.y)
         ctx.fillText(data.user_name, title.x, title.y)
 
-        // 赋值二维码图片 出发加载事件
-        // if (qrcodeObj._el.children[1].src.includes('data:')) {
-        //   Toast.show({
-        //     content: '1'
-        //   })
-        //   codeImg.src = qrcodeObj._el.children[1].src
-        // } else {
-        //   Toast.show({
-        //     content: '2'
-        //   })
-        //   // const before = 'data:image/jpeg;base64,'
-        //   // codeImg.src = before + qrcodeObj._el.children[1].src
-        //   codeImg.src = blob
-        //   alert(codeImg.src)
-        // }
+        // 赋值
         codeImg.src = base64Text
-        // alert(codeImg.src)
 
         // 层级之上
         const avaImg = new Image()
@@ -267,6 +253,9 @@ function Poster () {
   }
   useEffect(() => {
     getData()
+    return () => {
+
+    }
   }, [])
   useEffect(() => {
     initCanvas()

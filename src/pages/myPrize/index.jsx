@@ -111,6 +111,11 @@ function MyPrize () {
   const handleSaveImg = () => {
     utils.saveUrlImage(qrcode)
   }
+  useEffect(() => {
+    return () => {
+
+    }
+  }, [])
   return (
     <div className="myPrize">
       {/* <Crumbs1 text="我的奖品"></Crumbs1> */}
