@@ -15,7 +15,7 @@ import Dialog from '../../components/dialog/index.jsx'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-// import { mockRequest } from './mock-request'
+import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
   // const saveCallBack = useRef()
@@ -41,12 +41,15 @@ const Home = (props) => {
   }
   // 刷新页面方法
   const handleRefreshPage = () => {
-    const { path, params } = utils.getHashQuery()
-    params.time = (new Date()).getTime()
+    const { path, query } = utils.getHashQuery()
+    // debugger
+    const time = String(new Date().getTime())
+    console.log('time', time)
+    query.time = time
     let newUrl = window.location.origin + '/#/layout/home'
     const arr = []
-    Object.keys(params).forEach((key, idx) => {
-      arr[idx] = key + '=' + params[key]
+    Object.keys(query).forEach((key, idx) => {
+      arr[idx] = key + '=' + query[key]
     })
     newUrl = newUrl + '?' + arr.join('&')
     // eslint-disable-next-line no-self-assign
@@ -60,7 +63,8 @@ const Home = (props) => {
         ...data,
         is_first: 0
       })
-      handleRefreshPage()
+      // handleRefreshPage()
+      getDetail()
     } catch (error) {
       alert(error.message)
     }
@@ -73,6 +77,9 @@ const Home = (props) => {
   }) // 抽奖弹窗里的配置
   // 获取详情
   const getDetail = async () => {
+    if (timer) {
+      clearInterval(timer)
+    }
     // eslint-disable-next-line no-useless-catch
     try {
       // console.log('location', window.location)
@@ -101,6 +108,7 @@ const Home = (props) => {
         return false
       }
       // const res = await mockRequest()
+      console.log('res', res)
       res.data.draw_end_time *= 1000
       res.data.draw_start_time *= 1000
       res.data.end_time *= 1000
@@ -252,7 +260,8 @@ const Home = (props) => {
         }
       })
       if ((data.status !== resData.status && resData.status !== undefined) || (data.drawStatus !== resData.drawStatus && resData.drawStatus !== undefined)) {
-        handleRefreshPage()
+        // handleRefreshPage()
+        getDetail()
       }
     }, 1000)
   }
