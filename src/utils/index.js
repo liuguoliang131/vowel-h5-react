@@ -1,10 +1,9 @@
 /* eslint-disable no-undef */
-import {
+import options, {
   USER_INFO,
   TOKEN
 } from './uniField'
 import { Toast } from 'antd-mobile'
-
 // let webUrl = ''
 // if(process.env.NODE_ENV==='development') {
 //   webUrl = 'localhost'
@@ -44,7 +43,7 @@ const utils = {
         })
         if (timer) clearTimeout(timer)
         timer = setTimeout(() => {
-          window.location.href = 'https://h5.yuanyinfu.com/h5/app'
+          window.location.href = options.downloadUrl
         }, 2000)
       }
     }
