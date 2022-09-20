@@ -27,6 +27,8 @@ function TaskList (props) {
   return (
     <div className="TaskList">
       <div className="TaskList-content">
+        <div className='taskList-title'>做任务赚机会</div>
+        <div className="line"></div>
         {
           props.task_list && props.task_list.map((item, index) => {
             if (item.type === 2) {

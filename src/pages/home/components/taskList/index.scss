@@ -7,11 +7,33 @@
     height: 166px;
     padding-top: 50px;
     text-align: center;
-    background: url('../../../../../static/Frame 1000006058.png') no-repeat center center;
-    background-size: cover;
+    background: url('../../../../../static/Frame 1000006058.png') no-repeat;
+    background-size: 363px 174px;
+    background-position: -2px -7px;
+    position: relative;
+    .taskList-title {
+      position: absolute;
+      top: 12px;
+      left: 10px;
+      font-family: 'PingFang SC';
+      font-style: normal;
+      font-weight: 600;
+      font-size: 18px;
+      color: #000000;
+
+    } 
+    .line {
+      position: absolute;
+      left: 8.5px;
+      top: 100px;
+      width: 336px;
+      height: 0;
+      border-bottom: 0.5px solid #F6D3F9;
+    }
     .row {
       width: 336px;
-      height: 60px;
+      height: 50px;
+      margin-bottom: 10px;
       display: flex;
       // align-items: center;
       font-size: 12px;
@@ -81,7 +103,7 @@
         .col3-2 {
           position: absolute;
           top: 36px;
-          right: -10px;
+          right: -5px;
           transform: scale(0.8);
         }
       }
