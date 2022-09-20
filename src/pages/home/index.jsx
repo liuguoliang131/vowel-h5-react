@@ -64,7 +64,9 @@ const Home = (props) => {
         is_first: 0
       })
       // handleRefreshPage()
-      getDetail()
+      setTimeout(() => {
+        getDetail()
+      }, 1000)
     } catch (error) {
       alert(error.message)
     }
