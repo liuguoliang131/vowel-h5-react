@@ -80,7 +80,7 @@ class LuckyRolling extends React.Component {
         return (
           <div className={'start-btn'} onClick={() => this.playStart()}>
                 <div className="start-btn-row1">点击抽奖</div>
-                <div className="start-btn-row2">剩余抽奖机会{this.props.remain_award_num}次</div>
+                <div className="start-btn-row2">剩余抽奖机会<span>{this.props.remain_award_num}</span>次</div>
               </div>
         )
       }
