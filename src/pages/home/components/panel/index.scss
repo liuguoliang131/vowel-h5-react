@@ -25,6 +25,7 @@
         height: 18px;
         padding-right: 10px;
         padding-left: 24px;
+        text-align: left;
         overflow: hidden; // 溢出隐藏
         white-space: nowrap; // 强制一行
         text-overflow: ellipsis; // 文字溢出显示省略号
@@ -34,6 +35,9 @@
   }
 }
 .text-1 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'PingFang SC';
   font-style: normal;
   font-weight: 500;
@@ -41,4 +45,18 @@
   padding-top: 14px!important;
   text-align: center;
   color: #FFFFFF;
+  .text-1-1 {
+    width: 164px;
+    text-align: center;
+  }
+  .text-line-1 {
+    width: 28px;
+    height: 0;
+    border-bottom: 1px solid #FFFFFF;
+  }
+  .text-line-2 {
+    width: 28px;
+    height: 0;
+    border-bottom: 1px solid #FFFFFF;
+  }
 }
