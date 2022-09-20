@@ -40,11 +40,11 @@ const utils = {
         fail()
       } else {
         Toast.show({
-          content: '即将跳转到元音符App下载页面'
+          content: '请下载元音符APP进行操作！'
         })
         if (timer) clearTimeout(timer)
         timer = setTimeout(() => {
-          window.location.href = 'https://h5.yuanyinfu.com/h5/app'
+          window.location.href = 'https://share.yuanyinfu.com/h5/app'
         }, 2000)
       }
     }
