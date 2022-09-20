@@ -1,9 +1,12 @@
+/* eslint-disable no-empty */
 import axios from 'axios'
 import utils from '../utils/index'
 import { Toast } from 'antd-mobile'
+import md5 from 'js-md5'
 const NODE_ENV = process.env.NODE_ENV
 // console.log('NODE_ENV', NODE_ENV, process.env.REACT_APP_BASE_API)
 let toast = null
+const onlykey = 'U6LMVF9aNxg7Jgw5TMqL0CHiw4aT8ipuqlNCkdA9H50=' // key
 const instance = axios.create({
   baseURL: '/api',
   timeout: 20000,
@@ -16,7 +19,7 @@ const instance = axios.create({
 })
 // 添加请求拦截器
 instance.interceptors.request.use(function (config) {
-  console.log('config', config)
+  // console.log('config', config)
   // 在发送请求之前做些什么
   toast = Toast.show({
     content: '请求中',
@@ -25,13 +28,24 @@ instance.interceptors.request.use(function (config) {
     icon: 'loading'
 
   })
-  config.headers.ts = Date.now()
-  // utils.ownApp(() => {
-  //   config.headers['x-token'] = utils.getAppToken()
-  // }, () => {
-  //   config.headers['x-token'] = utils.getToken()
-  // })
+  const ts = parseInt(Date.now() / 1000)
+  config.headers.ts = ts
   config.headers['x-token'] = utils.getToken()
+  if (config.method === 'get') {
+
+  } else if (config.method === 'post') {
+    const { data } = config
+    const attrList = []
+    Object.keys(data).sort().forEach((key, idx) => {
+      attrList[idx] = key + '=' + data[key]
+    })
+    const afterUrl = attrList.join('&') // 参数串
+    // console.log('sort', afterUrl)
+    // console.log('sign----', afterUrl + onlykey + ts)
+    const sign = md5(afterUrl + onlykey + ts)
+    // console.log('sign:', sign)
+    config.headers.sign = sign
+  }
   return config
 }, function (error) {
   // 对请求错误做些什么
