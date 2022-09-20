@@ -19,7 +19,7 @@ import { promotionActivityDetailApi } from '../../axios/api'
 let timer = null
 const Home = (props) => {
   // const saveCallBack = useRef()
-  const location = useLocation()
+  const locationHook = useLocation()
   const navigate = useNavigate()
   const [resData, setResData] = useState({})
   const [data, setData] = useState({
@@ -50,7 +50,8 @@ const Home = (props) => {
       // setTimeout(() => {
       //   window.history.go(0)
       // }, 50)
-      window.location.href = location.href
+      // eslint-disable-next-line no-self-assign
+      window.location.href = window.location.href
     } catch (error) {
       alert(error.message)
     }
@@ -77,11 +78,11 @@ const Home = (props) => {
           params.share_sign = urlParams.share_sign
         }
       } else {
-        if (location.state.id) {
-          params.id = Number(location.state.id)
+        if (locationHook.state.id) {
+          params.id = Number(locationHook.state.id)
         }
-        if (location.state.share_sign) {
-          params.share_sign = location.state.share_sign
+        if (locationHook.state.share_sign) {
+          params.share_sign = locationHook.state.share_sign
         }
       }
 
