@@ -50,8 +50,7 @@ const Home = (props) => {
       // setTimeout(() => {
       //   window.history.go(0)
       // }, 50)
-      window.location.reload()
-      return false
+      window.location.href = location.href
     } catch (error) {
       alert(error.message)
     }
