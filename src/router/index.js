@@ -136,8 +136,8 @@ const GetRoutes = () => {
   if (!white.includes(params.path)) {
     if (!utils.getToken()) {
       if (inApp) {
-        // utils.goLogin()
-        // window.history.go(-1)
+        utils.goLogin()
+        window.history.go(-1)
       } else {
         return (<Navigate to={`/login?${Object.keys(params.query)}&back=${params.path}`} replace />)
       }

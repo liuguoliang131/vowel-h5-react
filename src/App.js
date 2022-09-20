@@ -3,9 +3,8 @@ import { Provider } from 'react-redux'
 import store from './store/index'
 import Routes from './router/index'
 import utils from './utils/index'
+
 utils.ownApp(() => {
-  alert('document.cookie：', document.cookie)
-  console.log('document.cookie：', document.cookie)
   if (document.cookie) {
     console.log(document.cookie)
     const arr = document.cookie.split('&')
