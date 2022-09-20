@@ -93,8 +93,8 @@ function Poster () {
       }// 头像
       ava.x = scaleNumber * full.offsetWidth * 14 / scaleWidth
       ava.y = scaleNumber * full.offsetHeight * 17 / scaleHeight
-      ava.width = scaleNumber * full.offsetWidth * 30 / scaleWidth
-      ava.height = scaleNumber * full.offsetWidth * 30 / scaleWidth
+      ava.width = scaleNumber * full.offsetWidth * 32 / scaleWidth
+      ava.height = scaleNumber * full.offsetWidth * 32 / scaleWidth
       // 文本
       const title = {
         x: scaleNumber * full.offsetWidth * 50 / scaleWidth,

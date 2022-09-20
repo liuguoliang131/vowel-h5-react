@@ -42,11 +42,13 @@ const Home = (props) => {
   // 关闭 第一次进入的弹窗
 
   const closeFirstPop = () => {
-    // setData({
-    //   ...data,
-    //   is_first: 0
-    // })
-    window.history.go(0)
+    setData({
+      ...data,
+      is_first: 0
+    })
+    setTimeout(() => {
+      window.history.go(0)
+    }, 50)
   }
   const [rollingDialogOption, setRollingDialogOption] = useState({
     visible: false,

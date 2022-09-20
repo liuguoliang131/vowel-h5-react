@@ -202,8 +202,8 @@
         height: 36px;
         background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%),
         linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
-        border: 0.5px solid;
-        border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+        // border: 0.5px solid;
+        // border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
         box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
         border-radius: 4px;
         font-family: 'PingFang SC';
@@ -228,8 +228,8 @@
   .empty-center {
     position: absolute;
     left: 50%;
-    top: 50%;
-    transform: translate(-50%,-50%);
+    top: 40%;
+    transform: translate(-50%,0);
     display: flex;
     flex-direction: column;
     align-items: center;
