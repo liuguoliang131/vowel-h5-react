@@ -22,11 +22,17 @@ const Login = (props) => {
   // 受控组件输入
   const handleSetState = (e) => {
     if (e.target.name === 'phone') {
+      if (e.target.value.length > 11) {
+        e.target.value = e.target.value.slice(0, 11)
+      }
       setData({
         ...data,
         phone: e.target.value
       })
     } else {
+      if (e.target.value.length > 6) {
+        e.target.value = e.target.value.slice(0, 6)
+      }
       setData({
         ...data,
         captcha: e.target.value
