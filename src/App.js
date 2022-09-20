@@ -5,11 +5,11 @@ import Routes from './router/index'
 import utils from './utils/index'
 
 // test
-const req = new XMLHttpRequest()
-req.open('GET', document.location, false)
-req.send(null)
-console.log(req.getAllResponseHeaders())
-alert(req.getAllResponseHeaders())
+// const req = new XMLHttpRequest()
+// req.open('GET', document.location, false)
+// req.send(null)
+// console.log(req.getAllResponseHeaders())
+// alert(req.getAllResponseHeaders())
 
 utils.ownApp(() => {
   if (document.cookie) {
