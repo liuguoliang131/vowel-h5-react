@@ -64,7 +64,7 @@ const utils = {
       })
     })
   },
-
+  // 有异步问题，暂时弃用
   isLogin: () => {
     if (utils.isApp()) {
       HSApp.postMessage(JSON.stringify({
@@ -82,22 +82,6 @@ const utils = {
         })
       }
     }
-    // utils.ownApp(() => {
-    //   App.postMessage(JSON.stringify({
-    //     type: 'isLogin',
-    //     params: {},
-    //     callback: 'isLoginResult'
-    //   }))
-    // }, () => {
-    //   if (!utils.getToken()) {
-    //     const urlParams = utils.getUrlParams()
-    //     // 如果url有参数 那么跳转到login进行登录 share_sign
-    //     utils.hashPush('/login', {
-    //       ...urlParams,
-    //       back: '/layout/home'
-    //     })
-    //   }
-    // })
   },
 
   // 分享到微信和朋友圈
