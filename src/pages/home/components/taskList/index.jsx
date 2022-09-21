@@ -22,7 +22,7 @@ function TaskList (props) {
     })
   }
   useEffect(() => {
-    console.log('taskList status', props.status)
+    // console.log('taskList drawStatus', props.drawStatus)
   }, [props])
   return (
     <div className="TaskList">

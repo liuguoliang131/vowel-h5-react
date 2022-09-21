@@ -272,7 +272,7 @@ const Home = (props) => {
     // saveCallBack.current = handleSetStatus
   })
   useEffect(() => {
-    console.log('data', data)
+    // console.log('data', data)
   }, [data])
   useEffect(() => {
     getDetail()
@@ -310,7 +310,10 @@ const Home = (props) => {
               <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} to={() => handleGoPoster()}></TaskList>
               <div className="mb16"></div>
               <DetailedPicture picList={data.pic_list}></DetailedPicture>
-              <AudioPlayer {...data.music_info}></AudioPlayer>
+              {
+                utils.isWhatSysTem() !== 2 ? (<AudioPlayer {...data.music_info}></AudioPlayer>) : null
+              }
+
             </>
 
               )

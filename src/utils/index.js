@@ -239,7 +239,23 @@ const utils = {
       type: 'saveUrlImage',
       params: { img }
     }))
+  },
+  // 判断应用系统
+  isWhatSysTem: () => {
+    const userMessage = navigator.userAgent
+    const isAndroid = userMessage.indexOf('Andriod') > -1 || userMessage.indexOf('Adr') > -1 // 当前为Andriod环境
+    // console.log('isAndroid', isAndroid)
+    const isIOS = !!userMessage.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/) // 当前为IOS环境
+    // console.log('isIOS', isIOS)
+    if (isAndroid) {
+      return 1
+    } else if (isIOS) {
+      return 2
+    } else {
+      return 3
+    }
   }
+
 }
 window.isLoginResult = function (token) {
   if (!token) {
