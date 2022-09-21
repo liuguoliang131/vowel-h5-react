@@ -34,13 +34,17 @@ function AudioPlayer (props) {
 
   }, [props])
   useEffect(() => {
+    console.log('audioRef', audioRef)
     return () => {
-
     }
   }, [])
+  useEffect(() => {
+    audioRef.current.setAttribute('playsinline', true)
+    audioRef.current.setAttribute('webkit-playsinline', true)
+  }, [audioRef])
   return (
     <div className="audioPlayer">
-      <audio playsinline={true} webkit-playsinline={true} ref={audioRef} style={{ width: 0, position: 'absolute' }} src={props.music_url} autoPlay={true} onPlay={(e) => onPlay(e)} onPause={(e) => onPause(e)}></audio>
+      <audio ref={audioRef} style={{ width: 0, position: 'absolute' }} src={props.music_url} autoPlay={true} onPlay={(e) => onPlay(e)} onPause={(e) => onPause(e)}></audio>
       <img src={props.music_pic} alt="" className='cover' />
       <div className="title">{props.music_name}</div>
       <div className="playbtn" onClick={() => handlePlay()}>
