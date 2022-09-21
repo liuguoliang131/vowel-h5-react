@@ -11,6 +11,7 @@
     height: 100vh;
     background-color: rgba(0,0,0,0.1);
     transition: all 0.5s;
+    overflow: hidden;
     .content-box {
       position: relative;
       box-sizing: border-box;

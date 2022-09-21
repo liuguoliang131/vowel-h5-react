@@ -9,8 +9,8 @@ class Model extends Component {
         {
           this.props.visible
             ? (
-            <div className="mask">
-            <div className="content-box">
+            <div className="mask" onTouchMove={(e) => e.preventDefault()}>
+            <div className="content-box" onTouchMove={(e) => e.preventDefault()}>
               {this.props.hideClose ? null : (<img className='close' src={closeIMG} alt="" onClick={() => this.handleClose()} />)
 
               }
