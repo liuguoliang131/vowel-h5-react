@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import App from './App.js'
 // ios穿透问题
-document.getElementsByName('html')[0].addEventListener('touchmove', function (e) {
+document.getElementsByTagName('html')[0].addEventListener('touchmove', function (e) {
   e.preventDefault()
 })
 const rootDOM = document.getElementById('root')
