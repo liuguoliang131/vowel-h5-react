@@ -4,7 +4,7 @@ const closeIMG = require('../../assets/Group 220.png')
 class Model extends Component {
   render () {
     return (
-      <div className="model">
+      <div className="model" onTouchMove={(e) => e.preventDefault()}>
         {
           this.props.visible
             ? (
@@ -13,7 +13,7 @@ class Model extends Component {
               {this.props.hideClose ? null : (<img className='close' src={closeIMG} alt="" onClick={() => this.handleClose()} />)
 
               }
-              <div className="text">
+              <div className="text" onTouchMove={(e) => e.preventDefault()}>
                 {this.props.text}
               </div>
             </div>
