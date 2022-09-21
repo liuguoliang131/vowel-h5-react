@@ -24,7 +24,8 @@ function MyEvent () {
       // utils.hashPush('/layout/home', item)
       // navigate('/layout/home', { state: { ...item }, replace: false })
       utils.hashPush('/layout/home', {
-        ...item
+        id: item.id
+
       })
     } else {
       Toast.show({

@@ -6,7 +6,7 @@ module.exports = function (app) {
   app.use(
     createProxyMiddleware('/api', {
       host: '192.168.110.122:3000',
-      target: process.env.REACT_APP_BASE_API || 'http://124.70.107.130:8033',
+      target: process.env.REACT_APP_BASE_API,
       changeOrigin: true,
       pathRewrite: { '^/api': '/' }
     })
