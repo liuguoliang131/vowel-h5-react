@@ -133,9 +133,9 @@ export async function mockRequest () {
         music_time: '233',
         music_pic: 'https://media.shenglangnft.com/poster/1663478955124581.jpeg?imageView2/2/w/300/h/300',
         music_pic_shear: '',
-        music_url: 'https://media.shenglangnft.com/music/1663478947793522.wav',
+        music_url: 'https://media.shenglangnft.com/music/165692757279167.mp3',
         visit_num: '',
-        music_name: '0918，预售歌曲参加活动预约+开售002',
+        music_name: 'giao',
         play_num: 0,
         like_num: 0,
         is_like: 0,
@@ -150,7 +150,7 @@ export async function mockRequest () {
         user_name: '',
         user_avatar: ''
       },
-      is_first: 1
+      is_first: 0
     }
   }
 }
