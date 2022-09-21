@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import utils from '../../utils'
 import './index.scss'
 const closeIMG = require('../../assets/Group 220.png')
 class Model extends Component {
@@ -23,6 +24,18 @@ class Model extends Component {
         }
       </div>
     )
+  }
+
+  componentDidMount () {
+    if (utils.isWhatSysTem() === 2) {
+      document.body.style.overflow = 'hidden' // 弹层显示时
+    }
+  }
+
+  componentWillUnmount () {
+    if (utils.isWhatSysTem() === 2) {
+      document.body.style.overflow = null // 弹层不显示时
+    }
   }
 
   handleClose = () => {
