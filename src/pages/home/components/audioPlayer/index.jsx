@@ -23,11 +23,11 @@ function AudioPlayer (props) {
   const handlePlay = () => {
     console.log('handlePlay', audioRef)
     if (!audioRef.current) return false
-    if (!audioRef.current.readyState) {
-      return Toast.show({
-        content: '歌曲加载中，请稍等'
-      })
-    }
+    // if (!audioRef.current.readyState) {
+    //   return Toast.show({
+    //     content: '歌曲加载中，请稍等'
+    //   })
+    // }
     audioRef.current.paused ? audioRef.current.play() : audioRef.current.pause()
   }
   useEffect(() => {
