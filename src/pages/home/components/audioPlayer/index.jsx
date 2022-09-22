@@ -36,7 +36,9 @@ function AudioPlayer (props) {
   useEffect(() => {
     console.log('audioRef', audioRef)
     return () => {
-      audioRef.current.pause()
+      if (audioRef.current) {
+        audioRef.current.pause()
+      }
     }
   }, [])
   useEffect(() => {
