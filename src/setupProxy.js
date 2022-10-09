@@ -5,7 +5,6 @@ module.exports = function (app) {
   // eslint-disable-next-line no-unused-expressions
   app.use(
     createProxyMiddleware('/api', {
-      host: '192.168.110.122:3000',
       target: process.env.REACT_APP_BASE_API,
       changeOrigin: true,
       pathRewrite: { '^/api': '/' }

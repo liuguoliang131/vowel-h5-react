@@ -54,7 +54,7 @@ const Login = (props) => {
     if (captchaBtnText) return false
     const res = await captcha({
       phone: data.phone,
-      use_type: 1
+      use_type: 6
     })
     console.log('res', res)
     if (res.code !== 0) {
