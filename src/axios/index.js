@@ -13,6 +13,7 @@ const instance = axios.create({
     'x-token': '',
     ak: 'hanhou-app',
     sign: '',
+    'app-id': 'yyf_h5',
     app_id: 'yyf_h5'
   }
 })

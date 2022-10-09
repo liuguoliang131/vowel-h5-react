@@ -110,7 +110,7 @@ function MyCourse () {
                 <div className="item" key={index}>
                   <div className="item-title">{item.title}</div>
                   <div className="item-video">
-                    <video controls controlslist="nodownload"
+                    <video playsinline webkit-playsinline controls controlslist="nodownload noremoteplayback"
                       poster={item.img_url}
                       disablePictureInPicture
                       onPlay={(e) => handlePauseOthter(index, e)}>
