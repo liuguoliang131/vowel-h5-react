@@ -75,7 +75,7 @@ class CountDown extends React.Component {
         <div className='CountDown'>
           <div className="round-box">
             <div className="round-box-text1">
-              距离奖池开启剩
+              距离开售
             </div>
             <div className="round-box-text2">
               <div className="text2-hh">{this.state.data.hh}</div>

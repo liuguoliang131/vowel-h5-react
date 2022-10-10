@@ -15,9 +15,7 @@ class Dialog extends Component {
           <div className="mask">
             <div className="content-box">
               <img className='close' src={closeIMG} alt="" onClick={() => this.handleClose()} />
-              <div className="text">
-                {this.props.text}
-              </div>
+              <div className="text" dangerouslySetInnerHTML={{ __html: this.props.text }}></div>
                 {
                   this.props.btn1 && this.props.btn2
                     ? (

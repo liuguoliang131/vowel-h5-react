@@ -3,7 +3,8 @@ import './index.scss'
 import { promotionPrizeDrawApi } from '../../../../axios/api'
 import { Mask } from 'antd-mobile'
 import utils from '../../../../utils'
-const prizeBoxBG = require('../../../../assets/Cube_Rounded0011 10.png')
+// const prizeBoxBG = require('../../../../assets/Cube_Rounded0011 10.png')
+const prizeBoxBG = require('../../../../assets/manghe.png')
 const emptyIMG = require('../../../../assets/OhGodPleaseNo.png')
 // let timer = null
 class LuckyRolling extends React.Component {
@@ -126,92 +127,105 @@ class LuckyRolling extends React.Component {
                     case 0:
                       return (
                         <div className={item.active ? 'prize x1 y1 active-prize' : 'prize x1 y1'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 1:
                       return (
                         <div className={item.active ? 'prize x2 y1 active-prize' : 'prize x2 y1'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 2:
                       return (
                         <div className={item.active ? 'prize x3 y1 active-prize' : 'prize x3 y1'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 3:
                       return (
                         <div className={item.active ? 'prize x4 y1 active-prize' : 'prize x4 y1'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 4:
                       return (
                         <div className={item.active ? 'prize x4 y2 active-prize' : 'prize x4 y2'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 5:
                       return (
                         <div className={item.active ? 'prize x4 y3 active-prize' : 'prize x4 y3'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 6:
                       return (
                         <div className={item.active ? 'prize x4 y4 active-prize' : 'prize x4 y4'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 7:
                       return (
                         <div className={item.active ? 'prize x3 y4 active-prize' : 'prize x3 y4'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 8:
                       return (
                         <div className={item.active ? 'prize x2 y4 active-prize' : 'prize x2 y4'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 9:
                       return (
                         <div className={item.active ? 'prize x1 y4 active-prize' : 'prize x1 y4'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 10:
                       return (
                         <div className={item.active ? 'prize x1 y3 active-prize' : 'prize x1 y3'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     case 11:
                       return (
                         <div className={item.active ? 'prize x1 y2 active-prize' : 'prize x1 y2'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                     default:
                       return (
                         <div className={item.active ? 'prize x1 y2 active-prize' : 'prize x1 y2'} key={index}>
-                          <img className='bgPicture' src={prizeBoxBG} alt="" />
-                          <img className='prizePicture' src={item.pic_url} alt="" />
+                          {/* <img className='bgPicture' src={prizeBoxBG} alt="" />
+                          <img className='prizePicture' src={item.pic_url} alt="" /> */}
+                          <img src={prizeBoxBG} className='bgPicture' />
                         </div>
                       )
                   }
@@ -236,7 +250,10 @@ class LuckyRolling extends React.Component {
         } else {
           this.state.prizeList.forEach((item, index) => {
             if (item.id === res.data.id) {
-              resolve(index)
+              resolve({
+                index,
+                data: res.data
+              })
             }
           })
         }
@@ -245,7 +262,7 @@ class LuckyRolling extends React.Component {
   }
 
   // 轮动动画 finishIdx:结果的index
-  animationJ = (finishIdx) => {
+  animationJ = (finishIdx, data) => {
     const that = this
     // 轮动2圈到3圈
     const { prizeList } = this.state
@@ -266,7 +283,8 @@ class LuckyRolling extends React.Component {
           deep(nextIndex, list, count - 1)
         } else {
           // alert(`您抽中了${list[index].title}`)
-          that.props.success(list[index])
+          // that.props.success(list[index])
+          that.props.success(data)
           that.setState({ start: false })
         }
       }, 100)
@@ -279,18 +297,18 @@ class LuckyRolling extends React.Component {
   playStart = async () => {
     if (!this.props.drawStatus) {
       console.log('play', this.props)
-      this.props.success(1)
+      this.props.success('未开始')
       return false
     }
-    if (this.props.remain_award_num === 0) {
-      this.props.success(0)
-      return false
-    }
+    // if (this.props.remain_award_num === 0) {
+    //   this.props.success('已用完')
+    //   return false
+    // }
     // 获取结果  然后开始动画
     console.log('start')
     if (this.state.start) return false
 
-    const finishIdx = await this.getPrizeDraw()
+    const { index: finishIdx, data } = await this.getPrizeDraw()
     // const finishIdx = 0
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) {
@@ -300,7 +318,7 @@ class LuckyRolling extends React.Component {
       start: true
     })
     console.log('结果是', this.state.prizeList[finishIdx].text)
-    this.animationJ(finishIdx)
+    this.animationJ(finishIdx, data)
   }
 }
 

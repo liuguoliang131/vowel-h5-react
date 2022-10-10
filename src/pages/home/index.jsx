@@ -12,10 +12,11 @@ import TaskList from './components/taskList/index.jsx'
 import DetailedPicture from './components/detailedPicture/index.jsx'
 import AudioPlayer from './components/audioPlayer/index.jsx'
 import Dialog from '../../components/dialog/index.jsx'
+import RuleNode from './components/ruleNode'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-// import { mockRequest } from './mock-request'
+import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
   // const saveCallBack = useRef()
@@ -26,11 +27,49 @@ const Home = (props) => {
   })
 
   const [emptyMsg, setEmptyMsg] = useState('')
+  const [ruleNodeVisible, setRuleNodeVisible] = useState(false)
+  // 去往海报
+  const handleGoPoster = () => {
+    if (process.env.NODE_ENV === 'development') {
+      if (data.id) {
+        navigate('/layout/poster', {
+          state: {
+            id: data.id,
+            title: data.title,
+            dec: data.sub_title
+          },
+          replace: false
+        })
+      } else {
+        Toast.show({
+          content: emptyMsg
+        })
+      }
+    } else {
+      utils.ownApp(() => {
+        if (data.id) {
+          navigate('/layout/poster', {
+            state: {
+              id: data.id,
+              title: data.title,
+              dec: data.sub_title
+            },
+            replace: false
+          })
+        } else {
+          Toast.show({
+            content: emptyMsg
+          })
+        }
+      })
+    }
+  }
   const btn1Fn = () => {
     setRollingDialogOption({
       ...rollingDialogOption,
       visible: false
     })
+    handleGoPoster()
   }
   const close = () => {
     console.log('close')
@@ -104,12 +143,12 @@ const Home = (props) => {
         }
       }
 
-      const res = await promotionActivityDetailApi(params)
-      if (res.code !== 0) {
-        setEmptyMsg(res.msg)
-        return false
-      }
-      // const res = await mockRequest()
+      // const res = await promotionActivityDetailApi(params)
+      // if (res.code !== 0) {
+      //   setEmptyMsg(res.msg)
+      //   return false
+      // }
+      const res = await mockRequest()
       console.log('res', res)
       res.data.draw_end_time *= 1000
       res.data.draw_start_time *= 1000
@@ -153,15 +192,15 @@ const Home = (props) => {
   // 抽奖callback
   const rollingSuccess = (prize) => {
     // console.log('success', prize)
-    if (prize === 0) {
+    if (prize === '已用完') {
       setRollingDialogOption({
         ...rollingDialogOption,
         visible: true,
         text: '您还没有抽奖机会或已用完，快去分享赚取抽奖机会！',
-        btn1: { text: '确认', click: () => btn1Fn() }
+        btn1: { text: '分享邀请', click: () => btn1Fn() }
       })
       return false
-    } else if (prize === 1) {
+    } else if (prize === '未开始') {
       const startTime = utils.getTimeData(data.draw_start_time)
 
       setRollingDialogOption({
@@ -178,38 +217,21 @@ const Home = (props) => {
       setRollingDialogOption({
         ...rollingDialogOption,
         visible: true,
-        text: '不要遗憾，不要气馁，再抽一次~',
-        btn1: { text: '确认', click: () => btn1Fn() }
+        text: prize.toast_content,
+        btn1: { text: '获取更多机会', click: () => btn1Fn() },
+        btn2: { text: '继续抽奖', click: () => close() }
       })
     } else {
       setRollingDialogOption({
         ...rollingDialogOption,
         visible: true,
-        text: `恭喜您获得${prize.title}，请前往“我的奖品”里查看兑换`,
-        btn1: { text: '去查看', click: () => handleGoMyPrize() }
+        text: prize.toast_content,
+        btn1: { text: '分享邀请', click: () => btn1Fn() }
 
       })
     }
   }
-  // 去往海报
-  const handleGoPoster = () => {
-    utils.ownApp(() => {
-      if (data.id) {
-        navigate('/layout/poster', {
-          state: {
-            id: data.id,
-            title: data.title,
-            dec: data.sub_title
-          },
-          replace: false
-        })
-      } else {
-        Toast.show({
-          content: emptyMsg
-        })
-      }
-    })
-  }
+
   // 设置定时器 改变活动状态
   const handleSetStatus = () => {
     const newData = JSON.parse(JSON.stringify(data))
@@ -307,14 +329,14 @@ const Home = (props) => {
               <div className="mb14"></div>
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
               <div className="mb16"></div>
-              <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} to={() => handleGoPoster()}></TaskList>
+              <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} showRule={() => setRuleNodeVisible(true)} to={() => handleGoPoster()}></TaskList>
               <div className="mb16"></div>
               <DetailedPicture picList={data.pic_list}></DetailedPicture>
               {/* {
                 utils.isWhatSysTem() !== 2 ? (<AudioPlayer {...data.music_info}></AudioPlayer>) : null
               } */}
               <AudioPlayer {...data.music_info}></AudioPlayer>
-
+              <RuleNode visible={ruleNodeVisible} close={() => setRuleNodeVisible(false)} text={data.rule_node}></RuleNode>
             </>
 
               )

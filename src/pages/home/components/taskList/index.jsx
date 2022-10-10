@@ -4,7 +4,9 @@ import { useLocation } from 'react-router-dom'
 import utils from '../../../../utils/index'
 const row1IMG = require('../../../../assets/Frame 1000006094@2x.png')
 const row2IMG = require('../../../../assets/Frame 1000006078-1.png')
-const row3IMG = require('../../../../assets/Rectangle 40961.png')
+// const row3IMG = require('../../../../assets/Rectangle 40961.png')
+const row3IMG = require('../../../../assets/taskButton.png')
+const rtIMG = require('../../../../assets/iconRt.png')
 function TaskList (props) {
   const location = useLocation()
 
@@ -27,8 +29,7 @@ function TaskList (props) {
   return (
     <div className="TaskList">
       <div className="TaskList-content">
-        <div className='taskList-title'>做任务赚机会</div>
-        <div className="line"></div>
+        {/* <div className="line"></div> */}
         {
           props.task_list && props.task_list.map((item, index) => {
             if (item.type === 2) {
@@ -82,6 +83,10 @@ function TaskList (props) {
           })
         }
 
+      </div>
+      <div className="viewRule" onClick={() => props.showRule()}>
+        查看更多规则
+        <img src={rtIMG} alt="" />
       </div>
     </div>
   )

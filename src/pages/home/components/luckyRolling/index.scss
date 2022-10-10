@@ -8,9 +8,11 @@ $one:80.5px;
     margin: auto;
     width: 332px;
     height: 332px;
-    background-image: url('../../../../../static/Rectangle\ 19.png'),url('../../../../../static/Rectangle\ 18.png');
-    background-position: 6px 6px,0 0;
-    background-size: 320px 320px,332px 332px;
+    // background-image: url('../../../../../static/Rectangle\ 19.png'),url('../../../../../static/Rectangle\ 18.png');
+    background-image: url('../../../../assets/rollingBg.png');
+    // background-position: 6px 6px,0 0;
+    // background-size: 332px 332px,332px 332px;
+    background-size: 332px 332px;
     background-repeat: no-repeat,no-repeat;
   }
   .LuckyRolling-box {
@@ -25,7 +27,8 @@ $one:80.5px;
       position: absolute;
       top: $one;
       left: $one;
-      background: no-repeat url('../../../../../static/Frame\ 1000006089.png') center;
+      // background: no-repeat url('../../../../../static/Frame\ 1000006089.png') center;
+      background: no-repeat url('../../../../../static/startBG.png') center;
       background-size: 136px 136px;
       width: 2*$one;
       height: 2*$one;
@@ -34,21 +37,41 @@ $one:80.5px;
         font-weight: 600;
         font-size: 20px;
         text-align: center;
-        color: #FD03B3;
+        // color: #FD03B3;
+        color: rgba(95, 0, 148, 1);
+
       }
       .start-btn-row2 {
         transform: scale(0.85);
         padding-top: 3px;
         font-size: 12px;
         text-align: center;
-        color: #999999;
+        color: #666666;
         span {
           color: #FD03B3;
         }
       }
     }
     .gray {
-      background: no-repeat url('../../../../../static/Frame\ 1000006089gray.png') center;
+      // background: no-repeat url('../../../../../static/Frame\ 1000006089gray.png') center;
+      .start-btn-row1 {
+        font-weight: 600;
+        font-size: 20px;
+        text-align: center;
+        // color: #FD03B3;
+        color: #666666;
+
+      }
+      .start-btn-row2 {
+        transform: scale(0.85);
+        padding-top: 3px;
+        font-size: 12px;
+        text-align: center;
+        color: #666666;
+        span {
+          color: #666666;
+        }
+      }
     }
     // 奖项
     .prize {
@@ -62,28 +85,49 @@ $one:80.5px;
       // border: 1px solid blue;
       .bgPicture {
         position: absolute;
-        left: 5px;
-        top: 5px;
-        width: 70.5px;
-        height: 70.5px;
+        left: 0px;
+        top: 10px;
+        width: 80.5px;
+        height: 85.5px;
+        // background-image: url('../../../../assets/manghe.png');
+        // background-position: -8px 0px;
+        // background-size: 85.5px 85.5px;
+        // background-repeat: no-repeat;
+        // overflow: visible;
       }
-      .prizePicture {
-        width: 58px;
-        height: 58px;
+      // .prizePicture {
+      //   width: 58px;
+      //   height: 58px;
+      //   visibility: hidden;
+      // }
+      &.y2 {
+        .bgPicture {
+          top: 5px;
+        }
+      }
+      &.y3 {
+        .bgPicture {
+          top: 5px;
+        }
+      }
+      &.y4 {
+        .bgPicture {
+          top: 5px;
+        }
       }
       
     }
     .active-prize {
       .bgPicture {
-        width: $one;
-        height: $one;
-        left: 0;
-        top: 0;
+        width: 90.5px;
+        height: 90.5px;
+        left: -5px;
+        top: 10px;
       }
-      .prizePicture {
-        width: 66.2px;
-        height: 66.2px;
-      }
+      // .prizePicture {
+      //   width: 66.2px;
+      //   height: 66.2px;
+      // }
     }
     // 坐标系
     .x1 {

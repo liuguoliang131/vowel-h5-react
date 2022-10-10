@@ -30,6 +30,7 @@ const utils = {
       if (fail) {
         fail()
       } else {
+        if (process.env.NODE_ENV === 'development') return false
         Toast.show({
           content: '即将跳转到元音符App下载页面'
         })
@@ -254,6 +255,30 @@ const utils = {
     } else {
       return 3
     }
+  },
+  // 分享base64图片到微信 微博
+  // share_way: 微信wxFriend、timeline、微博weibo
+  // share_title：标题
+  shareBase64Image: ({ img, share_way, share_title }) => {
+    HSApp.postMessage(JSON.stringify({
+      type: 'shareBase64Image',
+      params: {
+        img,
+        share_way,
+        share_title
+      }
+    }))
+  },
+  // 分享url图片到微信 微博
+  shareUrlImage: ({ img, share_way, share_title }) => {
+    HSApp.postMessage(JSON.stringify({
+      type: 'shareUrlImage',
+      params: {
+        img,
+        share_way,
+        share_title
+      }
+    }))
   }
 
 }

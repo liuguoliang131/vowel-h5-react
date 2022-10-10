@@ -4,23 +4,37 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 211px;
-    height: 26px;
+    // width: 211px;
+    // height: 26px;
     margin: auto;
-    background: rgba(252, 20, 186, 0.45);
-    border-radius: 13px;
+    // background: rgba(252, 20, 186, 0.45);
+    // border-radius: 13px;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
     color: #ffff;
+    margin-top: 7px;
     .round-box-text1 {
-      margin-right: 11px;
+      margin-right: 7px;
+      color: #D2E1F4;
     }
     .round-box-text2 {
       display: flex;
       align-items: center;
+      .text2-hh,.text2-MM,.text2-ss {
+        height: 18px;
+        padding: 0 2.2px;
+        line-height: 19px;
+        border: 0.5px solid rgba(100, 216, 59, 0.5);
+        border-radius: 2px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #64D83B;
+      }
       .text2-colon {
         margin: 0 5px;
+        font-size: 14px;
+        font-style: 500;
       }
     }
   }

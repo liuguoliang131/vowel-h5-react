@@ -12,8 +12,9 @@
       height: 136px;
       padding: 0 14px;
       margin-top: 20px;
-      background: url('../../../static/Rectangle\ 40993.png') no-repeat center;
-      background-size: 355px 136px;
+      // background: url('../../../static/Rectangle\ 40993.png') no-repeat center;
+      // background-size: 355px 136px;
+      background: #FFFFFF;
       text-align: left;
       border-radius: 8px;
       &:active {
@@ -51,7 +52,8 @@
         overflow: hidden; // 溢出隐藏
         white-space: nowrap; // 强制一行
         text-overflow: ellipsis; // 文字溢出显示省略号
-        border-bottom: 0.5px solid rgba(246, 211, 249, 1)
+        // border-bottom: 0.5px solid rgba(246, 211, 249, 1)
+        border-bottom: 0.5px solid #EDEDED;
       }
       .item-row4 {
         display: flex;

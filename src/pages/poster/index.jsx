@@ -7,6 +7,7 @@ import QRCode from 'qrcodejs2'
 import { promotionSharePosterListApi } from '../../axios/api'
 import { useLocation } from 'react-router-dom'
 import axios from 'axios'
+const saveBtnImage = require('../../assets/saveposter.png')
 function Poster () {
   const [data, setData] = useState({
     user_name: '',
@@ -208,12 +209,17 @@ function Poster () {
       a.remove()
     })
   }
-  const handleShareWebToWX = () => {
-    // const title = location.state.title
-    // const desc = '苹果手表S7/Airpods pro/免单奖励等超值大礼等你拿'
+  // 导出图片成base64
+  const onExportBase64 = () => {
+    const posterBase = viewRef.current.toDataURL('image/png;base64')
+    return posterBase
+  }
+  // 分享到微信微博
+  const handleShareWebToWX = (share_way) => {
+    const share_title = location.state.title || '元音符'
     // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
-    // const coverurl = ''
-    // utils.shareWebToWX(title, desc, url, coverurl)
+    const img = onExportBase64()
+    utils.shareBase64Image(share_title, share_way, img)
   }
   // const bottomRender = () => {
   //   let bottomComponent = null
@@ -245,9 +251,10 @@ function Poster () {
   const bottomRender = () => {
     return (
       <div className="bottom-box-share">
-        <div className="share-1">可分享至微信或朋友圈</div>
-        <img src={require('../../assets/share-wx.png')} alt="" className="share-2" />
-        <img src={require('../../assets/share-friends.png')} alt="" className="share-3" />
+        <div className="share-1">可分享至</div>
+        <img src={require('../../assets/share-wx.png')} alt="" className="share-2" onClick={() => handleShareWebToWX('wxFriend')} />
+        <img src={require('../../assets/share-friends.png')} alt="" className="share-3" onClick={() => handleShareWebToWX('wxFriend')} />
+        <img src={require('../../assets/share-weibo.png')} alt="" className="share-3" onClick={() => handleShareWebToWX('weibo')} />
       </div>
     )
   }
@@ -267,15 +274,17 @@ function Poster () {
         data.share_sign
           ? (
             <>
+            <div className="share-tips">邀请好友参加，可获得更多抽奖机会</div>
             <div className="poster-box">
             <div className='full' ref={fullRef}>
               <canvas ref={viewRef}></canvas>
             </div>
           </div>
           <div className="bottom-box">
-          <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
+          {/* <a className="save-the" download href="javascript:;" onClick={() => handleSavePoster()}>
             点击保存海报
-          </a>
+          </a> */}
+          <img src={saveBtnImage} className="save-the" onClick={() => handleSavePoster()} />
           {
             bottomRender()
           }

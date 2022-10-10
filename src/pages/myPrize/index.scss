@@ -13,7 +13,7 @@
       height: 190px;
       padding: 0 40px;
       margin-top: 20px;
-      background: url('../../../static/myprize.png') no-repeat;
+      background: url('../../../static/prizeItemBG.png') no-repeat;
       background-size: 355px;
       text-align: left;
       border-radius: 8px;
@@ -114,8 +114,9 @@
         span {
           width: 88px;
           height: 36px;
-          background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%);
-          box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+          // background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%);
+          // box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+          background: #D10910;
           border-radius: 4px;
           text-align: center;
           line-height: 36px;
@@ -141,10 +142,11 @@
           justify-content: center;
           width: 141px;
           height: 36px;
-          background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%);
-          box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
-          border: 0.5px solid;
-          border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+          // background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%);
+          // box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+          // border: 0.5px solid;
+          // border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+          background: #D10910;
           border-radius: 4px;
           font-weight: 600;
           font-size: 14px;
@@ -202,11 +204,12 @@
         justify-content: center;
         width: 141px;
         height: 36px;
-        background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%),
-        linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
-        border: 0.5px solid;
-        border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
-        box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+        // background: linear-gradient(99.58deg, #FC00B1 4.48%, #F585ED 34.71%, #F585ED 55.13%, #6102FF 100%),
+        // linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+        // border: 0.5px solid;
+        // border-image-source: linear-gradient(180deg, #FFCBFA 0%, #F11CC7 100%);
+        // box-shadow: inset 0px 3px 2px rgba(255, 152, 232, 0.65), inset 0px -3px 1px rgba(255, 255, 255, 0.25);
+        background: #D10910;
         border-radius: 4px;
         font-family: 'PingFang SC';
         font-style: normal;

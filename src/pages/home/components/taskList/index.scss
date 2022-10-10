@@ -1,15 +1,19 @@
 .TaskList {
   text-align: center;
+  // background: #ffff;
+  background: url('../../../../../static/taskListBG.png') no-repeat;
+  background-size: 355px;
+  background-position: 10px 0;
   .TaskList-content {
     box-sizing: border-box;
     margin: auto;
     width: 355px;
-    height: 166px;
-    padding-top: 50px;
+    // height: 166px;
+    padding-top: 62px;
     text-align: center;
-    background: url('../../../../../static/Frame 1000006058.png') no-repeat;
-    background-size: 363px 174px;
-    background-position: -2px -10px;
+    // background: url('../../../../../static/Frame 1000006058.png') no-repeat;
+    // background-size: 363px 174px;
+    // background-position: -2px -10px;
     position: relative;
     .taskList-title {
       position: absolute;
@@ -22,29 +26,32 @@
       color: #000000;
 
     } 
-    .line {
-      position: absolute;
-      left: 8.5px;
-      top: 100px;
-      width: 336px;
-      height: 0;
-      border-bottom: 0.5px solid #F6D3F9;
-    }
+    // .line {
+    //   position: absolute;
+    //   left: 8.5px;
+    //   top: 100px;
+    //   width: 336px;
+    //   height: 0;
+    //   border-bottom: 0.5px solid #F6D3F9;
+    // }
     .row {
       width: 336px;
-      height: 50px;
-      margin-bottom: 10px;
+      // height: 50px;
+      padding-top: 14px;
+      padding-bottom: 18px;
+      margin: auto;
+      margin-bottom: 8px;
       display: flex;
       // align-items: center;
       font-size: 12px;
+      border: 0.3px solid rgba(28, 2, 50, 0.3);
+      border-radius: 8px;
       .col1 {
-        width: 32px;
-        height: 32px;
-        margin-left: 13px;
+        padding-left: 8px;
         margin-right: 7px;
         img {
-          width: 100%;
-          height: 100%;
+          width: 32px;
+          height: 32px;
         }
       }
       .col2 {
@@ -79,6 +86,7 @@
         position: relative;
         text-align: right;
         width: 120px;
+        margin-right: 9px;
         .col3-1 {
           position: absolute;
           top: 0;
@@ -97,7 +105,9 @@
             height: 36px;
             line-height: 36px;
             text-align: center;
-            color: #ffff;
+            color: #0C062B;
+            font-weight: 600;
+            font-size: 14px;
           }
         }
         .col3-2 {
@@ -107,6 +117,22 @@
           transform: scale(0.8);
         }
       }
+    }
+    .row:nth-last-child(1) {
+      margin-bottom: 0;
+    }
+  }
+  .viewRule {
+    box-sizing: border-box;
+    height: 48px;
+    padding-top: 10px;
+    font-size: 13px;
+    color: #0C062B;
+    img {
+      margin-left: 4px;
+      width: 10px;
+      height: 10px;
+      vertical-align: middle;
     }
   }
 }

@@ -1,0 +1,46 @@
+.ruleNode {
+  .mask {
+    z-index: 100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.1);
+    transition: all 0.5s;
+    .content-box {
+      position: relative;
+      box-sizing: border-box;
+      width: 315px;
+      height: 293px;
+      background: linear-gradient(180deg, #F2F6FA 0%, #F2F6FA 17.34%, #A8B0D7 96.66%);
+      border-radius: 8px;
+      padding: 16px 20px;
+      .close {
+        position: absolute;
+        right: 0px;
+        top: -45px;
+        width: 30px;
+        height: 30px;
+      }
+      .text {
+        height: 253px;
+        overflow-y: scroll;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: left;
+        white-space: wrap;
+        font-family: 'PingFang SC';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 18px;
+        color: #333333;
+      }
+    }
+  }
+}
