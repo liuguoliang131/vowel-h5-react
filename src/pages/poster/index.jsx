@@ -220,7 +220,6 @@ function Poster () {
     // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
     const img = onExportBase64()
     let appConfig = window.localStorage.getItem('AppConfigInfo')
-    alert(appConfig)
     if (appConfig) {
       appConfig = JSON.parse(appConfig)
     } else {
@@ -229,7 +228,11 @@ function Poster () {
       }
     }
     if (Number(appConfig['version-code']) >= 1750) {
-      utils.shareBase64Image(share_title, share_way, img)
+      utils.shareBase64Image({
+        share_title,
+        share_way,
+        img
+      })
     } else {
       const share_url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
       utils.shareWebToWX(share_title, '', share_url, img)
