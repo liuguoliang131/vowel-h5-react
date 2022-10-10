@@ -16,7 +16,7 @@ import RuleNode from './components/ruleNode'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-import { mockRequest } from './mock-request'
+// import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
   // const saveCallBack = useRef()
@@ -143,12 +143,12 @@ const Home = (props) => {
         }
       }
 
-      // const res = await promotionActivityDetailApi(params)
-      // if (res.code !== 0) {
-      //   setEmptyMsg(res.msg)
-      //   return false
-      // }
-      const res = await mockRequest()
+      const res = await promotionActivityDetailApi(params)
+      if (res.code !== 0) {
+        setEmptyMsg(res.msg)
+        return false
+      }
+      // const res = await mockRequest()
       console.log('res', res)
       res.data.draw_end_time *= 1000
       res.data.draw_start_time *= 1000
