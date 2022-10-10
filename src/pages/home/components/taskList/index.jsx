@@ -77,6 +77,25 @@ function TaskList (props) {
                   </div>
                 </div>
               )
+            } else if (item.type === 4) {
+              return (
+                <div className="row" key={index}>
+                  <div className="col1">
+                    <img src={row2IMG} alt="" />
+                  </div>
+                  <div className="col2">
+                    <div className="col2-1">购买成功</div>
+                    <div className="col2-2">购买1份，可获得抽奖机会<span className='col2-2-n'>+{item.give_num}</span></div>
+                  </div>
+                  <div className="col3">
+                    <div className="col3-1" onClick={() => handleGoPay()}>
+                      <img src={row3IMG} alt="" />
+                      <div>{props.drawStatus === 0 ? '预约抢购' : '立即购买'}</div>
+                    </div>
+                    {/* <div className="col3-2">已获得<span style={{ color: 'rgba(252, 23, 188, 1)' }}>1</span>次抽奖机会</div> */}
+                  </div>
+                </div>
+              )
             } else {
               return null
             }

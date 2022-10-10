@@ -154,6 +154,22 @@ const Home = (props) => {
       res.data.draw_start_time *= 1000
       res.data.end_time *= 1000
       res.data.start_time *= 1000
+      // task_list里type=2和type=4的只显示其中一个
+      const taskList = []
+      const popArrFn = (list) => {
+        for (let i = 0; i < list.length; i++) {
+          const item = list[i]
+          if (item.type === 2 || item.type === 4) {
+            taskList.push(list.splice(i, 1))
+            popArrFn(list)
+            break
+          }
+        }
+      }
+      popArrFn(res.task_list)
+      if (taskList.length) {
+        res.task_list.push(taskList[0])
+      }
       setResData(res.data)
       setData(res.data)
     } catch (error) {
