@@ -160,15 +160,16 @@ const Home = (props) => {
         for (let i = 0; i < list.length; i++) {
           const item = list[i]
           if (item.type === 2 || item.type === 4) {
-            taskList.push(list.splice(i, 1))
+            const pop = list.splice(i, 1)
+            taskList.push(pop[0])
             popArrFn(list)
             break
           }
         }
       }
-      popArrFn(res.task_list)
+      popArrFn(res.data.task_list)
       if (taskList.length) {
-        res.task_list.push(taskList[0])
+        res.data.task_list.push(taskList[0])
       }
       setResData(res.data)
       setData(res.data)
