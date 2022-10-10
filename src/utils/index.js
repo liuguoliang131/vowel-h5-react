@@ -300,7 +300,8 @@ window.isLoginResult = function (token) {
   }
 }
 // 获取app信息的回调 保存
-window.appConfig = (config) => {
+window.appConfig = function (config) {
+  alert('appConfig', config)
   let AppConfigInfo = JSON.stringify({
     'version-code': '1710'
   })

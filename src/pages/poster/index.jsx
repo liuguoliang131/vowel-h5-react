@@ -84,8 +84,8 @@ function Poster () {
       canvas.width = full.offsetWidth * scaleNumber
       canvas.height = full.offsetHeight * scaleNumber
       // 参照比例
-      const scaleWidth = 375
-      const scaleHeight = 517
+      const scaleWidth = 315
+      const scaleHeight = 417
       const ava = {
         x: 0,
         y: 0,
@@ -93,21 +93,21 @@ function Poster () {
         height: 0
       }// 头像
       ava.x = scaleNumber * full.offsetWidth * 14 / scaleWidth
-      ava.y = scaleNumber * full.offsetHeight * 17 / scaleHeight
-      ava.width = scaleNumber * full.offsetWidth * 32 / scaleWidth
-      ava.height = scaleNumber * full.offsetWidth * 32 / scaleWidth
+      ava.y = scaleNumber * full.offsetHeight * 12 / scaleHeight
+      ava.width = scaleNumber * full.offsetWidth * 30 / scaleWidth
+      ava.height = scaleNumber * full.offsetWidth * 30 / scaleWidth
       // 文本
       const title = {
         x: scaleNumber * full.offsetWidth * 50 / scaleWidth,
-        y: scaleNumber * full.offsetHeight * 37 / scaleHeight,
+        y: scaleNumber * full.offsetHeight * 33 / scaleHeight,
         fontSize: scaleNumber * full.offsetHeight * 15 / scaleHeight
       }
       // 二维码
       const qr = {
-        x: scaleNumber * full.offsetWidth * 147 / scaleWidth,
-        y: scaleNumber * full.offsetHeight * 405 / scaleHeight,
-        width: scaleNumber * full.offsetWidth * 82 / scaleWidth,
-        height: scaleNumber * full.offsetWidth * 82 / scaleWidth
+        x: scaleNumber * full.offsetWidth * 121 / scaleWidth,
+        y: scaleNumber * full.offsetHeight * 315 / scaleHeight,
+        width: scaleNumber * full.offsetWidth * 74 / scaleWidth,
+        height: scaleNumber * full.offsetWidth * 74 / scaleWidth
       }
       const ctx = canvas.getContext('2d')
       // 创建图片 背景图
@@ -220,6 +220,7 @@ function Poster () {
     // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
     const img = onExportBase64()
     let appConfig = window.localStorage.getItem('AppConfigInfo')
+    alert('appConfig', appConfig)
     if (appConfig) {
       appConfig = JSON.parse(appConfig)
     } else {
