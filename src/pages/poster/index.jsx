@@ -220,7 +220,7 @@ function Poster () {
     // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
     const img = onExportBase64()
     let appConfig = window.localStorage.getItem('AppConfigInfo')
-    alert('appConfig', appConfig)
+    alert(appConfig)
     if (appConfig) {
       appConfig = JSON.parse(appConfig)
     } else {
