@@ -279,6 +279,16 @@ const utils = {
         share_title
       }
     }))
+  },
+  // 获取APP信息
+  getAppConfig: () => {
+    if (utils.isApp()) {
+      HSApp.postMessage(JSON.stringify({
+        type: 'getAppConfig',
+        params: {},
+        callback: 'appConfig'
+      }))
+    }
   }
 
 }
@@ -289,4 +299,17 @@ window.isLoginResult = function (token) {
     utils.setAppToken(token)
   }
 }
+// 获取app信息的回调 保存
+window.appConfig = (config) => {
+  let AppConfigInfo = JSON.stringify({
+    'version-code': '1710'
+  })
+  if (typeof config === 'string') {
+    AppConfigInfo = config
+  } else {
+    AppConfigInfo = JSON.stringify(config)
+  }
+  window.localStorage.setItem('AppConfigInfo', AppConfigInfo)
+}
+
 export default utils

@@ -25,6 +25,7 @@ utils.ownApp(() => {
   } else {
     utils.delToken()
   }
+  utils.getAppConfig() // 获取app配置信息
 }, () => {
 
 })

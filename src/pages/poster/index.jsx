@@ -219,7 +219,20 @@ function Poster () {
     const share_title = location.state.title || '元音符'
     // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
     const img = onExportBase64()
-    utils.shareBase64Image(share_title, share_way, img)
+    let appConfig = window.localStorage.getItem('AppConfigInfo')
+    if (appConfig) {
+      appConfig = JSON.parse(appConfig)
+    } else {
+      appConfig = {
+        'version-code': '1710'
+      }
+    }
+    if (Number(appConfig['version-code']) >= 1750) {
+      utils.shareBase64Image(share_title, share_way, img)
+    } else {
+      const share_url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+      utils.shareWebToWX(share_title, '', share_url, img)
+    }
   }
   // const bottomRender = () => {
   //   let bottomComponent = null
