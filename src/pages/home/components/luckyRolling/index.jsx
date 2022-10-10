@@ -246,12 +246,14 @@ class LuckyRolling extends React.Component {
         promotion_id: this.props.id
       }).then(res => {
         if (res.code !== 0) {
-          resolve(false)
+          resolve({
+            finishIdx: false
+          })
         } else {
           this.state.prizeList.forEach((item, index) => {
             if (item.id === res.data.id) {
               resolve({
-                index,
+                finishIdx: index,
                 data: res.data
               })
             }
@@ -308,7 +310,7 @@ class LuckyRolling extends React.Component {
     console.log('start')
     if (this.state.start) return false
 
-    const { index: finishIdx, data } = await this.getPrizeDraw()
+    const { finishIdx, data } = await this.getPrizeDraw()
     // const finishIdx = 0
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) {
