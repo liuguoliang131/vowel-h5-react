@@ -270,7 +270,7 @@ function Poster () {
       <div className="bottom-box-share">
         <div className="share-1">可分享至</div>
         <img src={require('../../assets/share-wx.png')} alt="" className="share-2" onClick={() => handleShareWebToWX('wxFriend')} />
-        <img src={require('../../assets/share-friends.png')} alt="" className="share-3" onClick={() => handleShareWebToWX('wxFriend')} />
+        <img src={require('../../assets/share-friends.png')} alt="" className="share-3" onClick={() => handleShareWebToWX('timeline')} />
         <img src={require('../../assets/share-weibo.png')} alt="" className="share-3" onClick={() => handleShareWebToWX('weibo')} />
       </div>
     )

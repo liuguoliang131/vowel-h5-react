@@ -257,7 +257,7 @@ const utils = {
     }
   },
   // 分享base64图片到微信 微博
-  // share_way: 微信wxFriend、timeline、微博weibo
+  // share_way: 微信wxFriend、朋友圈timeline、微博weibo
   // share_title：标题
   shareBase64Image: ({ img, share_way, share_title }) => {
     HSApp.postMessage(JSON.stringify({
