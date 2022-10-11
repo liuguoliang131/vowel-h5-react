@@ -14,7 +14,11 @@
       margin-top: 20px;
       // background: url('../../../static/Rectangle\ 40993.png') no-repeat center;
       // background-size: 355px 136px;
-      background: #FFFFFF;
+      // background: #FFFFFF;
+      background: url('../../../static/eventItemRight.png'),#FFFFFF;
+      background-repeat: no-repeat;
+      background-position: 300px 40px;
+      background-size: 46.18px 47.85px;
       text-align: left;
       border-radius: 8px;
       &:active {

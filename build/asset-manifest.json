@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.c1be3c3a.css",
-    "main.js": "/static/js/main.fe961a80.js",
-    "static/css/604.1c9cb373.chunk.css": "/static/css/604.1c9cb373.chunk.css",
+    "main.js": "/static/js/main.c7d5585f.js",
+    "static/css/604.4edd8975.chunk.css": "/static/css/604.4edd8975.chunk.css",
     "static/js/604.642c8208.chunk.js": "/static/js/604.642c8208.chunk.js",
     "static/css/438.ddc42c66.chunk.css": "/static/css/438.ddc42c66.chunk.css",
     "static/js/438.cc27d338.chunk.js": "/static/js/438.cc27d338.chunk.js",
@@ -25,13 +25,14 @@
     "static/media/saveposter.png": "/static/media/saveposter.432166c2d0e342045dd1.png",
     "static/media/dialogbtn.png": "/static/media/dialogbtn.ec27c97d4b20eab583f5.png",
     "static/media/dialogbtn2.png": "/static/media/dialogbtn2.f9795a62524d895fa0eb.png",
+    "static/media/eventItemRight.png": "/static/media/eventItemRight.72b699e5d38780c1a4b6.png",
     "static/media/taskButton.png": "/static/media/taskButton.1700ae46b04116152d33.png",
     "static/media/dialogbtn1.png": "/static/media/dialogbtn1.62d1e1c691d40b4f7cf0.png",
     "static/media/audioCover.png": "/static/media/audioCover.55e0cd5c704171c2f217.png",
     "index.html": "/index.html",
     "main.c1be3c3a.css.map": "/static/css/main.c1be3c3a.css.map",
-    "main.fe961a80.js.map": "/static/js/main.fe961a80.js.map",
-    "604.1c9cb373.chunk.css.map": "/static/css/604.1c9cb373.chunk.css.map",
+    "main.c7d5585f.js.map": "/static/js/main.c7d5585f.js.map",
+    "604.4edd8975.chunk.css.map": "/static/css/604.4edd8975.chunk.css.map",
     "604.642c8208.chunk.js.map": "/static/js/604.642c8208.chunk.js.map",
     "438.ddc42c66.chunk.css.map": "/static/css/438.ddc42c66.chunk.css.map",
     "438.cc27d338.chunk.js.map": "/static/js/438.cc27d338.chunk.js.map",
@@ -44,6 +45,6 @@
   },
   "entrypoints": [
     "static/css/main.c1be3c3a.css",
-    "static/js/main.fe961a80.js"
+    "static/js/main.c7d5585f.js"
   ]
 }
