@@ -2,7 +2,8 @@
   font-size: 14px;
   box-sizing: border-box;
   height: 100vh;
-  background-image: linear-gradient(#1d043d,#01185e);
+  // background-image: linear-gradient(#1d043d,#01185e);
+  background-color: #000000;
   text-align: center;
   overflow-y: scroll;
   .share-tips {
@@ -20,7 +21,7 @@
 
   }
   .poster-box {
-    margin: 0 20px;
+    margin: 0 30px;
     height: 417px;
     .full {
       width: 100%;

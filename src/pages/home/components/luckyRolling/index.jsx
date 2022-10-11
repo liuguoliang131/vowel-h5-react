@@ -73,7 +73,7 @@ class LuckyRolling extends React.Component {
         return (
           <div className={'start-btn gray'}>
           <div className="start-btn-row1">已结束</div>
-          <div className="start-btn-row2">今日剩余抽奖机会
+          <div className="start-btn-row2">剩余抽奖机会
           <span>{this.props.remain_award_num}</span>次</div>
         </div>
         )
