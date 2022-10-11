@@ -32,7 +32,7 @@ const routes = [
         element: <Home />,
         meta: {
           auth: true,
-          title: '幸运大转盘'
+          title: '音乐无限 好礼相伴'
         }
       },
       {
