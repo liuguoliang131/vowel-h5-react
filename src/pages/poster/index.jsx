@@ -235,8 +235,8 @@ function Poster () {
         img
       })
     } else {
-      const share_url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
-      utils.shareWebToWX(share_title, '', share_url, img)
+      // const share_url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+      // utils.shareWebToWX(share_title, '', share_url, img)
     }
   }
   // const bottomRender = () => {
