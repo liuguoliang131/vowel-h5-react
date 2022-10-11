@@ -200,6 +200,7 @@ const Home = (props) => {
       }
     })
   }
+
   // 抽奖次数-1
   const handleChangeNum = () => {
     setData({
@@ -228,7 +229,7 @@ const Home = (props) => {
         ...rollingDialogOption,
         visible: true,
         text: `不要急哦，${startTime.mon}月${startTime.dd}日${startTime.hh}:${startTime.MM}开始抽奖哦~`,
-        btn1: { text: '确认', click: () => btn1Fn() }
+        btn1: { text: '确认', click: () => close() }
       })
       return false
     }
@@ -369,7 +370,7 @@ const Home = (props) => {
               <TopWord mainImg={data.main_img}></TopWord>
               {/* <Panel drawStatus={data.drawStatus} id={data.id}></Panel> */}
               <CountDown id={data.id} drawStatus={data.drawStatus} draw_start_time={data.draw_start_time} draw_end_time={data.draw_end_time}></CountDown>
-              <div className="mb14"></div>
+              {/* <div className="mb14"></div> */}
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
               <div className="mb16"></div>
               <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} showRule={() => setRuleNodeVisible(true)} to={() => handleGoPoster()}></TaskList>

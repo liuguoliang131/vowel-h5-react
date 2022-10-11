@@ -30,6 +30,7 @@ $one:80.5px;
       // background: no-repeat url('../../../../../static/Frame\ 1000006089.png') center;
       background: no-repeat url('../../../../../static/startBG.png') center;
       background-size: 136px 136px;
+      background-position: 12px 17px;
       width: 2*$one;
       height: 2*$one;
       text-align: center;
@@ -87,7 +88,7 @@ $one:80.5px;
         position: absolute;
         left: -3px;
         top: 10px;
-        width: 87.5px;
+        width: 90.5px;
         // height: 90.5px;
         // background-image: url('../../../../assets/manghe.png');
         // background-position: -8px 0px;
@@ -119,7 +120,7 @@ $one:80.5px;
     }
     .active-prize {
       .bgPicture {
-        width: 93.5px;
+        width: 95.5px;
         // height: 97.5px;
         // left: -10px;
         // top: 0px;

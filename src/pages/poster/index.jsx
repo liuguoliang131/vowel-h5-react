@@ -216,8 +216,9 @@ function Poster () {
   }
   // 分享到微信微博
   const handleShareWebToWX = (share_way) => {
-    const share_title = location.state.title || '元音符'
-    // const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+    const url = window.location.origin + '/#/layout/home?share_sign=' + data.share_sign + '&id=' + location.state.id
+    const share_title = (location.state.title || '元音符') + url
+
     const img = onExportBase64()
     let appConfig = window.localStorage.getItem('AppConfigInfo')
     if (appConfig) {
