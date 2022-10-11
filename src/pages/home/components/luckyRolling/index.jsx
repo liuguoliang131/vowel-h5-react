@@ -302,6 +302,10 @@ class LuckyRolling extends React.Component {
 
   // 点击开始
   playStart = async () => {
+    this.props.success({
+      toast_type: 2,
+      toast_content: '<p style="font-weight: 700;">恭喜您获得%v</p > <br />分享邀请好友参加可以获得更多抽奖机会'
+    })
     if (!this.props.drawStatus) {
       console.log('play', this.props)
       this.props.success('未开始')

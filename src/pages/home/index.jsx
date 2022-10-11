@@ -17,7 +17,7 @@ import RuleNode from './components/ruleNode'
 import FirstPop from './components/firstPop'
 import utils from '../../utils'
 import { promotionActivityDetailApi } from '../../axios/api'
-// import { mockRequest } from './mock-request'
+import { mockRequest } from './mock-request'
 let timer = null
 const Home = (props) => {
   // const saveCallBack = useRef()
@@ -145,12 +145,12 @@ const Home = (props) => {
         }
       }
 
-      const res = await promotionActivityDetailApi(params)
-      if (res.code !== 0) {
-        setEmptyMsg(res.msg)
-        return false
-      }
-      // const res = await mockRequest()
+      // const res = await promotionActivityDetailApi(params)
+      // if (res.code !== 0) {
+      //   setEmptyMsg(res.msg)
+      //   return false
+      // }
+      const res = await mockRequest()
       console.log('res', res)
       res.data.draw_end_time *= 1000
       res.data.draw_start_time *= 1000
@@ -372,7 +372,7 @@ const Home = (props) => {
               <CountDown id={data.id} drawStatus={data.drawStatus} draw_start_time={data.draw_start_time} draw_end_time={data.draw_end_time}></CountDown>
               {/* <div className="mb14"></div> */}
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
-              {/* <div className="mb16"></div> */}
+              <div className="mb10"></div>
               <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} showRule={() => setRuleNodeVisible(true)} to={() => handleGoPoster()}></TaskList>
               {/* <div className="mb16"></div> */}
               <DetailedPicture picList={data.pic_list}></DetailedPicture>

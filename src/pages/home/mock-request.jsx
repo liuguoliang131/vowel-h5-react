@@ -8,7 +8,7 @@ export async function mockRequest () {
       type: 1,
       title: '幸运大抽奖11',
       sub_title: '0918-测试活动，预热+正在进行2',
-      rule_note: '活动规则0918-测试活动，预热+正在进行2',
+      rule_note: '<p style="font-weight: 700;">恭喜您获得aaaa</p > <br />分享邀请好友参加可以获得更多抽奖机会',
       status: 1,
       start_time: 1665381588,
       end_time: 1669880839,
@@ -150,14 +150,7 @@ export async function mockRequest () {
         user_name: '',
         user_avatar: ''
       },
-      is_first: 0,
-      rule_node: `
-      <div>
-        <p style="font-weight: 700;">【抽奖规则】</p>
-        <p style="white-space: wrap;">
-        1. 用户每日进入活动页，即获取1次抽奖次数，最多可获得2次。<br />2. 用户每邀请2位新用户参与抽奖，即可获取1次抽奖次数。<br />3. 用户购买数字音乐版权，每份可额外增加1次抽奖次数。<br />4. 预约购买后，抽奖次数将在开售抢购成功后进行显示，未抢购成功将无法获取抽奖次数。<br />5. 抽奖时间于10月13日15:00开启，18:00前抽奖完成，超时未抽奖，视为自动放弃抽奖权益。<br />6. 兑换奖励：虚拟奖励及时发放，实物奖励将于48小时内联系客服进行领取。<br />7. 本次活动最终解释权由元音符所有。
-        </p>
-      </div>`
+      is_first: 0
 
     }
   }
