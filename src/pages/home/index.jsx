@@ -208,7 +208,7 @@ const Home = (props) => {
   }
   // 抽奖callback
   const rollingSuccess = (prize) => {
-    // console.log('success', prize)
+    console.log('success', prize)
     if (prize === '已用完') {
       setRollingDialogOption({
         ...rollingDialogOption,
@@ -228,8 +228,8 @@ const Home = (props) => {
       })
       return false
     }
-    handleChangeNum()
-    if (prize.type === 5) {
+
+    if (prize.toast_type === 1) {
       // 弹窗 很遗憾没有中奖
       setRollingDialogOption({
         ...rollingDialogOption,
@@ -238,7 +238,28 @@ const Home = (props) => {
         btn1: { text: '获取更多机会', click: () => btn1Fn() },
         btn2: { text: '继续抽奖', click: () => close() }
       })
-    } else {
+      handleChangeNum()
+    } else if (prize.toast_type === 2) {
+      // 中奖
+      setRollingDialogOption({
+        ...rollingDialogOption,
+        visible: true,
+        text: prize.toast_content,
+        btn1: { text: '分享邀请', click: () => btn1Fn() }
+
+      })
+      handleChangeNum()
+    } else if (prize.toast_type === 3) {
+      // 没有抽奖机会
+      setRollingDialogOption({
+        ...rollingDialogOption,
+        visible: true,
+        text: prize.toast_content,
+        btn1: { text: '分享邀请', click: () => btn1Fn() }
+
+      })
+    } else if (prize.toast_type === 4) {
+      // 错误
       setRollingDialogOption({
         ...rollingDialogOption,
         visible: true,

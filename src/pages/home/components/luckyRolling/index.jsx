@@ -250,13 +250,18 @@ class LuckyRolling extends React.Component {
             finishIdx: false
           })
         } else {
-          this.state.prizeList.forEach((item, index) => {
-            if (item.id === res.data.id) {
-              resolve({
-                finishIdx: index,
-                data: res.data
-              })
-            }
+          // 念君安版本
+          // this.state.prizeList.forEach((item, index) => {
+          //   if (item.id === res.data.id) {
+          //     resolve({
+          //       finishIdx: index,
+          //       data: res.data
+          //     })
+          //   }
+          // })
+          resolve({
+            finishIdx: Math.floor(this.state.prizeList.length * Math.random()),
+            data: res.data
           })
         }
       })
@@ -315,6 +320,12 @@ class LuckyRolling extends React.Component {
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) {
       return false
+    } else {
+      if (data.toast_type === 3 || data.toast_type === 4) {
+        // 没有抽奖机会 或 错误
+        this.props.success(data)
+        return false
+      }
     }
     this.setState({
       start: true
