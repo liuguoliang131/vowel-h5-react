@@ -16,8 +16,16 @@ class Panel extends Component {
     if (res.code !== 0) {
       return false
     }
-    this.setState({
-      data: res.data
+    // this.setState({
+    //   data: res.data
+    // })
+    this.setState((state, props) => {
+      return {
+        data: res.data
+      }
+    }, () => {
+      // 在render后触发
+      this.startScroll()
     })
   }
 
@@ -26,7 +34,7 @@ class Panel extends Component {
     // console.log('viewRef', this.viewRef)
     const theScroll = this.viewRef.current.children[0]
     const clientHeight = this.viewRef.current.clientHeight
-    const scrollHeight = this.viewRef.current.scrollHeight
+    // const scrollHeight = this.viewRef.current.scrollHeight
     // const scrollTop = this.viewRef.current.scrollTop
     // console.log('视口高度clientHeight', this.viewRef.current.clientHeight, '滚动块高度scrollHeight:', this.viewRef.current.scrollHeight, 'scrollTop:', this.viewRef.current.scrollTop, '底边距离：', scrollHeight - clientHeight - scrollTop)
     clearInterval(timer)
@@ -36,6 +44,7 @@ class Panel extends Component {
       if (-1 * theScroll.offsetTop < theScroll.offsetHeight - clientHeight) {
         // console.log('1', theScroll.offsetTop)
         theScroll.style.transition = 'all 0.5s'
+        // console.log('移动', theScroll.offsetTop, clientHeight)
         theScroll.style.top = (theScroll.offsetTop - clientHeight) + 'px'
       } else {
         // console.log('2')
@@ -52,9 +61,9 @@ class Panel extends Component {
   }
 
   componentDidUpdate (prevProps, prevState) {
-    if (this.state.data !== prevState.data) {
-      this.startScroll()
-    }
+    // if (this.state.data !== prevState.data) {
+    //   this.startScroll()
+    // }
   }
 
   componentWillUnmount () {
@@ -65,7 +74,10 @@ class Panel extends Component {
   render () {
     return (
       <>
-      <div className="panel">
+      {
+        this.props.drawStatus === 1
+          ? (
+          <div className="panel">
         <div className="panel-content" ref={this.viewRef}>
           <div className="panel-scroll">
           {this.state.data.map((item, index) => (
@@ -76,13 +88,10 @@ class Panel extends Component {
           </div>
         </div>
       </div>
-      {/* <div className="text-1">
-        <span className="text-line-1"></span>
-        <span className='text-1-1'>
-        奖池已开放，抓紧抽奖吧
-        </span>
-        <span className="text-line-2"></span>
-      </div> */}
+            )
+          : null
+      }
+
       </>
 
     )

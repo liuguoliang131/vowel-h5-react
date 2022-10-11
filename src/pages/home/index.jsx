@@ -367,7 +367,7 @@ const Home = (props) => {
             ? (
             <>
               <TopWord mainImg={data.main_img}></TopWord>
-              <Panel id={data.id}></Panel>
+              {/* <Panel drawStatus={data.drawStatus} id={data.id}></Panel> */}
               <CountDown id={data.id} drawStatus={data.drawStatus} draw_start_time={data.draw_start_time} draw_end_time={data.draw_end_time}></CountDown>
               <div className="mb14"></div>
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
