@@ -76,13 +76,13 @@ class Panel extends Component {
           </div>
         </div>
       </div>
-      <div className="text-1">
+      {/* <div className="text-1">
         <span className="text-line-1"></span>
         <span className='text-1-1'>
         奖池已开放，抓紧抽奖吧
         </span>
         <span className="text-line-2"></span>
-      </div>
+      </div> */}
       </>
 
     )

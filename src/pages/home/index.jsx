@@ -6,6 +6,7 @@ import './index.scss'
 import { Empty, Toast } from 'antd-mobile'
 import Crumbs from '../../components/crumbs/index.jsx'
 import TopWord from './components/topWord/index.jsx'
+import Panel from './components/panel/index.jsx'
 import CountDown from './components/countDown'
 import LuckyRolling from './components/luckyRolling/index.jsx'
 import TaskList from './components/taskList/index.jsx'
@@ -28,6 +29,7 @@ const Home = (props) => {
 
   const [emptyMsg, setEmptyMsg] = useState('')
   const [ruleNodeVisible, setRuleNodeVisible] = useState(false)
+  const [ruleNode, setRuleNode] = useState('')
   // 去往海报
   const handleGoPoster = () => {
     if (process.env.NODE_ENV === 'development') {
@@ -171,6 +173,8 @@ const Home = (props) => {
       if (taskList.length) {
         res.data.task_list.push(taskList[0])
       }
+      console.log('rule_note', res.data.rule_note)
+      window.sessionStorage.setItem('rule_node', res.data.rule_note)
       setResData(res.data)
       setData(res.data)
     } catch (error) {
@@ -363,18 +367,19 @@ const Home = (props) => {
             ? (
             <>
               <TopWord mainImg={data.main_img}></TopWord>
-              <CountDown id={data.id} draw_start_time={data.draw_start_time}></CountDown>
+              <Panel id={data.id}></Panel>
+              <CountDown id={data.id} drawStatus={data.drawStatus} draw_start_time={data.draw_start_time} draw_end_time={data.draw_end_time}></CountDown>
               <div className="mb14"></div>
               <LuckyRolling remain_award_num={data.user_info.remain_award_num} drawStatus={data.drawStatus} prize_list={data.prize_list} id={data.id} success={(prize) => rollingSuccess(prize)}></LuckyRolling>
               <div className="mb16"></div>
               <TaskList drawStatus={data.drawStatus} music_info={data.music_info} userInfo={data.user_info} task_list={data.task_list} showRule={() => setRuleNodeVisible(true)} to={() => handleGoPoster()}></TaskList>
-              <div className="mb16"></div>
+              {/* <div className="mb16"></div> */}
               <DetailedPicture picList={data.pic_list}></DetailedPicture>
               {/* {
                 utils.isWhatSysTem() !== 2 ? (<AudioPlayer {...data.music_info}></AudioPlayer>) : null
               } */}
               <AudioPlayer {...data.music_info}></AudioPlayer>
-              <RuleNode visible={ruleNodeVisible} close={() => setRuleNodeVisible(false)} text={data.rule_node}></RuleNode>
+              <RuleNode ruleNode={data.rule_node} visible={ruleNodeVisible} close={() => setRuleNodeVisible(false)} ></RuleNode>
             </>
 
               )

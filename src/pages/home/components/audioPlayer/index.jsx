@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Toast } from 'antd-mobile'
 import './index.scss'
-const coverIMG = require('../../../../assets/Frame 77.png')
+const coverIMG = require('../../../../assets/audioCover.png')
 const playIMG = require('../../../../assets/Frame 1000006041.png')
 const suspendIMG = require('../../../../assets/Frame 1000006074.png')
 
@@ -48,7 +48,7 @@ function AudioPlayer (props) {
   return (
     <div className="audioPlayer">
       <audio ref={audioRef} style={{ width: 0, position: 'absolute' }} src={props.music_url} autoPlay={true} onPlay={(e) => onPlay(e)} onPause={(e) => onPause(e)}></audio>
-      <img src={props.music_pic} alt="" className='cover' />
+      <img src={coverIMG} alt="" className='cover' />
       <div className="title">{props.music_name}</div>
       <div className="playbtn" onClick={() => handlePlay()}>
         {

@@ -15,7 +15,7 @@ class RuleNode extends Component {
           <div className="mask">
             <div className="content-box">
               <img className='close' src={closeIMG} alt="" onClick={() => this.handleClose()} />
-              <div className="text" dangerouslySetInnerHTML={{ __html: this.props.text }}></div>
+              <div className="text" dangerouslySetInnerHTML={{ __html: window.sessionStorage.getItem('rule_node') }}></div>
             </div>
           </div>
               )
@@ -30,9 +30,11 @@ class RuleNode extends Component {
   }
 
   componentDidMount () {
+
   }
 
   componentDidUpdate () {
+    console.log('ruleNode update', this.props.ruleNode)
   }
 }
 
