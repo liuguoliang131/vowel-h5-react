@@ -27,8 +27,8 @@
         height: 30px;
       }
       .text {
-        height: 253px;
-        overflow-y: scroll;
+        min-height: 253px;
+        // overflow-y: scroll;
         display: flex;
         align-items: center;
         justify-content: center;
