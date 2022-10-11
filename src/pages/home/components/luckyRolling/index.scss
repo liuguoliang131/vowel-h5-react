@@ -85,10 +85,10 @@ $one:80.5px;
       // border: 1px solid blue;
       .bgPicture {
         position: absolute;
-        left: 0px;
+        left: -3px;
         top: 10px;
-        width: 80.5px;
-        height: 85.5px;
+        width: 87.5px;
+        // height: 90.5px;
         // background-image: url('../../../../assets/manghe.png');
         // background-position: -8px 0px;
         // background-size: 85.5px 85.5px;
@@ -107,23 +107,38 @@ $one:80.5px;
       }
       &.y3 {
         .bgPicture {
-          top: 5px;
+          top: 0px;
         }
       }
       &.y4 {
         .bgPicture {
-          top: 5px;
+          top: -5px;
         }
       }
       
     }
     .active-prize {
       .bgPicture {
-        width: 90.5px;
-        height: 90.5px;
-        left: -5px;
-        top: 10px;
+        width: 93.5px;
+        // height: 97.5px;
+        // left: -10px;
+        // top: 0px;
       }
+      // &.y2 {
+      //   .bgPicture {
+      //     top: 0px;
+      //   }
+      // }
+      // &.y3 {
+      //   .bgPicture {
+      //     top: 0px;
+      //   }
+      // }
+      // &.y4 {
+      //   .bgPicture {
+      //     top: 0px;
+      //   }
+      // }
       // .prizePicture {
       //   width: 66.2px;
       //   height: 66.2px;

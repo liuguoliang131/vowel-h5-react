@@ -317,6 +317,7 @@ class LuckyRolling extends React.Component {
 
     const { finishIdx, data } = await this.getPrizeDraw()
     // const finishIdx = 0
+    // const data = { toast_type: 1 }
     // 知道了结果，设置动画让其轮动多少次
     if (finishIdx === false) {
       return false
