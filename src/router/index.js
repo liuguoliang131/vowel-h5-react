@@ -93,7 +93,11 @@ const routes = [
   // 公众号介绍
   {
     path: '/introductionMp',
-    element: <IntroductionMp />
+    element: <IntroductionMp />,
+    meta: {
+      auth: true,
+      title: '必读 | 新用户使用指南'
+    }
   },
   {
     path: '*',
