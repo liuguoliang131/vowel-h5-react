@@ -1,6 +1,15 @@
 import React from 'react'
 import './index.scss'
+import utils from '../../utils'
 function IntroductionMp () {
+  const handOpenMini = () => {
+    try {
+      utils.openMiniProgram('gh_5f79c7effdf9', '')
+    } catch (error) {
+      console.log(error)
+      throw error
+    }
+  }
   return (
     <div className="IntroductionMp">
       <div className="title">
@@ -68,7 +77,7 @@ function IntroductionMp () {
       </div>
       <p></p>
       <div className="banner">
-        <img src="https://file.yuanyinfu.com/front-end-lib/644.png" alt="" />
+        <img src="https://file.yuanyinfu.com/front-end-lib/644.png" alt="" onClick={() => handOpenMini()} />
       </div>
       <p></p>
       <div className="title3">
