@@ -11,6 +11,7 @@ const MyPrize = lazy(() => import('../pages/myPrize/index.jsx'))
 const MyCourse = lazy(() => import('../pages/myCourse/index.jsx'))
 const Test = lazy(() => import('../pages/test/index.jsx'))
 const Poster = lazy(() => import('../pages/poster/index.jsx'))
+const IntroductionMp = lazy(() => import('../pages/introductionMp/index.jsx'))
 const routes = [
   {
     path: '/login',
@@ -89,6 +90,11 @@ const routes = [
       }
     ]
   },
+  // 公众号介绍
+  {
+    path: '/introductionMp',
+    element: <IntroductionMp />
+  },
   {
     path: '*',
     element: <Navigate to={'/login'} />
@@ -122,7 +128,7 @@ function deepGetRoute (list, path) {
   }
 }
 const inApp = utils.isApp()
-const white = inApp ? ['/layout/home'] : ['/layout/home', '/login']
+const white = inApp ? ['/layout/home', '/IntroductionMp'] : ['/layout/home', '/login', '/IntroductionMp']
 const GetRoutes = () => {
   const params = utils.getHashQuery()
   // console.log('route', params)
@@ -133,7 +139,7 @@ const GetRoutes = () => {
   }
 
   const children = useRoutes(routes)
-  if (!white.includes(params.path)) {
+  if (!white.map(item => item.toLowerCase()).includes(params.path.toLowerCase())) {
     if (!utils.getToken()) {
       if (inApp) {
         utils.goLogin()

@@ -1,0 +1,74 @@
+.IntroductionMp {
+  font-family: Optima-Regular, PingFangTC-light;
+  color: black;
+  padding: 20px;
+  text-align: left;
+  .title {
+    font-size: 22px;
+    line-height: 1.4;
+    margin-bottom: 14px;
+  }
+  .banner {
+    img {
+      width: 100%;
+    }
+  }
+  p {
+    min-height: 24px;
+    line-height: 24px;
+    font-size:15px;
+    word-wrap: break-word!important;
+  }
+  .title1 {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    min-height: 28.8px;
+    line-height: 28.8px;
+  }
+  .title2 {
+    position: relative;
+    font-size: 26px;
+    font-weight: bold;
+    text-align: center;
+    // min-height: 34.5px;
+    // line-height: 34.5px;
+    .jinghao {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28.8px;
+        height: 28.8px;
+        border-radius: 14.4px;
+        background-color: rgb(238, 108, 98);
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffff;
+      }
+      padding-bottom: 20px;
+    }
+    .text {
+      font-size: 26px;
+    font-weight: bold;
+    }
+    .line {
+      margin: auto;
+      display: flex;
+      width: 43.55px;
+      height: 2px;
+      background-color: rgb(238, 108, 98);
+      border-radius: 3px;
+      margin-top: 16px;
+    }
+  }
+  .title3 {
+    font-size: 16px;
+    font-weight: bold;
+    min-height: 21px;
+    line-height: 21px;
+  }
+}
