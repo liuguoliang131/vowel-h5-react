@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.97eb9464.css",
+    "main.css": "/static/css/main.717cf9ba.css",
     "main.js": "/static/js/main.3c376870.js",
     "static/css/604.0d786f6d.chunk.css": "/static/css/604.0d786f6d.chunk.css",
     "static/js/604.642c8208.chunk.js": "/static/js/604.642c8208.chunk.js",
@@ -13,14 +13,10 @@
     "static/js/833.8606b5b7.chunk.js": "/static/js/833.8606b5b7.chunk.js",
     "static/js/377.955aa114.chunk.js": "/static/js/377.955aa114.chunk.js",
     "static/media/stone.mp3": "/static/media/stone.7b88996b2ac32b36f08d.mp3",
-    "static/media/homeBG.png": "/static/media/homeBG.2e05a1f200bd92b2face.png",
-    "static/media/rollingBg.png": "/static/media/rollingBg.1ec51b09106fc38e1390.png",
     "static/media/mycourse1.png": "/static/media/mycourse1.f8e27b30f086f8325fb2.png",
     "static/media/image 97.png": "/static/media/image 97.9f03d1009fb2d1fe393b.png",
-    "static/media/taskListBG.png": "/static/media/taskListBG.71322bd77d411fd4bb6f.png",
     "static/media/manghe.png": "/static/media/manghe.4cc914b78bb2ebf5b26e.png",
     "static/media/prizeItemBG.png": "/static/media/prizeItemBG.403c2b34b82a6cd9ca54.png",
-    "static/media/startBG.png": "/static/media/startBG.68d9e170d6cbd0fffb82.png",
     "static/media/20220918125925.jpg": "/static/media/20220918125925.4e57caca44396478fb8e.jpg",
     "static/media/saveposter.png": "/static/media/saveposter.432166c2d0e342045dd1.png",
     "static/media/dialogbtn.png": "/static/media/dialogbtn.ec27c97d4b20eab583f5.png",
@@ -30,7 +26,7 @@
     "static/media/dialogbtn1.png": "/static/media/dialogbtn1.62d1e1c691d40b4f7cf0.png",
     "static/media/audioCover.png": "/static/media/audioCover.55e0cd5c704171c2f217.png",
     "index.html": "/index.html",
-    "main.97eb9464.css.map": "/static/css/main.97eb9464.css.map",
+    "main.717cf9ba.css.map": "/static/css/main.717cf9ba.css.map",
     "main.3c376870.js.map": "/static/js/main.3c376870.js.map",
     "604.0d786f6d.chunk.css.map": "/static/css/604.0d786f6d.chunk.css.map",
     "604.642c8208.chunk.js.map": "/static/js/604.642c8208.chunk.js.map",
@@ -44,7 +40,7 @@
     "377.955aa114.chunk.js.map": "/static/js/377.955aa114.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.97eb9464.css",
+    "static/css/main.717cf9ba.css",
     "static/js/main.3c376870.js"
   ]
 }
