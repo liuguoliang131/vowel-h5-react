@@ -5,6 +5,7 @@
   // padding-top: 30.5px;
   box-sizing: border-box;
   background-color: rgb(25, 25, 25);
+  text-align: center;
   .pt30 {
     padding-top: 30.5px;
   }
@@ -19,6 +20,7 @@
       font-size: 14px;
       color: #FFFFFF;
       margin-right: 20px;
+      min-width: 42px;
     }
     input {
       font-weight: 400;
@@ -43,6 +45,7 @@
       font-size: 14px;
       color: #FFFFFF;
       margin-right: 20px;
+      min-width: 42px;
     }
     input {
       font-weight: 400;
